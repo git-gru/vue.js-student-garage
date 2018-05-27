@@ -1,6 +1,6 @@
 <template>
 <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light navbar-stick-dark" data-navbar="sticky">
+    <nav class="navbar navbar-expand-lg student-garage-nav">
       <div class="container">
 
         <div class="navbar-left">
@@ -16,7 +16,7 @@
 
           <ul class="nav nav-navbar">
             <li class="nav-item">
-              <a class="nav-link" href="#">Demos <span class="arrow"></span></a>
+              <a class="nav-link" href="#">{{example}} <span class="arrow"></span></a>
               <nav class="nav">
                 <a class="nav-link" href="demo/bootstrap.html">Bootstrap</a>
                 <a class="nav-link" href="demo/dropbox.html">Dropbox</a>
@@ -244,8 +244,18 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      msg: 'This is navbar'
+      msg: 'This is navbar',
+      example: 'Testing'
     }
   }
 }
 </script>
+
+<style scoped>
+.student-garage-nav{
+  background-color: black;
+  color: white;
+  top: 0px !important;
+}
+
+</style>

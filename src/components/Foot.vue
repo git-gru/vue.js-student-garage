@@ -1,5 +1,5 @@
 <template>
-<footer class="footer">
+<footer class="footer fixed-bottom">
       <div class="container">
         <div class="row gap-y align-items-center">
           <div class="col-6 col-lg-3">
@@ -37,3 +37,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fixed-bottom{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+</style>

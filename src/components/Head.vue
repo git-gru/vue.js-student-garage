@@ -1,5 +1,5 @@
 <template>
-    <header class="header text-white h-fullscreen overflow-hidden" style="background-image: linear-gradient(-45deg, #667eea 0%, #764ba2 100%);">
+    <header class="header text-white " style="background-image: linear-gradient(-45deg, #667eea 0%, #764ba2 100%);">
       <canvas class="constellation" data-radius="0"></canvas>
       <div class="container position-static">
         <div class="row align-items-center h-100">

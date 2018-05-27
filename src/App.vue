@@ -1,8 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="spread">
     <Navbar/>
-    <Head/>
-    <Main/>
+    <router-view class="margin-nav"> </router-view>
     <Foot/>
   </div>
 </template>
@@ -23,6 +22,17 @@ export default {
   }
 }
 </script>
-<style>
 
+<style scoped>
+
+.margin-nav{
+  margin-top: 75px;
+
+  @media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+  }
+}
+.spread{
+  height: 100%;
+}
 </style>
