@@ -1,5 +1,5 @@
 <template>
-<footer class="footer fixed-bottom">
+<footer class="footer fixed-bottom footer-color">
       <div class="container">
         <div class="row gap-y align-items-center">
           <div class="col-6 col-lg-3">
@@ -44,6 +44,11 @@ export default {
     left: 0;
     bottom: 0;
     width: 100%;
+}
+
+.footer-color{
+  background-color: black;
+  color: white;
 }
 
 </style>
