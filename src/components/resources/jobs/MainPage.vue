@@ -1,56 +1,52 @@
 <template>
   <div>
     <div class="left-margin">
-      <h2>Ask Student Garage </h2>
+      <h2>Jobs </h2>
     </div>
 
     <div class="left-margin">
-      <h6>Ask our network of student entrepreneurs, investors, and advisors. </h6>
-    </div>
-
-    <div class="flex-row top-margin">
-      <div class="center-mobile" >
-        <button type="button" class="btn btn-lg ask-color">Ask a Question</button>
-      </div>
+      <h6>Some of the educational resources recommended from our network of student
+        entrepreneurs, investors, and advisors. </h6>
     </div>
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for questions...">
+                <input type="text" class="form-control" placeholder="Search for...">
                 <div class="input-group-append ml-4">
                   <button class="btn btn-primary" type="button">Go!</button>
                 </div>
       </div>
     </div>
 
+
     <div class = "row left-margin right-margin">
       <div class = "col-md-6 top-margin">
-        <div class="card border">
+        <div class="card border bg-primary white-text">
             <div class="card-body">
               <h5 class="card-title">Image at bottom</h5>
               <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary">12 Answers</button>
+              <button type="button" class="btn btn-md read-more">12 Answers</button>
             </div>
         </div>
       </div>
 
       <div class = "col-md-6 top-margin">
-        <div class="card border">
+        <div class="card border bg-primary white-text">
             <div class="card-body">
               <h5 class="card-title">Image at bottom</h5>
               <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary">12 Answers</button>
+              <button type="button" class="btn btn-md read-more">12 Answers</button>
             </div>
         </div>
 
       </div>
 
       <div class = "col-md-6 top-margin">
-        <div class="card border">
+        <div class="card border bg-primary white-text">
             <div class="card-body">
               <h5 class="card-title">Image at bottom</h5>
               <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary">12 Answers</button>
+              <button type="button" class="btn btn-md read-more">12 Answers</button>
             </div>
         </div>
 
@@ -77,6 +73,7 @@ export default {
   background-color: #FF420E;
   color: white;
 }
+
 .flex-content{
   display: flex;
   justify-content: center;
@@ -115,12 +112,23 @@ export default {
     justify-content: center;
   }
 }
-
+.read-more{
+  background-color: white;
+  /* primary */
+  color:#50a1ff;
+}
 .right-margin{
   margin-right: 5%;
 }
 .top-margin{
   margin-top: 2.5%;
+}
+.top-margin-shrunk{
+  margin-top: .5%;
+}
+
+.white-text{
+  color: white;
 }
 
 </style>

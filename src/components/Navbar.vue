@@ -30,17 +30,17 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Resources <span class="arrow"></span></a>
               <nav class="nav">
-                <a class="nav-link" href="blog/classic.html">Events</a>
-                <a class="nav-link" href="blog/grid.html">Education</a>
-                <a class="nav-link" href="blog/list.html">Jobs</a>
+                <a class="nav-link"> <router-link :to="{ name: 'EventsMain' }">Events</router-link></a>
+                <a class="nav-link"> <router-link :to="{ name: 'EducationMain' }">Education</router-link></a>
+                <a class="nav-link"> <router-link :to="{ name: 'JobsMain' }">Jobs</router-link></a>
               </nav>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#">Demo Day <span class="arrow"></span></a>
               <nav class="nav">
-                <a class="nav-link" href="blog/classic.html">Discover</a>
-                <a class="nav-link" href="blog/grid.html">Post Your Product</a>
+                <a class="nav-link"> <router-link :to="{ name: 'DiscoverMain' }">Discover</router-link></a>
+                  <a class="nav-link"> <router-link :to="{ name: 'PostProductMain' }">Post Product</router-link></a>
               </nav>
             </li>
 
@@ -48,9 +48,9 @@
               <a class="nav-link" href="#">Your Account <span class="arrow"></span></a>
               <nav class="nav">
                 <a class="nav-link"> <router-link :to="{ name: 'ProfilePage' }">Your Profile</router-link></a>
-                <a class="nav-link" href="blog/grid.html">Messages</a>
+                <a class="nav-link"> <router-link :to="{ name: 'MessagesMain' }">Messages</router-link></a>
                 <a class="nav-link" href="blog/classic.html">Your Products</a>
-                <a class="nav-link" href="blog/classic.html">Settings</a>
+                <a class="nav-link"> <router-link :to="{ name: 'AccountSettingsMain' }">Settings</router-link></a>
                 <a class="nav-link" href="blog/classic.html">Sign Out</a>
               </nav>
             </li>

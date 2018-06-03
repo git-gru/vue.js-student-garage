@@ -1,22 +1,19 @@
 <template>
   <div>
     <div class="left-margin">
-      <h2>Ask Student Garage </h2>
+      <h2>Events Near You </h2>
+      <div class ="float-right right-margin">
+        <button type="button" class="btn btn-lg ask-color">Create an Event</button>
+      </div>
     </div>
 
     <div class="left-margin">
-      <h6>Ask our network of student entrepreneurs, investors, and advisors. </h6>
-    </div>
-
-    <div class="flex-row top-margin">
-      <div class="center-mobile" >
-        <button type="button" class="btn btn-lg ask-color">Ask a Question</button>
-      </div>
+      <h6>Find entrepreneurial events on campus </h6>
     </div>
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for questions...">
+                <input type="text" class="form-control" placeholder="Search for...">
                 <div class="input-group-append ml-4">
                   <button class="btn btn-primary" type="button">Go!</button>
                 </div>
@@ -88,7 +85,9 @@ export default {
   justify-content: center;
   flex-direction: row;
 }
-
+.float-right{
+  float:right;
+}
 .img-restricted{
   height: 200px;
   width: 200px;
