@@ -3,7 +3,7 @@
     <div class="left-margin">
       <h2>Events Near You </h2>
       <div class ="float-right right-margin">
-        <button type="button" class="btn btn-lg ask-color">Create an Event</button>
+        <button type="button" class="btn btn-lg btn-success">Create an Event</button>
       </div>
     </div>
 

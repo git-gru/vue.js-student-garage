@@ -9,6 +9,7 @@ import DiscoverMain from '@/components/demo-day/discover/MainPage.vue'
 import MessagesMain from '@/components/messages/MainPage.vue'
 import PostProductMain from '@/components/demo-day/post/MainPage.vue'
 import AccountSettingsMain from '@/components/account/settings/MainPage.vue'
+import IndividualMessageView from '@/components/messages/IndividualView.vue'
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ export default new Router({
       path:'/jobs',
       name:'JobsMain',
       component:JobsMain
+    },
+    {
+      path:'/message',
+      name:'IndividualMessageView',
+      component:IndividualMessageView
     }
   ]
 })

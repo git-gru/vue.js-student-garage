@@ -2,10 +2,11 @@
   <div>
     <div class="chat_list left-margin right-margin">
       <div class = "text-center">
-      Messages
+      Your Chat With Curtis
     </div>
-    <ul class="list-group">
-        <li v-for="item in test" @click= "individualView()" class="list-group-item bordered">
+    <ul class="list-group top-margin">
+        <li v-for="item in test" v-bind:class="{'to-the-right': isMe(item), 'my-color': isMe(item)}" class="list-group-item bordered w-75 rounded top-margin-1">
+          <div>
             <div class="pull-left hidden-xs">
                 <div>
                     <img class="avatar avatar-lg" src="https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg" alt="avatar">
@@ -15,11 +16,22 @@
             <div class="left-margin">
                 <small class="list-group-item-heading text-muted text-primary left-margin">User1</small>
                 <p class="list-group-item-text left-margin">
-                    Hi! this message is FOR you.
+                    Hi! I'm on the left ya sucka ! :>>>>
                 </p>
             </div>
+          </div>
         </li>
       </ul>
+      <form class="form-horizontal top-margin" autocomplete="off">
+      <fieldset>
+        <div class="form-group input-group">
+                  <input type="text" class="form-control" placeholder="Send a message">
+                  <div class="input-group-append ml-4">
+                    <button class="btn btn-primary" type="button">Send</button>
+                  </div>
+        </div>
+      </fieldset>
+    </form>
     </div>
 
   </div>
@@ -38,8 +50,8 @@ export default {
     }
   },
   methods: {
-    individualView(){
-      this.$router.push('/message');
+    isMe(message){
+      return message % 2 === 0;
     }
   }
 }
@@ -68,6 +80,9 @@ export default {
 .chat_list .pull-left {
     width: 55px;
     text-align: center;
+}
+.comment {
+  width: 80%;
 }
 
 /*
@@ -100,6 +115,9 @@ export default {
 .message-margin{
   margin-top: 1%;
 }
+.my-color{
+  background-color: orange;
+}
 .no-left-margin{
   margin-left: 0 !important;
 }
@@ -123,8 +141,19 @@ export default {
 .right-margin{
   margin-right: 5%;
 }
+.rounded{
+  border-radius: 30px !important;
+}
+.to-the-right{
+  float: right;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
 .top-margin{
   margin-top: 2.5%;
+}
+.top-margin-1{
+  margin-top: 1%;
 }
 .top-margin-shrunk{
   margin-top: .5%;
