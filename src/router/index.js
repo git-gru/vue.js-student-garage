@@ -10,6 +10,8 @@ import MessagesMain from '@/components/messages/MainPage.vue'
 import PostProductMain from '@/components/demo-day/post/MainPage.vue'
 import AccountSettingsMain from '@/components/account/settings/MainPage.vue'
 import IndividualMessageView from '@/components/messages/IndividualView.vue'
+import IndividualProductView from '@/components/demo-day/discover/IndividualView.vue'
+import MyProducts from '@/components/account/products/MyProducts.vue'
 
 Vue.use(Router)
 
@@ -70,6 +72,16 @@ export default new Router({
       path:'/message',
       name:'IndividualMessageView',
       component:IndividualMessageView
+    },
+    {
+      path:'/product',
+      name:'IndividualProductView',
+      component:IndividualProductView
+    },
+    {
+      path:'/my-products',
+      name:'MyProducts',
+      component:MyProducts
     }
   ]
 })

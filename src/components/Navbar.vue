@@ -49,7 +49,7 @@
               <nav class="nav">
                 <a class="nav-link"> <router-link :to="{ name: 'ProfilePage' }">Your Profile</router-link></a>
                 <a class="nav-link"> <router-link :to="{ name: 'MessagesMain' }">Messages</router-link></a>
-                <a class="nav-link" href="blog/classic.html">Your Products</a>
+                <a class="nav-link"> <router-link :to="{ name: 'MyProducts' }">Your Products</router-link></a>
                 <a class="nav-link"> <router-link :to="{ name: 'AccountSettingsMain' }">Settings</router-link></a>
                 <a class="nav-link" href="blog/classic.html">Sign Out</a>
               </nav>

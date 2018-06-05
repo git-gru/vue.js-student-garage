@@ -5,7 +5,7 @@
       Your Chat With Curtis
     </div>
     <ul class="list-group top-margin">
-        <li v-for="item in test" v-bind:class="{'to-the-right': isMe(item), 'my-color': isMe(item)}" class="list-group-item bordered w-75 rounded top-margin-1">
+        <li v-for="item in test" v-bind:class="{'to-the-right': isMe(item), 'light-blue': isMe(item)}" class="list-group-item bordered w-75 rounded top-margin-1">
           <div>
             <div class="pull-left hidden-xs">
                 <div>
@@ -46,7 +46,7 @@ export default {
     return {
       msg: 'This is navbar',
       example: 'Testing',
-      test: [1,2,3,4,5]
+      test: [1,2,2,3,4]
     }
   },
   methods: {
@@ -105,7 +105,10 @@ export default {
   height: 200px;
   width: 200px;
 }
-
+.light-blue {
+  background-color: #25ddec !important;
+  color: white !important;
+}
 .left-margin{
   margin-left: 5%;
 }
@@ -114,9 +117,6 @@ export default {
 }
 .message-margin{
   margin-top: 1%;
-}
-.my-color{
-  background-color: orange;
 }
 .no-left-margin{
   margin-left: 0 !important;
@@ -143,6 +143,7 @@ export default {
 }
 .rounded{
   border-radius: 30px !important;
+  border-color: #25ddec !important;
 }
 .to-the-right{
   float: right;

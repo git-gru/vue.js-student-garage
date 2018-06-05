@@ -1,31 +1,9 @@
 <template>
   <div>
     <div class="left-margin">
-      <h2>Demo Day </h2>
+      <h2>Your Products </h2>
     </div>
 
-    <div class="left-margin">
-      <h6>Discover some of the latest projects coming out of Stanford</h6>
-    </div>
-
-    <div class="flex-row top-margin">
-      <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <div class="input-group-append ml-4">
-                  <button class="btn btn-primary" type="button">Go!</button>
-                </div>
-      </div>
-    </div>
-    <div class="left-margin flex-row top-margin-shrunk">
-      <span class="badge badge-pill badge-primary">Primary</span>
-      <span class="badge badge-pill badge-secondary">Secondary</span>
-      <span class="badge badge-pill badge-success">Success</span>
-      <span class="badge badge-pill badge-danger">Danger</span>
-      <span class="badge badge-pill badge-warning">Warning</span>
-      <span class="badge badge-pill badge-info">Info</span>
-      <span class="badge badge-pill badge-light">Light</span>
-      <span class="badge badge-pill badge-dark">Dark</span>
-    </div>
 
     <div class = "row left-margin right-margin">
       <div class = "col-md-4 top-margin">
