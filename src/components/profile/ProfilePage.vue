@@ -4,23 +4,23 @@
     <div class = "row">
       <div class = "col-md-4 flex-content">
         <div>
-          <img src="https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg" alt="..." class="rounded-circle img-restricted">
+          <img src="https://pbs.twimg.com/profile_images/833767319973212161/Ft904pMk_400x400.jpg" alt="..." class="rounded-circle img-restricted">
         </div>
       </div>
 
       <!-- Bio-->
       <div class= "col-md-6">
         <div class= "center-mobile">
-          <h2>Curtis Staples</h2>
+          <h2>Goku</h2>
         </div>
 
         <div class= "center-mobile">
-          <h5> Studying Human-Computer Interaction @ Stanford </h5>
+          <h5> Studying Human-Computer Interaction </h5>
         </div>
 
         <div class= "center-mobile">
           <span> <i class="fa fa-map-pin"></i></span>
-          <span> Stanford University </span>
+          <span> Somewhere </span>
 
         </div>
 
@@ -32,7 +32,7 @@
         </div>
 
         <div class="center-mobile" >
-          <button type="button" class="btn btn-xl btn-primary">Message Curtis</button>
+          <button type="button" class="btn btn-xl btn-primary">Message Goku</button>
         </div>
             <div class="col-md-8 mx-auto no-left-margin no-left-padding margin-top">
 
