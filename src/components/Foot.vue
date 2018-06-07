@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .fixed-bottom{
-    position: absolute;
+    position: initial;
     left: 0;
     bottom: 0;
     width: 100%;
