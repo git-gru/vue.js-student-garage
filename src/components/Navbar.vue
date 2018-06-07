@@ -81,10 +81,6 @@ export default {
 }
 </script>
 <style scoped>
-.student-garage-nav{
-  background-color: black;
-  color: white;
-  top: 0px !important;
-}
+
 
 </style>
