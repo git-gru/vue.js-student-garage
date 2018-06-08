@@ -92,11 +92,7 @@
 
         <section id="lity" class="section bg-gray">
         <div class="container">
-          <header class="section-header">
-            <h2>Lity Lightbox</h2>
-            <hr>
-            <p class="lead">Open single image in a lightbox without pagination. View more options in <a href="lightbox.html">lightbox page</a>.</p>
-          </header>
+          
 
           <div class="row">
             <div class="col-lg-7 mx-auto">
