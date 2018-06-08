@@ -21,3 +21,23 @@
     display: none; } }
 
 /*# sourceMappingURL=style.css.map */
+
+.nav-navbar .nav .nav-link a
+{
+      color: rgba(117,117,117,0.8)!important;
+}
+
+.nav-navbar .nav .nav-link a:hover
+{
+      color: rgba(80,161,255,1)!important;
+}
+
+.nav a
+{
+  color: rgba(117,117,117,0.8)!important;
+}
+
+.nav a:hover
+{
+  color: rgba(80,161,255,1)!important;
+}

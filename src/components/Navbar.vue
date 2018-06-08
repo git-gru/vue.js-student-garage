@@ -1,19 +1,24 @@
 <template>
 <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg student-garage-nav">
+    <nav class="navbar navbar-expand-lg student-garage-nav navbar-dark" data-navbar="sticky">
       <div class="container">
 
         <div class="navbar-left">
-          <button class="navbar-toggler" type="button">&#9776;</button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
           <a class="navbar-brand" href="index.html">
             <img class="logo-dark" src="/static/assets/img/logo-dark.png" alt="logo">
             <img class="logo-light" src="/static/assets/img/logo-light.png" alt="logo">
           </a>
         </div>
         <section class="navbar-mobile">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
           <span class="navbar-divider d-mobile-none"></span>
 
-          <ul class="nav nav-navbar">
+          <ul class="nav nav-navbar mx-auto">
             <li class="nav-item">
               <a class="nav-link" href="#">Profiles <span class="arrow"></span></a>
               <nav class="nav">
@@ -80,11 +85,4 @@ export default {
   }
 }
 </script>
-<style scoped>
-.student-garage-nav{
-  background-color: black;
-  color: white;
-  top: 0px !important;
-}
 
-</style>
