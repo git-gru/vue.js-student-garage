@@ -87,24 +87,44 @@
 
       <div class = "top-margin">
         <div class="card">
-                  <div class="col-lg-7 mx-auto">
-              <div class="gallery gallery-4-type4" data-provide="photoswipe">
-                <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
-                  <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+
+
+
+        <section id="lity" class="section bg-gray">
+        <div class="container">
+          <header class="section-header">
+            <h2>Lity Lightbox</h2>
+            <hr>
+            <p class="lead">Open single image in a lightbox without pagination. View more options in <a href="lightbox.html">lightbox page</a>.</p>
+          </header>
+
+          <div class="row">
+            <div class="col-lg-7 mx-auto">
+
+              <div class="gallery gallery-4-type4">
+                <a class="gallery-item" href="#">
+                  <img src="/static/assets/img/thumb/1.jpg" alt="..." data-provide="lightbox">
                 </a>
                 <div class="gallery-item-group">
-                  <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
-                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  <a class="gallery-item" href="#">
+                    <img src="/static/assets/img/thumb/2.jpg" alt="..." data-provide="lightbox">
                   </a>
-                  <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
-                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  <a class="gallery-item" href="#">
+                    <img src="/static/assets/img/thumb/3.jpg" alt="..." data-provide="lightbox">
                   </a>
-                  <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
-                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  <a class="gallery-item" href="#">
+                    <img src="/static/assets/img/thumb/4.jpg" alt="..." data-provide="lightbox">
                   </a>
                 </div>
               </div>
+
             </div>
+          </div>
+
+
+        </div>
+      </section>
+
 
         </div>
       </div>
