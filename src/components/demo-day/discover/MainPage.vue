@@ -80,9 +80,42 @@
                     <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
                     <a class="fs-12 fw-600" @click="goToProduct()" href="#">Read more <i class="fa fa-angle-right pl-1"></i></a>
                   </div>
-                </div>
-
+        </div>
       </div>
+
+
+
+      <div class = "top-margin">
+        <div class="card">
+                  <div class="col-lg-7 mx-auto">
+              <div class="gallery gallery-4-type4" data-provide="photoswipe">
+                <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                </a>
+                <div class="gallery-item-group">
+                  <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  </a>
+                  <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  </a>
+                  <a class="gallery-item" href="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg">
+                  </a>
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+
+
+
+
+     
+      
+
 
     </div>
   </div>
