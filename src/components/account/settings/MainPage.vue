@@ -8,14 +8,23 @@
 
           <form class="input-line">
             <div class="form-group ">
-                  <label>First Name</label>
-                    <textarea class="form-control" rows="4" placeholder="Textarea"></textarea>
-                  </div>
+                  <label>Your Name</label>
+                  <input  class="form-control" type="text" placeholder="Your Name" v-model="userName">
+              </div>
 
-                  <div class="form-group">
-                  <label>Normal</label>
-                  <input class="form-control" type="text" placeholder="Last name">
-                </div>
+              <fieldset disabled>
+            <div class="form-group ">
+                <label for="disabledTextInput">Your School</label>
+                <input id="disabledTextInput" class="form-control" type="text" placeholder="Your Name" v-model="userSchool">
+            </div>
+          </fieldset>
+
+            <div class="form-group ">
+                <label>Current Title</label>
+                <input class="form-control" type="text" placeholder="Your Name" v-model="userCurTitle">
+            </div>
+
+            <button type="submit" class="btn btn-primary" @click="updateAccount()">Update Account</button>
             </form>
           </div>
       </div>
@@ -29,11 +38,21 @@
 
 <script>
 export default {
-  name: 'PostProductMain',
+  name: 'AccountSettingsMain',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing'
+      userName: 'Curtis Staples',
+      userSchool: 'Stanford University',
+      userCurTitle: 'Founder of Student Garage'
+    }
+  },
+  methods:{
+    updateAccount(){
+      let user = {};
+      user.name = this.userName;
+      user.school = this.userSchool;
+      user.curTitle = this.userCurTitle;
+      console.log(user);
     }
   }
 }

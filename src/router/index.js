@@ -12,6 +12,7 @@ import AccountSettingsMain from '@/components/account/settings/MainPage.vue'
 import IndividualMessageView from '@/components/messages/IndividualView.vue'
 import IndividualProductView from '@/components/demo-day/discover/IndividualView.vue'
 import MyProducts from '@/components/account/products/MyProducts.vue'
+import CreateEvent from '@/components/resources/events/CreateEvent.vue'
 
 Vue.use(Router)
 
@@ -82,6 +83,11 @@ export default new Router({
       path:'/my-products',
       name:'MyProducts',
       component:MyProducts
+    },
+    {
+      path:'/create-event',
+      name:'CreateEvent',
+      component:CreateEvent
     }
   ]
 })

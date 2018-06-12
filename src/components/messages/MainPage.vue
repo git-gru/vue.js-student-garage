@@ -25,8 +25,6 @@
   </div>
 
 </template>
-
-
 <script>
 export default {
   name: 'Messages',
@@ -34,18 +32,16 @@ export default {
     return {
       msg: 'This is navbar',
       example: 'Testing',
-      test: [1,2,3,4,5]
+      test: [1, 2, 3, 4, 5]
     }
   },
   methods: {
-    individualView(){
-      this.$router.push('/message');
+    individualView () {
+      this.$router.push('/message')
     }
   }
 }
 </script>
-
-
 <style scoped>
 .bordered{
   border-style: solid;

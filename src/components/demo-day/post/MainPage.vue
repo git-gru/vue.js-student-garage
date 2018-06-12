@@ -3,22 +3,23 @@
       <div class= "margin-20">
         <div>
           <div class="">
-            <h2>Post a Product </h2>
+            <h2>Post a Project </h2>
           </div>
 
           <div class="">
-            <h6>Post the current project</h6>
+            <h6>Show Student Garage What You're Working On</h6>
           </div>
           <form class="input-line">
             <div class="form-group ">
                   <label>Project Name</label>
-                    <textarea class="form-control" rows="4" placeholder="Textarea"></textarea>
+                  <input class="form-control" type="text" placeholder="Project Name" v-model="projectName">
                   </div>
 
                   <div class="form-group">
-                  <label>Normal</label>
-                  <input class="form-control" type="text" placeholder="Last name">
+                  <label>Description</label>
+                  <textarea class="form-control" rows="4" placeholder="Project Description" v-model="projectDescription"></textarea>
                 </div>
+                <button type="submit" class="btn btn-primary" @click="postProject()">Post Project</button>
             </form>
           </div>
       </div>
@@ -35,8 +36,16 @@ export default {
   name: 'PostProductMain',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing'
+      projectName:'',
+      projectDescription:''
+    }
+  },
+  methods: {
+    postProject(){
+      let project = {};
+      project.name = this.projectName;
+      project.description = this.projectDescription;
+      console.log(project);
     }
   }
 }

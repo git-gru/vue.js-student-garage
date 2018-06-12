@@ -3,7 +3,7 @@
     <div class="left-margin">
       <h2>Events Near You </h2>
       <div class ="float-right right-margin">
-        <button type="button" class="btn btn-lg btn-success">Create an Event</button>
+        <button type="button" class="btn btn-lg btn-success" @click="createEvent()">Create an Event</button>
       </div>
     </div>
 
@@ -13,9 +13,9 @@
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" class="form-control" placeholder="Search for events..." v-model="eventQuery">
                 <div class="input-group-append ml-4">
-                  <button class="btn btn-primary" type="button">Go!</button>
+                  <button class="btn btn-primary" type="button" @click='queryEvents()'>Go!</button>
                 </div>
       </div>
     </div>
@@ -59,11 +59,18 @@
 </template>
 <script>
 export default {
-  name: 'Navbar',
+  name: 'EventsMain',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing'
+      eventQuery: ''
+    }
+  },
+  methods:{
+    queryEvents(){
+      console.log(this.eventQuery);
+    },
+    createEvent(){
+      this.$router.push('/create-event');
     }
   }
 }

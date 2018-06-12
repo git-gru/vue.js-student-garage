@@ -11,39 +11,51 @@
                 </div>
               </div>
 
-              <div class="gallery gallery-4-type4" data-provide="photoswipe">
-                <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                  <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                </a>
-                <div class="gallery-item-group">
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                </div>
+              <div class = "">
+                <div class="card">
 
-                <div class="gallery-extra-items">
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
-                  <a class="gallery-item" href="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg">
-                    <img src="https://cdn.stocksnap.io/img-thumbs/960w/OTOSZLA6WF.jpg" alt="...">
-                  </a>
+
+
+                <section id="lity" class="section">
+                <div class="container">
+
+
+                  <div class="row">
+
+
+                      <div class="gallery gallery-4-type4">
+                        <a class="gallery-item" href="#">
+                          <img src="/static/assets/img/thumb/1.jpg" alt="..." data-provide="lightbox">
+                        </a>
+                        <div class="gallery-item-group">
+                          <a class="gallery-item" href="#">
+                            <img src="/static/assets/img/thumb/2.jpg" alt="..." data-provide="lightbox">
+                          </a>
+                          <a class="gallery-item" href="#">
+                            <img src="/static/assets/img/thumb/3.jpg" alt="..." data-provide="lightbox">
+                          </a>
+                          <a class="gallery-item" href="#">
+                            <img src="/static/assets/img/thumb/4.jpg" alt="..." data-provide="lightbox">
+                          </a>
+                        </div>
+                      </div>
+
+
+                  </div>
+
+
                 </div>
+              </section>
+
+
+                </div>
+              </div>
+
+              <div>
+                <h4> Description: </h4>
+                <p> Product Description goes here. This is the best product in the world. </p>
+
+
               </div>
             </div>
 

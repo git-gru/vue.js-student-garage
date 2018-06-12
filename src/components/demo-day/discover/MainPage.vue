@@ -10,7 +10,7 @@
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" class="form-control" placeholder="Search for projects...">
                 <div class="input-group-append ml-4">
                   <button class="btn btn-primary" type="button">Go!</button>
                 </div>
@@ -28,7 +28,7 @@
     </div>
 
     <div class = "row left-margin right-margin">
-      <div class = "col-md-4 top-margin">
+      <div class = "col-md-6 top-margin">
         <div class="card">
                 <div class="card-img-top">
                   <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
@@ -46,7 +46,7 @@
               </div>
       </div>
 
-      <div class = "col-md-4 top-margin">
+      <div class = "col-md-6 top-margin">
         <div class="card">
                   <div class="card-img-top">
                     <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
@@ -65,7 +65,7 @@
 
       </div>
 
-      <div class = "col-md-4 top-margin">
+      <div class = "col-md-6 top-margin">
         <div class="card">
                   <div class="card-img-top">
                     <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
@@ -82,56 +82,6 @@
                   </div>
         </div>
       </div>
-
-
-
-      <div class = "top-margin">
-        <div class="card">
-
-
-
-        <section id="lity" class="section bg-gray">
-        <div class="container">
-          
-
-          <div class="row">
-            <div class="col-lg-7 mx-auto">
-
-              <div class="gallery gallery-4-type4">
-                <a class="gallery-item" href="#">
-                  <img src="/static/assets/img/thumb/1.jpg" alt="..." data-provide="lightbox">
-                </a>
-                <div class="gallery-item-group">
-                  <a class="gallery-item" href="#">
-                    <img src="/static/assets/img/thumb/2.jpg" alt="..." data-provide="lightbox">
-                  </a>
-                  <a class="gallery-item" href="#">
-                    <img src="/static/assets/img/thumb/3.jpg" alt="..." data-provide="lightbox">
-                  </a>
-                  <a class="gallery-item" href="#">
-                    <img src="/static/assets/img/thumb/4.jpg" alt="..." data-provide="lightbox">
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-
-        </div>
-      </section>
-
-
-        </div>
-      </div>
-
-
-
-
-
-     
-      
-
 
     </div>
   </div>

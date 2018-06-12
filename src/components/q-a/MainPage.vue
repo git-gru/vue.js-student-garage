@@ -19,21 +19,38 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Have a Question?</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
 
+              <div v-if="!userHasQuestion">
                 <div class="modal-body">
-                  <p class="lead">Modals are a great tool to display call to action contents. Mostly you want to use them for sale promotions, sign up to your application, newsletter subscription, etc.</p>
-                  <p class="lead mb-0">Our template make it an easy task as well.</p>
+                  <form class="input-line">
+                          <div class="form-group">
+                          <label>Question</label>
+                          <input class="form-control" type="text" placeholder="Ask Your Question" v-model='questionAsked'>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
+                  <button type="button" @click = "ask()" class="btn btn-primary">Ask</button>
                 </div>
+            </div>
+
+            <div v-if="userHasQuestion">
+              <div class="modal-body">
+                <p> Question Asked! </p>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+          </div>
+
               </div>
             </div>
           </div>
@@ -41,9 +58,9 @@
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for questions...">
+                <input type="text" class="form-control" placeholder="Search for questions..." v-model="questionQuery">
                 <div class="input-group-append ml-4">
-                  <button class="btn btn-primary" type="button">Go!</button>
+                  <button class="btn btn-primary" type="button" @click ="queryQuestions()">Go!</button>
                 </div>
       </div>
     </div>
@@ -87,11 +104,23 @@
 </template>
 <script>
 export default {
-  name: 'Navbar',
+  name: 'QAMain',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing',
+      questionAsked: '',
+      userHasQuestion: false,
+      questionQuery:''
+    }
+  },
+  methods:{
+    ask(){
+      let question = {};
+      question.content = this.questionAsked;
+      console.log(question);
+      this.userHasQuestion = true;
+    },
+    queryQuestions(){
+      console.log(this.questionQuery);
     }
   }
 

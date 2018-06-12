@@ -6,7 +6,7 @@
 
 
     <div class = "row left-margin right-margin">
-      <div class = "col-md-4 top-margin">
+      <div class = "col-md-6 top-margin">
         <div class="card">
                 <div class="card-img-top">
                   <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
@@ -24,7 +24,7 @@
               </div>
       </div>
 
-      <div class = "col-md-4 top-margin">
+      <div class = "col-md-6 top-margin">
         <div class="card">
                   <div class="card-img-top">
                     <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
@@ -43,7 +43,7 @@
 
       </div>
 
-      <div class = "col-md-4 top-margin">
+      <div class = "col-md-6 top-margin">
         <div class="card">
                   <div class="card-img-top">
                     <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">

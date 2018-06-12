@@ -29,7 +29,7 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" @click ="goToQA()">Q & A <span class="arrow"></span></a>
+              <a class="nav-link"> <router-link :to="{ name: 'QAMain' }">Q & A</router-link></a>
             </li>
 
             <li class="nav-item">
@@ -85,4 +85,3 @@ export default {
   }
 }
 </script>
-
