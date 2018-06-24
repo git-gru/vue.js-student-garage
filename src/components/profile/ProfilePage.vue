@@ -73,6 +73,23 @@
               </div>
 
             </div>
+            <h4> My Locker </h4>
+            <p> Cool things I want you to see </p>
+            <carousel-3d :controlsVisible = "true">
+              <slide class="black-background" :index="0">
+                Slide 1 Content
+              </slide>
+              <slide class="black-background" :index="1">
+                Slide 2 Content
+              </slide>
+              <slide class="black-background" :index="2">
+                <h1>Slide 3 Content</h1>
+                  <p> This is something cool I built </p>
+              </slide>
+              <slide class="black-background" :index="3">
+                Slide 4 Content
+              </slide>
+            </carousel-3d>
       </div>
 
     </div>
@@ -94,7 +111,10 @@ export default {
 </script>
 
 <style scoped>
-
+.black-background{
+  background-color: black;
+  color: white;
+}
 .flex-content{
   display: flex;
   justify-content: center;

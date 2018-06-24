@@ -82,6 +82,18 @@
 </template>
 
 <script>
+export default {
+  name: 'HelloWorld',
+  data () {
+    return {
+      msg: 'This is navbar',
+      example: 'Testing'
+    }
+  },
+  methods: {
+
+  }
+}
 
 </script>
 

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import ProfilePage from '@/components/profile/ProfilePage.vue'
 import QAMain from '@/components/q-a/MainPage.vue'
+import IndividualQuestionView from '@/components/q-a/IndividualQuestion.vue'
 import EventsMain from '@/components/resources/events/MainPage.vue'
 import EducationMain from '@/components/resources/education/MainPage.vue'
 import JobsMain from '@/components/resources/jobs/MainPage.vue'
@@ -13,6 +14,7 @@ import IndividualMessageView from '@/components/messages/IndividualView.vue'
 import IndividualProductView from '@/components/demo-day/discover/IndividualView.vue'
 import MyProducts from '@/components/account/products/MyProducts.vue'
 import CreateEvent from '@/components/resources/events/CreateEvent.vue'
+import LandingPage from '@/components/general/Landing.vue'
 
 Vue.use(Router)
 
@@ -88,6 +90,16 @@ export default new Router({
       path:'/create-event',
       name:'CreateEvent',
       component:CreateEvent
+    },
+    {
+      path:'/question',
+      name:'IndividualQuestionView',
+      component:IndividualQuestionView
+    },
+    {
+      path:'/landing',
+      name:'LandingPage',
+      component:LandingPage
     }
   ]
 })

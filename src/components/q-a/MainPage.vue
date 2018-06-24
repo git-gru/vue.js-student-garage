@@ -71,7 +71,7 @@
             <div class="card-body">
               <h5 class="card-title">Image at bottom</h5>
               <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary">12 Answers</button>
+              <button type="button" class="btn btn-md btn-primary" @click="goToQuestion()">12 Answers</button>
             </div>
         </div>
       </div>
@@ -121,6 +121,9 @@ export default {
     },
     queryQuestions(){
       console.log(this.questionQuery);
+    },
+    goToQuestion(){
+      this.$router.push('/question');
     }
   }
 
