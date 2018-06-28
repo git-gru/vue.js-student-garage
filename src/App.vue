@@ -1,7 +1,13 @@
 <template>
   <div id="app" class="spread">
-    <Navbar/>
-    <router-view class="margin-nav"> </router-view>
+    <div v-if="loggedIn">
+      <Navbar/>
+      <router-view class="margin-nav"> </router-view>
+    </div>
+    <div v-if="!loggedIn" class="not-logged-in">
+      <Landing/>
+    </div>
+
     <Foot/>
   </div>
 </template>
@@ -11,6 +17,8 @@ import Navbar from '@/components/Navbar.vue'
 import Head from '@/components/Head.vue'
 import Main from '@/components/Main.vue'
 import Foot from '@/components/Foot.vue'
+import Landing from '@/components/Landing.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -18,7 +26,18 @@ export default {
     Navbar,
     Head,
     Main,
-    Foot
+    Foot,
+    Landing
+  },
+  data () {
+    return {
+    }
+  },
+  // ...
+computed:{
+  ...mapGetters({
+    loggedIn: 'loggedIn'
+    })
   }
 }
 </script>
@@ -34,5 +53,10 @@ export default {
 }
 .spread{
   height: 100%;
+}
+
+.not-logged-in{
+    margin: -25px !important;
+
 }
 </style>
