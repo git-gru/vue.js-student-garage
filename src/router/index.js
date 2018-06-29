@@ -15,7 +15,7 @@ import IndividualProductView from '@/components/demo-day/discover/IndividualView
 import MyProducts from '@/components/account/products/MyProducts.vue'
 import CreateEvent from '@/components/resources/events/CreateEvent.vue'
 import LandingPage from '@/components/general/Landing.vue'
-
+import StudentMainOnboarding from '@/components/onboarding/student/MainScreen.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -100,6 +100,11 @@ export default new Router({
       path:'/landing',
       name:'LandingPage',
       component:LandingPage
+    },
+    {
+      path:'/student-onboarding',
+      name:'StudentMainOnboarding',
+      component:StudentMainOnboarding
     }
   ]
 })
