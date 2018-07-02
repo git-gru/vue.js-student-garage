@@ -18,8 +18,8 @@
       <div class="left-margin">
         <div class="row">
         <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg"
-        class="small-img left-margin-small">
-        <div class="left-margin-small">
+        class="small-img left-margin-small col-md-4">
+        <div class="left-margin-small col-md-6">
           <h4> For Students </h4>
           <p> This is fake data that is simulating something real. Continue
             to work right now on this page until we have put real data in it
@@ -32,14 +32,14 @@
 
       <div class="left-margin">
         <div class="row">
-        <div class="left-margin-small">
+        <div class="left-margin-small col-md-6">
           <h4> For Investors </h4>
           <p> This is fake data that is simulating something real. Continue
             to work right now on this page until we have put real data in it
           </p>
         </div>
         <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg"
-        class="small-img left-margin-small">
+        class="small-img left-margin-small col-md-4">
       </div>
 
       </div>
@@ -90,7 +90,7 @@ export default {
 }
 
 .first-screen .centered-block {
-  position: absolute;    
+  position: absolute;
   display: table;
   top: 0;
   left: 0;
@@ -103,7 +103,7 @@ export default {
 }
 
 .first-screen .login-wrapper {
-  position: absolute;    
+  position: absolute;
   bottom: 100%;
   width: 100%;
   margin: 0 0 40px;
