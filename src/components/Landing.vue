@@ -2,11 +2,17 @@
   <div class="entire-page">
     <!-- Header -->
     <div class="white-background">
-      <div class="big-margin-below">
-        <button @click="login()" class="btn btn-primary float-right right-margin"> Sign Up/Login </button>
-      </div>
-      <div class= "flex-content">
-        <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
+      <div class="first-screen">
+        <div class="view">
+          <div class="centered-block">
+            <div class="big-margin-below login-wrapper clearfix">
+              <button @click="login()" class="btn btn-primary float-right right-margin"> Sign Up/Login </button>
+            </div>
+            <div class= "flex-content logo-wrapper">
+              <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="left-margin">
@@ -69,18 +75,56 @@ export default {
 
 
 <style scoped>
-.big-margin-below{
-  margin-bottom: 15%;
+.first-screen .view {
+  padding: 40px 0;
 }
+
+.first-screen .login-wrapper {
+  margin-bottom: 40px;
+}
+
+@media(min-width: 576px) {
+  .first-screen {
+    height: 80vh;
+    overflow: hidden;
+  }
+  .first-screen .view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+  }
+
+  .first-screen .centered-block {
+    position: absolute;    
+    display: table;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: auto;
+  }
+
+  .first-screen .login-wrapper {
+    position: absolute;    
+    bottom: 100%;
+    width: 100%;
+  }
+}
+
 .entire-page{
-  height: 100vh;
   position: initial;
   margin-top: 0px;
   left: 0;
 }
 .mid-sized-img{
-  height: 25vh;
-  width:75vw;
+  height: 100%;
+  width: 75vw;
 }
 .white-background{
   background-color: white;
