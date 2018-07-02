@@ -15,7 +15,10 @@ import IndividualProductView from '@/components/demo-day/discover/IndividualView
 import MyProducts from '@/components/account/products/MyProducts.vue'
 import CreateEvent from '@/components/resources/events/CreateEvent.vue'
 import LandingPage from '@/components/general/Landing.vue'
-import StudentMainOnboarding from '@/components/onboarding/student/MainScreen.vue'
+import StudentOnboardOne from '@/components/onboarding/student/ScreenOne.vue'
+import StudentOnboardTwo from '@/components/onboarding/student/ScreenTwo.vue'
+import StudentOnboardThree from '@/components/onboarding/student/ScreenThree.vue'
+import StudentOnboardFour from '@/components/onboarding/student/ScreenFour.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -102,9 +105,27 @@ export default new Router({
       component:LandingPage
     },
     {
-      path:'/student-onboarding',
-      name:'StudentMainOnboarding',
-      component:StudentMainOnboarding
+      path:'/student-onboarding/1',
+      name:'StudentOnboardOne',
+      component:StudentOnboardOne
+    },
+    {
+      path:'/student-onboarding/2',
+      name:'StudentOnboardTwo',
+      component:StudentOnboardTwo,
+      props: true
+    },
+    {
+      path:'/student-onboarding/3',
+      name:'StudentOnboardThree',
+      component:StudentOnboardThree,
+      props: true
+    },
+    {
+      path:'/student-onboarding/4',
+      name:'StudentOnboardFour',
+      component:StudentOnboardFour,
+      props: true
     }
   ]
 })

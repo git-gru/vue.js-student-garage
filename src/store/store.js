@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from './firebase.js'
+import helperFunctions from './helperFunctions.js'
 
 Vue.use(Vuex);
 Vue.use(firebase);
@@ -8,11 +9,16 @@ Vue.use(firebase);
 export const store = new Vuex.Store({
   state:{
     curUser: null,
-    loggedIn: null
+    loggedIn: null,
+    onboarded: null,
+    onboardingData : {}
   },
   getters: {
     loggedIn(state){
       return state.loggedIn;
+    },
+    getOnboardingData(state){
+      return state.onboardingData;
     }
   },
   mutations: {
@@ -21,6 +27,9 @@ export const store = new Vuex.Store({
     },
     setLoggedIn(state){
       state.loggedIn = true;
+    },
+    updateOnboardingData(state, payload){
+      state.onboardingData = helperFunctions.updateOnboardingData(state.onboardingData,payload);
     }
   },
   actions:{
@@ -38,6 +47,9 @@ export const store = new Vuex.Store({
     },
     testLogin({commit}){
       commit('setLoggedIn');
+    },
+    onboarding({commit},payload){
+      commit('updateOnboardingData',payload);
     }
   }
 });
