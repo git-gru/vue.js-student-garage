@@ -17,31 +17,30 @@
 
       <div class="left-margin">
         <div class="row">
-        <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg"
-        class="small-img left-margin-small col-md-4">
-        <div class="left-margin-small col-md-6">
-          <h4> For Students </h4>
-          <p> This is fake data that is simulating something real. Continue
-            to work right now on this page until we have put real data in it
+          <p class="col-5 col-sm-3">
+            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
           </p>
+          <div class="col-7 col-sm-9">
+            <h4> For Students </h4>
+            <p> This is fake data that is simulating something real. Continue
+              to work right now on this page until we have put real data in it
+            </p>
+          </div>
         </div>
-
-      </div>
-
       </div>
 
       <div class="left-margin">
         <div class="row">
-        <div class="left-margin-small col-md-6">
-          <h4> For Investors </h4>
-          <p> This is fake data that is simulating something real. Continue
-            to work right now on this page until we have put real data in it
+          <div class="col-7 col-sm-9">
+            <h4> For Investors </h4>
+            <p> This is fake data that is simulating something real. Continue
+              to work right now on this page until we have put real data in it
+            </p>
+          </div>
+          <p class="col-5 col-sm-3">
+            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
           </p>
         </div>
-        <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg"
-        class="small-img left-margin-small col-md-4">
-      </div>
-
       </div>
 
       <div>
