@@ -2,40 +2,45 @@
   <div class="entire-page">
     <!-- Header -->
     <div class="white-background">
-      <div class="big-margin-below">
-        <button @click="login()" class="btn btn-primary float-right right-margin"> Sign Up/Login </button>
-      </div>
-      <div class= "flex-content">
-        <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
+      <div class="first-screen">
+        <div class="view">
+          <div class="centered-block">
+            <div class="big-margin-below login-wrapper clearfix">
+              <button @click="login()" class="btn btn-primary float-right right-margin"> Sign Up/Login </button>
+            </div>
+            <div class= "flex-content logo-wrapper">
+              <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="left-margin">
         <div class="row">
-        <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg"
-        class="small-img left-margin-small">
-        <div class="left-margin-small">
-          <h4> For Students </h4>
-          <p> This is fake data that is simulating something real. Continue
-            to work right now on this page until we have put real data in it
+          <p class="col-5 col-sm-3">
+            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
           </p>
+          <div class="col-7 col-sm-9">
+            <h4> For Students </h4>
+            <p> This is fake data that is simulating something real. Continue
+              to work right now on this page until we have put real data in it
+            </p>
+          </div>
         </div>
-
-      </div>
-
       </div>
 
       <div class="left-margin">
         <div class="row">
-        <div class="left-margin-small">
-          <h4> For Investors </h4>
-          <p> This is fake data that is simulating something real. Continue
-            to work right now on this page until we have put real data in it
+          <div class="col-7 col-sm-9">
+            <h4> For Investors </h4>
+            <p> This is fake data that is simulating something real. Continue
+              to work right now on this page until we have put real data in it
+            </p>
+          </div>
+          <p class="col-5 col-sm-3">
+            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
           </p>
         </div>
-        <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg"
-        class="small-img left-margin-small">
-      </div>
-
       </div>
 
       <div>
@@ -69,18 +74,48 @@ export default {
 
 
 <style scoped>
-.big-margin-below{
-  margin-bottom: 15%;
+.first-screen {
+  height: 80vh;
+  overflow: hidden;
 }
-.entire-page{
+
+.first-screen .view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
+  padding: 0 0 40px;
+}
+
+.first-screen .centered-block {
+  position: absolute;
+  display: table;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: auto;
+}
+
+.first-screen .login-wrapper {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  margin: 0 0 40px;
+}
+
+.entire-page{
   position: initial;
   margin-top: 0px;
   left: 0;
 }
 .mid-sized-img{
-  height: 25vh;
-  width:75vw;
+  height: 100%;
+  width: 75vw;
 }
 .white-background{
   background-color: white;
