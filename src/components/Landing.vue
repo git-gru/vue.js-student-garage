@@ -75,46 +75,38 @@ export default {
 
 
 <style scoped>
+.first-screen {
+  height: 80vh;
+  overflow: hidden;
+}
+
 .first-screen .view {
-  padding: 40px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  padding: 0 0 40px;
+}
+
+.first-screen .centered-block {
+  position: absolute;    
+  display: table;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: auto;
 }
 
 .first-screen .login-wrapper {
-  margin-bottom: 40px;
-}
-
-@media(min-width: 576px) {
-  .first-screen {
-    height: 80vh;
-    overflow: hidden;
-  }
-  .first-screen .view {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    padding: 0;
-  }
-
-  .first-screen .centered-block {
-    position: absolute;    
-    display: table;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    margin: auto;
-  }
-
-  .first-screen .login-wrapper {
-    position: absolute;    
-    bottom: 100%;
-    width: 100%;
-  }
+  position: absolute;    
+  bottom: 100%;
+  width: 100%;
+  margin: 0 0 40px;
 }
 
 .entire-page{
