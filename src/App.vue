@@ -57,9 +57,4 @@ computed:{
 .spread{
   height: 100%;
 }
-
-.not-logged-in{
-    margin: -25px !important;
-
-}
 </style>
