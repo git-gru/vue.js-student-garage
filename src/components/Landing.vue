@@ -62,7 +62,7 @@ export default {
     }
   },
   methods: {
-    login () {
+    login () { // handled in the success callback of index.html
       this.$store.dispatch('testLogin');
       console.log('logged in');
     }
