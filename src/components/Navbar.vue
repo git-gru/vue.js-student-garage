@@ -8,8 +8,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
           <a class="navbar-brand" href="index.html">
-            <img class="logo-dark" src="/static/assets/img/logo-dark.png" alt="logo">
-            <img class="logo-light" src="/static/assets/img/logo-light.png" alt="logo">
+            <img class="logo-dark" src="/static/assets/img/NavBar-Logo-Dark.png" alt="logo">
           </a>
         </div>
         <section class="navbar-mobile">

@@ -19,6 +19,8 @@ import StudentOnboardOne from '@/components/onboarding/student/ScreenOne.vue'
 import StudentOnboardTwo from '@/components/onboarding/student/ScreenTwo.vue'
 import StudentOnboardThree from '@/components/onboarding/student/ScreenThree.vue'
 import StudentOnboardFour from '@/components/onboarding/student/ScreenFour.vue'
+import InvestorOnboardOne from '@/components/onboarding/investor/ScreenOne.vue'
+import InvestorOnboardTwo from '@/components/onboarding/investor/ScreenTwo.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -126,6 +128,16 @@ export default new Router({
       name:'StudentOnboardFour',
       component:StudentOnboardFour,
       props: true
+    },
+    {
+      path:'/investor-onboarding/1',
+      name:'InvestorOnboardOne',
+      component:InvestorOnboardOne
+    },
+    {
+      path:'/investor-onboarding/2',
+      name:'InvestorOnboardTwo',
+      component:InvestorOnboardTwo
     }
   ]
 })
