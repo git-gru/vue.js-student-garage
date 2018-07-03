@@ -9,7 +9,7 @@
 
             <h1>How it works</h1>
             <p class="lead-2 opacity-90 mt-6">Getting started and using our product is easy peasy!</p>
-            <button @click="login"> Login </button>
+            <script type="in/Login"></script>
 
           </div>
         </div>
@@ -20,7 +20,6 @@
 
 
 </template>
-
 
 
 <script>
