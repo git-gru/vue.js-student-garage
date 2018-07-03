@@ -5,7 +5,7 @@
       <router-view class="margin-nav"> </router-view>
     </div>
     <div v-if="!loggedIn" class="not-logged-in">
-      <Landing/>
+      <Landing ref="landing" />
     </div>
 
     <Foot/>
@@ -38,6 +38,9 @@ computed:{
   ...mapGetters({
     loggedIn: 'loggedIn'
     })
+  },
+  mounted () {
+    window.landingComponent = this.$refs.landing
   }
 }
 </script>

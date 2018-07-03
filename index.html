@@ -23,6 +23,32 @@
     <meta property="og:url" content="http://thetheme.io/thesaas/">
     <meta name="twitter:card" content="summary_large_image">
 
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+        api_key:   86wtjssgyprmd1
+        onLoad:    onLinkedinLoad
+        authorize: true
+        lang:      en_US
+    </script>
+    <script  type="text/javascript">
+        function onLinkedinLoad() {
+            IN.Event.on(IN, "auth", getProfileData);
+            
+        }
+        function getProfileData() {
+            IN.API.Profile("me").fields("id", "first-name", "last-name", "headline", "location", "picture-url", "public-profile-url", "email-address").result(displayProfileData).error(onError);
+        }
+
+        // Handle the successful return from the API call
+        function displayProfileData(data){
+            window.landingComponent.login();
+            console.log(data);
+        }
+        function onError () {
+
+        }
+
+    </script>
+
     <style>
         html {
             position: relative;
@@ -73,5 +99,6 @@
     <!-- Scripts -->
     <script src="/static/assets/js/page.min.js"></script>
     <script src="/static/assets/js/script.js"></script>
+  
   </body>
 </html>

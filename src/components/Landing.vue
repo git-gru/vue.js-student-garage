@@ -6,7 +6,7 @@
         <div class="view">
           <div class="centered-block">
             <div class="big-margin-below login-wrapper clearfix">
-              <button @click="login()" class="btn btn-primary float-right right-margin"> Sign Up/Login </button>
+              <script type="in/Login"></script>
             </div>
             <div class= "flex-content logo-wrapper">
               <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
@@ -52,7 +52,6 @@
 
 
 </template>
-
 
 
 <script>
@@ -106,6 +105,8 @@ export default {
   bottom: 100%;
   width: 100%;
   margin: 0 0 40px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .entire-page{
