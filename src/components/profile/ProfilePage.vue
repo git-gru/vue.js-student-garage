@@ -1,45 +1,51 @@
 <template>
   <div>
     <!-- Profile Image -->
-    <div class = "row">
-      <div class = "col-md-4 flex-content">
+    <div class="">
+    <div class = "row align-items-center justify-content-center">
+      <div class = "">
         <div>
           <img src="https://pbs.twimg.com/profile_images/833767319973212161/Ft904pMk_400x400.jpg" alt="..." class="rounded-circle img-restricted">
         </div>
       </div>
 
       <!-- Bio-->
-      <div class= "col-md-6">
-        <div class= "center-mobile">
+      <div class= "left-margin">
+        <div class= "">
           <h2>Goku</h2>
         </div>
 
-        <div class= "center-mobile">
+        <div class= "">
           <h5> Studying Human-Computer Interaction </h5>
         </div>
 
-        <div class= "center-mobile">
+        <div class= "">
           <span> <i class="fa fa-map-pin"></i></span>
           <span> Somewhere </span>
 
         </div>
 
-        <div class="social center-mobile no-left-margin">
+        <div class="social negative-left-margin">
           <a class="social-facebook" href="https://www.facebook.com/thethemeio"><i class="fa fa-facebook"></i></a>
           <a class="social-twitter" href="https://twitter.com/thethemeio"><i class="fa fa-twitter"></i></a>
           <a class="social-linkedin" href="https://www.linkedin.com/thethemeio/"><i class="fa fa-linkedin"></i></a>
           <a class="social-dribbble" href="https://dribbble.com/thethemeio"><i class="fa fa-dribbble"></i></a>
         </div>
 
-        <div class="center-mobile" >
+        <div class="" >
           <button type="button" class="btn btn-xl btn-primary">Message Goku</button>
         </div>
-            <div class="col-md-8 mx-auto no-left-margin no-left-padding margin-top">
+      </div>
+    </div>
+  </div>
+
+      <div>
+            <div class="col-md-12 mx-auto no-left-margin no-right-margin no-right-padding no-left-padding margin-top center-mobile">
 
               <div class="accordion" id="accordion-1">
                 <div class="card no-padding">
                   <h5 class="card-title">
-                    <a data-toggle="collapse" href="#collapse-1-1">Is this a secure site for purchases?</a>
+                    <a data-toggle="collapse" href="#collapse-1-1">Experiences</a>
                   </h5>
 
                   <div id="collapse-1-1" class="collapse" data-parent="#accordion-1">
@@ -50,7 +56,7 @@
                 </div>
                 <div class="card">
                   <h5 class="card-title">
-                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-2">How long are your contracts?</a>
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-2">Education</a>
                   </h5>
 
                   <div id="collapse-1-2" class="collapse" data-parent="#accordion-1">
@@ -61,7 +67,7 @@
                 </div>
                 <div class="card">
                   <h5 class="card-title">
-                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-3">Can I cancel my subscription?</a>
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-3">Interesting Tidbits</a>
                   </h5>
 
                   <div id="collapse-1-3" class="collapse" data-parent="#accordion-1">
@@ -73,6 +79,7 @@
               </div>
 
             </div>
+            <div class="margin-top-small">
             <h4> My Locker </h4>
             <p> Cool things I want you to see </p>
             <carousel-3d :controlsVisible = "true">
@@ -90,9 +97,8 @@
                 Slide 4 Content
               </slide>
             </carousel-3d>
+          </div>
       </div>
-
-    </div>
 
   </div>
 
@@ -131,9 +137,20 @@ export default {
   height: 200px;
   width: 200px;
 }
-
+.left-margin{
+  margin-left: 5%;
+}
+.left-margin-small{
+  margin-left: 2.5%;
+}
 .margin-top{
   margin-top: 5%;
+}
+.margin-top-small{
+  margin-top: 2.5%;
+}
+.negative-left-margin{
+  margin-left: -3%;
 }
 .no-left-margin{
   margin-left: 0 !important;
@@ -141,6 +158,13 @@ export default {
 
 .no-left-padding{
   padding-left: 0 !important;
+}
+.no-right-margin{
+  margin-right: 0 !important;
+}
+
+.no-right-padding{
+  padding-right: 0 !important;
 }
 
 @media (max-width:400px){
