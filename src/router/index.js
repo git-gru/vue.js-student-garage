@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ProfilePage from '@/components/profile/ProfilePage.vue'
+import InvestorProfile from '@/components/profile/InvestorProfile.vue'
 import QAMain from '@/components/q-a/MainPage.vue'
 import IndividualQuestionView from '@/components/q-a/IndividualQuestion.vue'
 import EventsMain from '@/components/resources/events/MainPage.vue'
@@ -138,6 +139,11 @@ export default new Router({
       path:'/investor-onboarding/2',
       name:'InvestorOnboardTwo',
       component:InvestorOnboardTwo
+    },
+    {
+      path:'/investor',
+      name:'InvestorProfile',
+      component:InvestorProfile
     }
   ]
 })
