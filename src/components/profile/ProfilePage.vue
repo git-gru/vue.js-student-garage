@@ -33,7 +33,7 @@
         </div>
 
         <div class="" >
-          <button type="button" class="btn btn-xl btn-primary">Message Goku</button>
+          <button type="button" class="btn btn-xl btn-primary" @click="addStudent()">Message Goku</button>
         </div>
       </div>
     </div>
@@ -105,12 +105,18 @@
 </template>
 
 <script>
+import StudentService from '../../services/studentService.js';
 export default {
-  name: 'Navbar',
+  name: 'StudentProfile',
   data () {
     return {
       msg: 'This is navbar',
       example: 'Testing'
+    }
+  },
+  methods:{
+    addStudent(){ // just wanted to test the firestore database
+      StudentService.addStudent();
     }
   }
 }
