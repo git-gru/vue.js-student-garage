@@ -22,7 +22,8 @@
           </div>
         </li>
       </ul>
-      <form class="form-horizontal top-margin" autocomplete="off">
+      
+      <form class = "form-horizontal top-margin" autocomplete="off">
       <fieldset>
         <div class="form-group input-group">
                   <input type="text" class="form-control" placeholder="Send a message" v-model="message" @keyup.enter="onSubmit">
