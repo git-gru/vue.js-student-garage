@@ -62,8 +62,6 @@
           </ul>
         </section>
 
-        <a class="btn btn-xs btn-round btn-success" href="https://themeforest.net/item/thesaas-responsive-bootstrap-saas-software-webapp-template/19778599?license=regular&open_purchase_for_item_id=19778599&purchasable=source&ref=thethemeio">Buy Now</a>
-
       </div>
     </nav><!-- /.navbar -->
 </template>

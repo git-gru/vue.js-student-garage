@@ -10,7 +10,7 @@
 
     <div class="flex-row top-margin">
       <div class="center-mobile" >
-        <button type="button" class="btn btn-lg ask-color" data-toggle="modal" data-target="#modal-default">Ask a Question</button>
+        <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#modal-default">Ask a Question</button>
       </div>
     </div>
 
@@ -66,50 +66,28 @@
     </div>
 
     <div class = "row left-margin right-margin">
-      <div class = "col-md-6 top-margin">
+      <div v-for="question in questions"  class = "col-md-6 top-margin">
         <div class="card border">
             <div class="card-body">
-              <h5 class="card-title">Image at bottom</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary" @click="goToQuestion()">12 Answers</button>
+              <h5 class="card-title">{{question.title}}</h5>
+              <button type="button" class="btn btn-md btn-primary" @click="goToQuestion(question.id)">{{question.answers.length}} Answers </button>
             </div>
         </div>
       </div>
-
-      <div class = "col-md-6 top-margin">
-        <div class="card border">
-            <div class="card-body">
-              <h5 class="card-title">Image at bottom</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary">12 Answers</button>
-            </div>
-        </div>
-
-      </div>
-
-      <div class = "col-md-6 top-margin">
-        <div class="card border">
-            <div class="card-body">
-              <h5 class="card-title">Image at bottom</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md btn-primary">12 Answers</button>
-            </div>
-        </div>
-
-      </div>
-
     </div>
   </div>
 
 </template>
 <script>
+import QuestionService from '../../services/questionService.js'
 export default {
   name: 'QAMain',
   data () {
     return {
       questionAsked: '',
       userHasQuestion: false,
-      questionQuery:''
+      questionQuery:'',
+      questions: []
     }
   },
   methods:{
@@ -122,12 +100,21 @@ export default {
     queryQuestions(){
       console.log(this.questionQuery);
     },
-    goToQuestion(){
-      this.$router.push('/question');
+    goToQuestion(id){
+      console.log(id);
+      this.$router.push({ name: 'IndividualQuestionView', params: { id }});
     }
+  },
+  mounted(){
+    var self = this;
+    QuestionService.getQuestions().then(function(querySnapshot){
+      self.questions = querySnapshot.docs.map(doc => {
+        let question = doc.data();
+        question.id = doc.id;
+        return question;
+      })
+    });
   }
-
-
 }
 </script>
 <style scoped>

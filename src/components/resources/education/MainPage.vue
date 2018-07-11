@@ -28,51 +28,38 @@
       <span class="badge badge-pill badge-dark">Dark</span>
     </div>
 
+
     <div class = "row left-margin right-margin">
-      <div class = "col-md-6 top-margin">
-        <div class="card border bg-primary white-text">
+      <div v-for="resource in resources" class = "col-md-6 top-margin">
+        <div class="card border bg-primary white-text h-100 w-100">
             <div class="card-body">
-              <h5 class="card-title">Image at bottom</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md read-more">12 Answers</button>
+              <h4 class="white-text">{{resource.title}}</h4>
+              <span class="badge badge-pill badge-warning">{{resource.topic}}</span>
+              <a v-bind:href="resource.link" target="_blank">
+                <button type="button" class="btn btn-md read-more display-block top-margin">Read More</button>
+              </a>
             </div>
         </div>
       </div>
-
-      <div class = "col-md-6 top-margin">
-        <div class="card border bg-primary white-text">
-            <div class="card-body">
-              <h5 class="card-title">Image at bottom</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md read-more">12 Answers</button>
-            </div>
-        </div>
-
-      </div>
-
-      <div class = "col-md-6 top-margin">
-        <div class="card border bg-primary white-text">
-            <div class="card-body">
-              <h5 class="card-title">Image at bottom</h5>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-              <button type="button" class="btn btn-md read-more">12 Answers</button>
-            </div>
-        </div>
-
-      </div>
-
     </div>
   </div>
 
 </template>
 <script>
+import EducationResourceService from '../../../services/educationResourceService.js'
 export default {
   name: 'Navbar',
   data () {
     return {
       msg: 'This is navbar',
-      example: 'Testing'
+      resources: []
     }
+  },
+  mounted() {
+    var self = this;
+    EducationResourceService.getResources().then(function(querySnapshot){
+      self.resources = querySnapshot.docs.map(doc => doc.data());
+    });
   }
 }
 </script>
@@ -83,6 +70,9 @@ export default {
   color: white;
 }
 
+.display-block{
+  display: block;
+}
 .flex-content{
   display: flex;
   justify-content: center;

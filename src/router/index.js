@@ -98,9 +98,10 @@ export default new Router({
       component:CreateEvent
     },
     {
-      path:'/question',
+      path:'/question/:id',
       name:'IndividualQuestionView',
-      component:IndividualQuestionView
+      component:IndividualQuestionView,
+      props:true
     },
     {
       path:'/landing',

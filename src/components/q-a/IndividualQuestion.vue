@@ -1,28 +1,32 @@
 <template>
   <div>
       <h2 class="text-center"> <span class ="bolded">{{question.title}}</span> </h2>
+      <div class="flex-row">
+        <h5 class="inline"> Asked by: {{question.asked_by.first_name}} {{question.asked_by.last_name}}</h5>
+        <img class="avatar avatar-lg left-margin-small" :src="question.asked_by.profile_img_add" alt="avatar">
+    </div>
       <div class="side-margin-10">
-        <h4 class ="bolded"> {{ question.answers.length }} Answer </h4>
+        <h4 v-if="question.answers.length == 1" class ="bolded"> {{ question.answers.length }} Answer </h4>
+        <h4 v-if="question.answers.length != 1" class ="bolded"> {{ question.answers.length }} Answers </h4>
 
         <ul class="list-group">
           <li v-for="answer in question.answers"
               class="list-group-item side-margin pseudo message">
             <div class="vertical-center">
-              <img class="ms-avatar-hero" v-bind:src="answer.user.avatarImgUrl" alt="">
+              <img class="ms-avatar-hero" v-bind:src="answer.answered_by.profile_img_add" alt="">
               <div class="name-message-container vertical-center">
-                <strong>{{ answer.user.name }}</strong>
-                <div>{{ answer.text }}</div>
+                <strong>{{ answer.answered_by.first_name}} {{ answer.answered_by.last_name}}</strong>
+                <div>{{ answer.content }}</div>
               </div>
             </div>
             <div class='vote-panel'>
               <button class="bordered btn btn-sm">
                 <i class="fa fa-thumbs-up"></i>
-
+                <p v-if="countUpvotes(answer) >= 0"class="inline">{{countUpvotes(answer)}}</p>
               </button>
 
               <button  class="btn btn-sm bordered-red">
                 <i class="fa fa-thumbs-down"></i>
-
               </button>
             </div>
           </li>
@@ -40,30 +44,17 @@
 
 
 <script>
-/*
-import questionService from '../../services/questionService.js'
-import TwilioService from '../../services/TwilioMessageService.js'
-import userService from '../../services/userService.js'
-import answerService from '../../services/answerService.js' */
+import QuestionService from '../../services/questionService.js';
 export default {
   name: 'IndividualQuestionView',
   data () {
     return {
       userAnswer:'',
-      question: {
-        title: 'Test Question',
-        answers:[{
-          user:{
-            name: "Fake User",
-            avatarImgUrl: 'https://mk0slamonlinensgt39k.kinstacdn.com/wp-content/uploads/2018/03/lebron_james_play-in_tournament_playoff.jpg'
-          },
-          text: 'This is an example answer'
-        }]
-      },
+      question: {}
     }
   },
   mounted(){
-    //this.update()
+    this.update()
   },
   computed: {
     answersTitle() {
@@ -72,10 +63,10 @@ export default {
   },
   methods: {
     update() {
-      questionService.getQuestion(this.$route.params.id)
-        .then((question) => {
-          this.question = question
-        })
+      let self = this;
+      QuestionService.getQuestion(this.$route.params.id).then(function(querySnapshot){
+        self.question = querySnapshot.data();
+      });
     },
     downvote(answer) {
       const reaction = this.getReaction(answer)
@@ -95,9 +86,11 @@ export default {
       return answer.reactions.find(answer => answer.userId === userService.currentUser.id) || {}
     },
     countUpvotes(answer) {
-      return answer.reactions.reduce((acc, reaction) => {
-        return acc + reaction.value
-      }, 0)
+      let score = 0;
+      for(let reaction in answer.reactions){
+        score += parseInt(answer.reactions[reaction]);
+      }
+      return score;
     },
     postComment(questionId) {
       questionService.answerQuestion(questionId, this.answer);
@@ -140,10 +133,16 @@ export default {
   width: 50px;
   height: 50px;
 }
-.flex-content {
+.flex-content{
+  display: flex;
+  justify-content: center;
+}
+
+.flex-row{
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
 }
 .upper-margin {
   margin-top: 2.5%;
@@ -163,6 +162,9 @@ export default {
   display: inline-block;
   vertical-align: middle;
   height: 100%;
+}
+.left-margin-small{
+  margin-left: .5%;
 }
 .light-blue {
   background-color: #25ddec;
@@ -215,6 +217,9 @@ export default {
 }
 .date-user-match {
   float: right;
+}
+.inline{
+  display: inline;
 }
 .is-typing-area {
   height: 2em;
