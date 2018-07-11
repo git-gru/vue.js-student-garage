@@ -2,13 +2,14 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import firebase from './firebase.js'
 import helperFunctions from './helperFunctions.js'
+import currentUser from './user.js'
 
 Vue.use(Vuex);
 Vue.use(firebase);
 
 export const store = new Vuex.Store({
   state:{
-    curUser: null,
+    curUser: currentUser,
     loggedIn: null,
     onboarded: null,
     onboardingData : {}
@@ -19,6 +20,9 @@ export const store = new Vuex.Store({
     },
     getOnboardingData(state){
       return state.onboardingData;
+    },
+    getCurrentUser(state){
+      return state.curUser;
     }
   },
   mutations: {
