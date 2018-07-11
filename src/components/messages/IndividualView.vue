@@ -27,7 +27,7 @@
         <div class="form-group input-group">
                   <input type="text" class="form-control" placeholder="Send a message" v-model="message" @keyup.enter="onSubmit">
                   <div class="input-group-append ml-4">
-                    <button class="btn btn-primary" type="button">Send</button>
+                    <button class="btn btn-primary" type="button" @click="onSubmit">Send</button>
                   </div>
         </div>
       </fieldset>
