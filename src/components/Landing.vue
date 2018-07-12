@@ -11,6 +11,7 @@
             <div class= "flex-content logo-wrapper">
               <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
             </div>
+            <Login />
           </div>
         </div>
       </div>
@@ -50,10 +51,14 @@
   </div>
 </template>
 
-
 <script>
+import Login from "@/components/account/Login.vue"
+
 export default {
   name: "Landing",
+  components: {
+    Login
+  },
   data() {
     return {};
   },
