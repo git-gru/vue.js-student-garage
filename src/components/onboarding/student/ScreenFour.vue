@@ -46,7 +46,7 @@
     <div>
       <div class="form-group">
         <label>How Do You Spend Your Free Time?</label>
-        <textarea class="form-control" rows="4" placeholder="Tell us more" v-model="userExperienceDescription"></textarea>
+        <textarea class="form-control" rows="4" placeholder="Tell us more" v-model="userFreeTime"></textarea>
       </div>
     </div>
 
@@ -76,16 +76,7 @@ export default {
   name: 'StudentMainOnboarding',
   data () {
     return {
-      userFirstName: '',
-      userLastName: '',
-      userSchool: 'Stanford University',
-      userHeadline: '',
-      userEducationalStudies: '',
-      userEducationalGraduation: '',
-      userExperienceTitle: '',
-      userExperienceStart: '',
-      userExperienceEnd: '',
-      userExperienceDescription:'',
+      userFreeTime: '',
       lockerItems: [],
       gitHubLink:''
     }
@@ -97,12 +88,10 @@ export default {
     },
   methods:{
     onboardingFinished(){
-      let user = {};
-      user.firstName = this.userFirstName;
-      user.lastName = this.userLastName;
-      user.school = this.userSchool;
-      user.headline = this.userHeadline;
-      console.log(user);
+      let lockerData = {};
+      lockerData.lockerItems = this.lockerItems;
+      let freeTime = {};
+      freeTime.free_time = this.userFreeTime;
     },
     addExperience(){
       console.log("Add Experience!");

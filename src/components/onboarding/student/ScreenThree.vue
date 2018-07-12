@@ -14,8 +14,8 @@
     </fieldset>
         <div class="row">
           <div class="form-group col-md-6">
-              <label>Major</label>
-              <input  class="form-control" type="text" placeholder="Major" v-model="stanfordMajor">
+              <label>Major/Program</label>
+              <input  class="form-control" type="text" placeholder="Major" v-model="stanfordDescription">
           </div>
           <div class="form-group col-md-6">
               <label>Graduation Year (or expected)</label>
@@ -105,7 +105,7 @@ export default {
       userHeadline: '',
       stanfordEducation: 'Stanford University',
       stanfordGraduation: '',
-      stanfordMajor: '',
+      stanfordDescription: '',
       userExperienceStart: '',
       userExperienceEnd: '',
       userExperienceDescription:'',
@@ -123,8 +123,17 @@ export default {
       this.$router.push('/student-onboarding/2')
     },
     toFourthScreen(){
+      let stanfordEducation = {};
+      stanfordEducation.school = this.stanfordEducation;
+      stanfordEducation.description = stanfordDescription;
+      stanfordEducation.gradYear = this.stanfordGraduation;
+      let otherEducation = {};
+      otherEducation.education = this.educationData;
+      let testInformation = {};
+      testInformation.tests = this.testData;
+      /*
       //this.$store.dispatch('onboarding',userData);
-      this.$router.push('/student-onboarding/4')
+      this.$router.push('/student-onboarding/4')*/
     },
     addExperience(){
       console.log("Add Experience!");

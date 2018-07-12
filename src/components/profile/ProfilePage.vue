@@ -77,9 +77,11 @@
                       <p> Graduation Year (or expected): {{education.gradYear}} </p>
                       <hr v-if="key < student.education.length -1">
                     </div>
-
+                    <div class="card-body" v-if="!emptyString(student.gpa)">
+                      <h4 class="theme-bold"> GPA: {{student.gpa}} </h4>
+                    </div>
                     <div class="card-body" v-if="student.tests.length > 0">
-                      <h4> Test Scores </h4>
+                      <h4 class="theme-bold"> Test Scores </h4>
                       <div class="" v-for="(test, key) in student.tests">
                         <h4>{{test.title}} </h4>
                         <h5>{{test.score}} </h5>
@@ -109,7 +111,7 @@
             <h4> My Locker </h4>
             <p> Cool things I want you to see </p>
             <carousel-3d :controlsVisible = "true">
-              <slide v-for="(item, key) in student.locker" class="black-background" :index="key">
+              <slide v-for="item in student.locker" v-bind:key="item.title" class="black-background" :index="item.title">
                 <a v-bind:href="item.link" target="_blank">
                 <h1 class="text-white">{{item.title}}</h1>
                 <p v-if="!emptyString(item.link)"> (Click Here to Learn More) </p>
@@ -206,6 +208,12 @@ border: none;
 }
 .no-right-padding{
   padding-right: 0 !important;
+}
+.theme-bold{
+  font-weight: bold;
+}
+.theme-blue{
+  color: #50a1ff !important;
 }
 @media (max-width:400px){
   .center-mobile{

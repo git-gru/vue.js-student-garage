@@ -16,6 +16,10 @@
             <label>Title</label>
             <input class="form-control" type="text" placeholder="Experience Title" v-model="experiences[key].title">
         </div>
+        <div class="form-group ">
+            <label>Company</label>
+            <input class="form-control" type="text" placeholder="Company Name" v-model="experiences[key].company">
+        </div>
           <div class="form-group">
             <label>Description</label>
             <textarea class="form-control" rows="4" placeholder="Experience Description" v-model="experiences[key].description"></textarea>
@@ -57,17 +61,7 @@ export default {
   props: ['userData'],
   data () {
     return {
-      userFirstName: '',
-      experiences: [{title:'', description:'', start:'', end:''}],
-      userLastName: '',
-      userSchool: 'Stanford University',
-      userHeadline: '',
-      userEducationalStudies: '',
-      userEducationalGraduation: '',
-      userExperienceTitle: '',
-      userExperienceStart: '',
-      userExperienceEnd: '',
-      userExperienceDescription:''
+      experiences: [{title:'',company:'', description:'', start:'', end:''}],
     }
   },
   computed:{
@@ -81,14 +75,13 @@ export default {
     },
     toThirdScreen(){
       console.log(this.experiences);
-      /*
-      let userData = {};
-      userData.testField = "testing!";
+      let userData = {};/*
+      userData.experiences = this.experiences;
       this.$store.dispatch('onboarding',userData);
       this.$router.push('/student-onboarding/3')*/
     },
     addExperience(){
-      this.experiences.push({title:'', description:'', start:'', end:''});
+      this.experiences.push({title:'',company:'', description:'', start:'', end:''});
     },
     deleteExperience(index){
         //this.experiences.push({title:'', description:'', start:'', end:''});
