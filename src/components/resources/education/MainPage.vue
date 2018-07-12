@@ -28,7 +28,12 @@
       <span class="badge badge-pill badge-dark">Dark</span>
     </div>
 
-
+    <div v-if="showSpinner" class="top-margin-5">
+      <div class="flex-content">
+        <rotate-square2 class="display-block"></rotate-square2>
+      </div>
+      <h4 class="text-center"> Loading </h4>
+    </div>
     <div class = "row left-margin right-margin">
       <div v-for="resource in resources" class = "col-md-6 top-margin">
         <div class="card border bg-primary white-text h-100 w-100">
@@ -47,19 +52,25 @@
 </template>
 <script>
 import EducationResourceService from '../../../services/educationResourceService.js'
+import {RotateSquare2} from 'vue-loading-spinner'
 export default {
   name: 'EducationResources',
+  components: {
+      RotateSquare2
+  },
   data () {
     return {
-      resources: []
-      // spinner = true
+      resources: [],
+      showSpinner: true
     }
   },
   mounted() {
+    console.log(this.showSpinner);
+    console.log("hello");
     var self = this;
     EducationResourceService.getResources().then(function(querySnapshot){
       self.resources = querySnapshot.docs.map(doc => doc.data());
-      // spinner = false
+      self.showSpinner = false;
     });
   }
 }
@@ -71,6 +82,10 @@ export default {
   color: white;
 }
 
+.black-background{
+  background-color: black;
+  color:black;
+}
 .display-block{
   display: block;
 }
@@ -122,6 +137,9 @@ export default {
 }
 .top-margin{
   margin-top: 2.5%;
+}
+.top-margin-5{
+  margin-top: 5%
 }
 .top-margin-shrunk{
   margin-top: .5%;

@@ -42,7 +42,7 @@
       <div>
             <div class="col-md-12 mx-auto no-left-margin no-right-margin no-right-padding no-left-padding margin-top center-mobile">
 
-              <div class="accordion" id="accordion-1">
+              <div class="accordion w-100" id="accordion-1">
                 <div class="card no-padding">
                   <h5 class="card-title">
                     <a data-toggle="collapse" href="#collapse-1-1">Experiences</a>
@@ -110,17 +110,17 @@
             <div class="margin-top-small">
             <h4> My Locker </h4>
             <p> Cool things I want you to see </p>
-            <carousel-3d :controlsVisible = "true">
-              <slide v-for="item in student.locker" v-bind:key="item.title" class="black-background" :index="item.title">
-                <a v-bind:href="item.link" target="_blank">
-                <h1 class="text-white">{{item.title}}</h1>
-                <p v-if="!emptyString(item.link)"> (Click Here to Learn More) </p>
-                </a>
-                <h6 class="text-white"> <span> {{item.start}} - </span>
-                <span> {{item.end}} </span> </h6>
-                <p> {{item.description}} </p>
-              </slide>
-            </carousel-3d>
+              <carousel-3d :controlsVisible = "true">
+                <slide v-for="(item, key) in student.locker" class="black-background" v-bind:key="item.title" :index="key">
+                  <a v-bind:href="item.link" target="_blank">
+                  <h1 class="text-white">{{item.title}}</h1>
+                  <p v-if="!emptyString(item.link)"> (Click Here to Learn More) </p>
+                  </a>
+                  <h6 class="text-white"> <span> {{item.start}} - </span>
+                  <span> {{item.end}} </span> </h6>
+                  <p> {{item.description}} </p>
+                </slide>
+              </carousel-3d>
           </div>
       </div>
 
