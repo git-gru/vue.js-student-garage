@@ -55,135 +55,141 @@
 
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-  name: 'StudentMainOnboarding',
-  props: ['userData'],
-  data () {
+  name: "StudentMainOnboarding",
+  props: ["userData"],
+  data() {
     return {
-      experiences: [{title:'',company:'', description:'', start:'', end:''}],
-    }
+      experiences: [
+        { title: "", company: "", description: "", start: "", end: "" }
+      ]
+    };
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      onboardingSoFar: 'getOnboardingData'
-      })
+      onboardingSoFar: "getOnboardingData"
+    })
+  },
+  methods: {
+    toFirstScreen() {
+      this.$router.push("/student-onboarding/1");
     },
-  methods:{
-    toFirstScreen(){
-      this.$router.push('/student-onboarding/1')
-    },
-    toThirdScreen(){
+    toThirdScreen() {
       console.log(this.experiences);
-      let userData = {};/*
+      let userData = {}; /*
       userData.experiences = this.experiences;
       this.$store.dispatch('onboarding',userData);
       this.$router.push('/student-onboarding/3')*/
     },
-    addExperience(){
-      this.experiences.push({title:'',company:'', description:'', start:'', end:''});
+    addExperience() {
+      this.experiences.push({
+        title: "",
+        company: "",
+        description: "",
+        start: "",
+        end: ""
+      });
     },
-    deleteExperience(index){
-        //this.experiences.push({title:'', description:'', start:'', end:''});
-        console.log("experience deleted", index);
-        this.experiences.splice(index,1);
-      },
-    addEducation(){
+    deleteExperience(index) {
+      //this.experiences.push({title:'', description:'', start:'', end:''});
+      console.log("experience deleted", index);
+      this.experiences.splice(index, 1);
+    },
+    addEducation() {
       console.log("Add Education!");
     },
-    addSomethingCool(){
+    addSomethingCool() {
       console.log("Add Something Cool!");
     }
   }
-}
-
+};
 </script>
 
 
 <style scoped>
-.ask-color{
-  background-color: #FF420E;
+.ask-color {
+  background-color: #ff420e;
   color: white;
 }
 
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
 
-.float-l{
+.float-l {
   float: left;
   margin-left: 0px;
 }
-.float-r{
+.float-r {
   float: right;
   margin-right: 0px;
 }
-.float-right{
-  float:right;
+.float-right {
+  float: right;
 }
 
-.hand-hover:hover{
+.hand-hover:hover {
   cursor: pointer;
 }
-hr{
-height: 1px;
-color: #123455;
-background-color: #123455;
-border: none;
+hr {
+  height: 1px;
+  color: #123455;
+  background-color: #123455;
+  border: none;
 }
-.icon-minus-color{
+.icon-minus-color {
   color: red;
 }
-.icon-plus-color{
+.icon-plus-color {
   color: green;
 }
-.img-restricted{
+.img-restricted {
   height: 200px;
   width: 200px;
 }
-.inline{
+.inline {
   display: inline;
 }
-.left-margin{
+.left-margin {
   margin-left: 5%;
 }
-.margin-top{
+.margin-top {
   margin-top: 5%;
 }
 
-.margin-20{
-  margin-left:20%;
+.margin-20 {
+  margin-left: 20%;
   margin-right: 20%;
 }
-.no-left-margin{
+.no-left-margin {
   margin-left: 0 !important;
 }
 
-.no-left-padding{
+.no-left-padding {
   padding-left: 0 !important;
 }
 
-@media (max-width:400px){
-  .center-mobile{
+@media (max-width: 400px) {
+  .center-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
 
-.right-margin{
+.right-margin {
   margin-right: 5%;
 }
-.top-margin{
+.top-margin {
   margin-top: 2.5%;
 }
-
 </style>

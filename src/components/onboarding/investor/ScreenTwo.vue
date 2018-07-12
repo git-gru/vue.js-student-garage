@@ -45,109 +45,110 @@
 
 <script>
 export default {
-  name: 'StudentMainOnboarding',
-  data () {
+  name: "StudentMainOnboarding",
+  data() {
     return {
-      userFirstName: '',
-      userLastName: '',
-      userHeadline: '',
-      reasonsToUse: [{title:'Network With Students'},{title:'Find Talent for Existing Portfolio Companies'},
-                      {title:'Improve Deal Flow'},{title: 'All of the Above'}]
-    }
+      userFirstName: "",
+      userLastName: "",
+      userHeadline: "",
+      reasonsToUse: [
+        { title: "Network With Students" },
+        { title: "Find Talent for Existing Portfolio Companies" },
+        { title: "Improve Deal Flow" },
+        { title: "All of the Above" }
+      ]
+    };
   },
-  methods:{
-      toSecondScreen(){
+  methods: {
+    toSecondScreen() {
       let userData = {};
       userData.firstName = this.userFirstName;
       userData.lastName = this.userLastName;
       userData.headline = this.userHeadline;
-      this.$store.dispatch('onboarding',userData);
-      this.$router.push('/student-onboarding/2');
+      this.$store.dispatch("onboarding", userData);
+      this.$router.push("/student-onboarding/2");
     },
-    addExperience(){
+    addExperience() {
       console.log("Add Experience!");
     },
-    addEducation(){
+    addEducation() {
       console.log("Add Education!");
     },
-    addSomethingCool(){
+    addSomethingCool() {
       console.log("Add Something Cool!");
     }
   }
-}
-
+};
 </script>
 
 
 <style scoped>
-.ask-color{
-  background-color: #FF420E;
+.ask-color {
+  background-color: #ff420e;
   color: white;
 }
 
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
-.float-right{
-  float:right;
+.float-right {
+  float: right;
 }
-.hand-hover:hover{
+.hand-hover:hover {
   cursor: pointer;
 }
-hr{
-height: 1px;
-color: #123455;
-background-color: #123455;
-border: none;
-
+hr {
+  height: 1px;
+  color: #123455;
+  background-color: #123455;
+  border: none;
 }
-.img-restricted{
+.img-restricted {
   height: 200px;
   width: 200px;
 }
-.inline{
+.inline {
   display: inline;
 }
-.left-margin{
+.left-margin {
   margin-left: 5%;
 }
-.margin-top{
+.margin-top {
   margin-top: 5%;
 }
 
-.margin-20{
-  margin-left:20%;
+.margin-20 {
+  margin-left: 20%;
   margin-right: 20%;
 }
-.no-left-margin{
+.no-left-margin {
   margin-left: 0 !important;
 }
 
-.no-left-padding{
+.no-left-padding {
   padding-left: 0 !important;
 }
 
-@media (max-width:400px){
-  .center-mobile{
+@media (max-width: 400px) {
+  .center-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
 
-.right-margin{
+.right-margin {
   margin-right: 5%;
 }
-.top-margin{
+.top-margin {
   margin-top: 2.5%;
 }
-
 </style>

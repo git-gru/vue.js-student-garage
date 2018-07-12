@@ -44,17 +44,17 @@
 
 
 <script>
-import QuestionService from '../../services/questionService.js';
+import QuestionService from "../../services/questionService.js";
 export default {
-  name: 'IndividualQuestionView',
-  data () {
+  name: "IndividualQuestionView",
+  data() {
     return {
-      userAnswer:'',
+      userAnswer: "",
       question: {}
-    }
+    };
   },
-  mounted(){
-    this.update()
+  mounted() {
+    this.update();
   },
   computed: {
     answersTitle() {
@@ -64,81 +64,96 @@ export default {
   methods: {
     update() {
       let self = this;
-      QuestionService.getQuestion(this.$route.params.id).then(function(querySnapshot){
+      QuestionService.getQuestion(this.$route.params.id).then(function(
+        querySnapshot
+      ) {
         self.question = querySnapshot.data();
       });
     },
     downvote(answer) {
-      const reaction = this.getReaction(answer)
-      answerService.reactToAnswer(answer.id, reaction.value === -1 ? 'neutral' : 'downvote')
+      const reaction = this.getReaction(answer);
+      answerService
+        .reactToAnswer(
+          answer.id,
+          reaction.value === -1 ? "neutral" : "downvote"
+        )
         .then(() => {
-          this.update()
-        })
+          this.update();
+        });
     },
     upvote(answer) {
-      const reaction = this.getReaction(answer)
-      answerService.reactToAnswer(answer.id, reaction.value === 1 ? 'neutral' : 'upvote')
+      const reaction = this.getReaction(answer);
+      answerService
+        .reactToAnswer(answer.id, reaction.value === 1 ? "neutral" : "upvote")
         .then(() => {
-          this.update()
-        })
+          this.update();
+        });
     },
     getReaction(answer) {
-      return answer.reactions.find(answer => answer.userId === userService.currentUser.id) || {}
+      return (
+        answer.reactions.find(
+          answer => answer.userId === userService.currentUser.id
+        ) || {}
+      );
     },
     countUpvotes(answer) {
       let score = 0;
-      for(let reaction in answer.reactions){
+      for (let reaction in answer.reactions) {
         score += parseInt(answer.reactions[reaction]);
       }
       return score;
     },
     postComment(questionId) {
       questionService.answerQuestion(questionId, this.answer);
-      if(this.question.user.phoneNum !== ""){
+      if (this.question.user.phoneNum !== "") {
         this.sendSystemMessage(this.question.user.phoneNum);
       }
       this.answer = "";
-      questionService.getQuestion(this.$route.params.id) // re-render the question so user sees their answer
-        .then((question) => {
+      questionService
+        .getQuestion(this.$route.params.id) // re-render the question so user sees their answer
+        .then(question => {
           this.question = {
             ...question,
             content: question.text,
-            answers: question.answers.map(answer => ({ ...answer, content: answer.text }))
-          }
-        })
+            answers: question.answers.map(answer => ({
+              ...answer,
+              content: answer.text
+            }))
+          };
+        });
     },
-    sendSystemMessage: function(phoneNumber){
+    sendSystemMessage: function(phoneNumber) {
       TwilioService.questionAnswered(phoneNumber);
     },
-    answerQuestion(){
+    answerQuestion() {
       console.log("Answer the Question");
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.side-margin-10{
-    margin-left: 10%;
-    margin-right: 10%;
+.side-margin-10 {
+  margin-left: 10%;
+  margin-right: 10%;
 }
-.answer{
+.answer {
   border-top-style: solid !important;
-   border-right-style: solid !important;
-   border-bottom-style: solid !important;
-   border-left-style: solid !important;
-   border-color: #25ddec;
+  border-right-style: solid !important;
+  border-bottom-style: solid !important;
+  border-left-style: solid !important;
+  border-color: #25ddec;
 }
 .ms-avatar-hero {
   width: 50px;
   height: 50px;
 }
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,8 +178,8 @@ export default {
   vertical-align: middle;
   height: 100%;
 }
-.left-margin-small{
-  margin-left: .5%;
+.left-margin-small {
+  margin-left: 0.5%;
 }
 .light-blue {
   background-color: #25ddec;
@@ -188,13 +203,13 @@ export default {
 .send-button {
   margin: 0;
 }
-.centered{
+.centered {
   text-align: center;
 }
-.chat-title{
-  margin:auto;
+.chat-title {
+  margin: auto;
 }
-.lower-margin{
+.lower-margin {
   margin-bottom: 2.5%;
 }
 @media screen and (max-width: 500px) {
@@ -202,7 +217,6 @@ export default {
     width: 40px;
     height: 40px;
   }
-
 }
 @media screen and (max-width: 500px) {
   .comment {
@@ -218,7 +232,7 @@ export default {
 .date-user-match {
   float: right;
 }
-.inline{
+.inline {
   display: inline;
 }
 .is-typing-area {

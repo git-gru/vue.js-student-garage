@@ -353,21 +353,17 @@
 
 <script>
 export default {
-  name: 'Landing',
-  data () {
+  name: "Landing",
+  data() {
     return {
-      testVariable: ''
-    }
+      testVariable: ""
+    };
   },
-  methods: {
-
-  }
-}
+  methods: {}
+};
 </script>
 
 
 
 <style scoped>
-
-
 </style>

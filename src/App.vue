@@ -13,15 +13,15 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
-import Head from '@/components/Head.vue'
-import Main from '@/components/Main.vue'
-import Foot from '@/components/Foot.vue'
-import Landing from '@/components/Landing.vue'
-import { mapGetters } from 'vuex'
+import Navbar from "@/components/Navbar.vue";
+import Head from "@/components/Head.vue";
+import Main from "@/components/Main.vue";
+import Foot from "@/components/Foot.vue";
+import Landing from "@/components/Landing.vue";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Navbar,
     Head,
@@ -29,32 +29,32 @@ export default {
     Foot,
     Landing
   },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   },
   // ...
-computed:{
-  ...mapGetters({
-    loggedIn: 'loggedIn'
+  computed: {
+    ...mapGetters({
+      loggedIn: "loggedIn"
     })
   },
-  mounted () {
-    window.landingComponent = this.$refs.landing
+  mounted() {
+    window.landingComponent = this.$refs.landing;
   }
-}
+};
 </script>
 
 <style scoped>
-
-.margin-nav{
+.margin-nav {
   margin-top: 75px;
 
   @media screen and (max-width: 768px) {
-    body { padding-top: 0px; }
+    body {
+      padding-top: 0px;
+    }
   }
 }
-.spread{
+.spread {
   height: 100%;
 }
 </style>

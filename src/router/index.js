@@ -68,83 +68,83 @@ export default new Router({
       component: PostProductMain
     },
     {
-      path:'/settings',
-      name:'AccountSettingsMain',
-      component:AccountSettingsMain
+      path: '/settings',
+      name: 'AccountSettingsMain',
+      component: AccountSettingsMain
     },
     {
-      path:'/jobs',
-      name:'JobsMain',
-      component:JobsMain
+      path: '/jobs',
+      name: 'JobsMain',
+      component: JobsMain
     },
     {
-      path:'/message',
-      name:'IndividualMessageView',
-      component:IndividualMessageView
+      path: '/message',
+      name: 'IndividualMessageView',
+      component: IndividualMessageView
     },
     {
-      path:'/product',
-      name:'IndividualProductView',
-      component:IndividualProductView
+      path: '/product',
+      name: 'IndividualProductView',
+      component: IndividualProductView
     },
     {
-      path:'/my-products',
-      name:'MyProducts',
-      component:MyProducts
+      path: '/my-products',
+      name: 'MyProducts',
+      component: MyProducts
     },
     {
-      path:'/create-event',
-      name:'CreateEvent',
-      component:CreateEvent
+      path: '/create-event',
+      name: 'CreateEvent',
+      component: CreateEvent
     },
     {
-      path:'/question/:id',
-      name:'IndividualQuestionView',
-      component:IndividualQuestionView,
-      props:true
-    },
-    {
-      path:'/landing',
-      name:'LandingPage',
-      component:LandingPage
-    },
-    {
-      path:'/student-onboarding/1',
-      name:'StudentOnboardOne',
-      component:StudentOnboardOne
-    },
-    {
-      path:'/student-onboarding/2',
-      name:'StudentOnboardTwo',
-      component:StudentOnboardTwo,
+      path: '/question/:id',
+      name: 'IndividualQuestionView',
+      component: IndividualQuestionView,
       props: true
     },
     {
-      path:'/student-onboarding/3',
-      name:'StudentOnboardThree',
-      component:StudentOnboardThree,
+      path: '/landing',
+      name: 'LandingPage',
+      component: LandingPage
+    },
+    {
+      path: '/student-onboarding/1',
+      name: 'StudentOnboardOne',
+      component: StudentOnboardOne
+    },
+    {
+      path: '/student-onboarding/2',
+      name: 'StudentOnboardTwo',
+      component: StudentOnboardTwo,
       props: true
     },
     {
-      path:'/student-onboarding/4',
-      name:'StudentOnboardFour',
-      component:StudentOnboardFour,
+      path: '/student-onboarding/3',
+      name: 'StudentOnboardThree',
+      component: StudentOnboardThree,
       props: true
     },
     {
-      path:'/investor-onboarding/1',
-      name:'InvestorOnboardOne',
-      component:InvestorOnboardOne
+      path: '/student-onboarding/4',
+      name: 'StudentOnboardFour',
+      component: StudentOnboardFour,
+      props: true
     },
     {
-      path:'/investor-onboarding/2',
-      name:'InvestorOnboardTwo',
-      component:InvestorOnboardTwo
+      path: '/investor-onboarding/1',
+      name: 'InvestorOnboardOne',
+      component: InvestorOnboardOne
     },
     {
-      path:'/investor',
-      name:'InvestorProfile',
-      component:InvestorProfile
+      path: '/investor-onboarding/2',
+      name: 'InvestorOnboardTwo',
+      component: InvestorOnboardTwo
+    },
+    {
+      path: '/investor',
+      name: 'InvestorProfile',
+      component: InvestorProfile
     }
   ]
 })

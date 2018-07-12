@@ -95,34 +95,34 @@
 
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
-  name: 'StudentMainOnboarding',
-  data () {
+  name: "StudentMainOnboarding",
+  data() {
     return {
-      userFirstName: '',
-      userLastName: '',
-      userHeadline: '',
-      stanfordEducation: 'Stanford University',
-      stanfordGraduation: '',
-      stanfordDescription: '',
-      userExperienceStart: '',
-      userExperienceEnd: '',
-      userExperienceDescription:'',
+      userFirstName: "",
+      userLastName: "",
+      userHeadline: "",
+      stanfordEducation: "Stanford University",
+      stanfordGraduation: "",
+      stanfordDescription: "",
+      userExperienceStart: "",
+      userExperienceEnd: "",
+      userExperienceDescription: "",
       educationData: [],
       testData: []
-    }
+    };
   },
-  computed:{
+  computed: {
     ...mapGetters({
-    onboardingSoFar: 'getOnboardingData'
-      })
+      onboardingSoFar: "getOnboardingData"
+    })
+  },
+  methods: {
+    toSecondScreen() {
+      this.$router.push("/student-onboarding/2");
     },
-  methods:{
-    toSecondScreen(){
-      this.$router.push('/student-onboarding/2')
-    },
-    toFourthScreen(){
+    toFourthScreen() {
       let stanfordEducation = {};
       stanfordEducation.school = this.stanfordEducation;
       stanfordEducation.description = stanfordDescription;
@@ -135,116 +135,113 @@ export default {
       //this.$store.dispatch('onboarding',userData);
       this.$router.push('/student-onboarding/4')*/
     },
-    addExperience(){
+    addExperience() {
       console.log("Add Experience!");
     },
-    addEducation(){
-      this.educationData.push({school:'',major:'', gradYear:''})
+    addEducation() {
+      this.educationData.push({ school: "", major: "", gradYear: "" });
     },
-    addTestData(){
-      this.testData.push({test:'',score:''})
+    addTestData() {
+      this.testData.push({ test: "", score: "" });
     },
-    deleteTestData(index){
-      this.testData.splice(index,1);
+    deleteTestData(index) {
+      this.testData.splice(index, 1);
     },
-    deleteEducation(index){
-      this.educationData.splice(index,1);
+    deleteEducation(index) {
+      this.educationData.splice(index, 1);
     },
-    addSomethingCool(){
+    addSomethingCool() {
       console.log("Add Something Cool!");
     }
   }
-}
-
+};
 </script>
 
 
 <style scoped>
-.ask-color{
-  background-color: #FF420E;
+.ask-color {
+  background-color: #ff420e;
   color: white;
 }
 
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
-.float-l{
+.float-l {
   float: left;
   margin-left: 0px;
 }
-.float-r{
+.float-r {
   float: right;
   margin-right: 0px;
 }
-.float-right{
-  float:right;
+.float-right {
+  float: right;
 }
-.hand-hover:hover{
+.hand-hover:hover {
   cursor: pointer;
 }
-hr{
-height: 1px;
-color: #123455;
-background-color: #123455;
-border: none;
-
+hr {
+  height: 1px;
+  color: #123455;
+  background-color: #123455;
+  border: none;
 }
-.icon-minus-color{
+.icon-minus-color {
   color: red;
 }
-.icon-plus-color{
+.icon-plus-color {
   color: green;
 }
-.img-restricted{
+.img-restricted {
   height: 200px;
   width: 200px;
 }
-.inline{
+.inline {
   display: inline;
 }
-.left-margin{
+.left-margin {
   margin-left: 5%;
 }
-.margin-top{
+.margin-top {
   margin-top: 5%;
 }
-.margin-top-small{
+.margin-top-small {
   margin-top: 2.5%;
 }
 
-.margin-20{
-  margin-left:20%;
+.margin-20 {
+  margin-left: 20%;
   margin-right: 20%;
 }
-.no-left-margin{
+.no-left-margin {
   margin-left: 0 !important;
 }
 
-.no-left-padding{
+.no-left-padding {
   padding-left: 0 !important;
 }
 
-@media (max-width:400px){
-  .center-mobile{
+@media (max-width: 400px) {
+  .center-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
 
-.right-margin{
+.right-margin {
   margin-right: 5%;
 }
-.top-margin{
+.top-margin {
   margin-top: 2.5%;
 }
-
 </style>

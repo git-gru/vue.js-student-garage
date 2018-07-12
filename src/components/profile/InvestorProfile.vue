@@ -117,80 +117,79 @@
 
 <script>
 export default {
-  name: 'InvestorProfile',
-  data () {
+  name: "InvestorProfile",
+  data() {
     return {
-      msg: 'This is navbar',
-      example: 'Testing'
-    }
+      msg: "This is navbar",
+      example: "Testing"
+    };
   }
-}
+};
 </script>
 
 <style scoped>
-.black-background{
+.black-background {
   background-color: black;
   color: white;
 }
-.company-logo{
+.company-logo {
   width: 80px;
   height: 80px;
 }
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
 
-.img-restricted{
+.img-restricted {
   height: 200px;
   width: 200px;
 }
-.left-margin{
+.left-margin {
   margin-left: 5%;
 }
-.left-margin-small{
+.left-margin-small {
   margin-left: 2.5%;
 }
-.margin-bottom-small{
+.margin-bottom-small {
   margin-top: 2.5%;
 }
-.margin-top{
+.margin-top {
   margin-top: 5%;
 }
-.margin-top-small{
+.margin-top-small {
   margin-top: 2.5%;
 }
-.negative-left-margin{
+.negative-left-margin {
   margin-left: -5%;
 }
-.no-left-margin{
+.no-left-margin {
   margin-left: 0 !important;
 }
 
-.no-left-padding{
+.no-left-padding {
   padding-left: 0 !important;
 }
-.no-right-margin{
+.no-right-margin {
   margin-right: 0 !important;
 }
 
-.no-right-padding{
+.no-right-padding {
   padding-right: 0 !important;
 }
 
-@media (max-width:400px){
-  .center-mobile{
+@media (max-width: 400px) {
+  .center-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
-
 </style>

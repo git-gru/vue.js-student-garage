@@ -42,109 +42,108 @@
 
 
 <script>
-import Datepicker from 'vuejs-datepicker'
-import VueTimepicker from 'vue2-timepicker'
-import moment from 'moment'
-const today = moment()
+import Datepicker from "vuejs-datepicker";
+import VueTimepicker from "vue2-timepicker";
+import moment from "moment";
+const today = moment();
 export default {
-  name: 'AccountSettingsMain',
-  components:{
-    'VueTimepicker': VueTimepicker,
-    'Datepicker': Datepicker
+  name: "AccountSettingsMain",
+  components: {
+    VueTimepicker: VueTimepicker,
+    Datepicker: Datepicker
   },
-  data () {
+  data() {
     return {
-      eventTitle: '',
-      eventDescription: '',
-      time:{
-        "hh": today.format('hh'),
-        "mm": today.format('mm'),
-        "A": today.format('A')
+      eventTitle: "",
+      eventDescription: "",
+      time: {
+        hh: today.format("hh"),
+        mm: today.format("mm"),
+        A: today.format("A")
       },
       date: today.toDate()
-    }
+    };
   },
-  methods:{
-    createEvent(){
+  methods: {
+    createEvent() {
       let event = {};
       event.title = this.eventTitle;
       event.description = this.eventDescription;
       event.date = this.formatDate(this.date.toString().split(" "));
       console.log(event);
       this.posted = true;
-      this.eventTitle = '';
-      this.eventDescription = '';
+      this.eventTitle = "";
+      this.eventDescription = "";
     },
-    formatDate(date){
-      console.log(date,'date coming in');
-      console.log(this.time, 'what is the time?');
-      let result =
-        `${date[2]} ${date [1]} ${date[3]} ${this.time.hh}:${this.time.mm}:00 ${this.time.A}`;
+    formatDate(date) {
+      console.log(date, "date coming in");
+      console.log(this.time, "what is the time?");
+      let result = `${date[2]} ${date[1]} ${date[3]} ${this.time.hh}:${
+        this.time.mm
+      }:00 ${this.time.A}`;
       result = new Date(result);
       return result;
     }
   }
-}
+};
 </script>
 
 
 <style scoped>
-
-.ask-color{
-  background-color: #FF420E;
+.ask-color {
+  background-color: #ff420e;
   color: white;
 }
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
-.float-right{
-  float:right;
+.float-right {
+  float: right;
 }
-.img-restricted{
+.img-restricted {
   height: 200px;
   width: 200px;
 }
 
-.left-margin{
+.left-margin {
   margin-left: 5%;
 }
-.margin-top{
+.margin-top {
   margin-top: 5%;
 }
 
-.margin-20{
-  margin-left:20%;
+.margin-20 {
+  margin-left: 20%;
   margin-right: 20%;
 }
-.no-left-margin{
+.no-left-margin {
   margin-left: 0 !important;
 }
 
-.no-left-padding{
+.no-left-padding {
   padding-left: 0 !important;
 }
 
-@media (max-width:400px){
-  .center-mobile{
+@media (max-width: 400px) {
+  .center-mobile {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
 
-.right-margin{
+.right-margin {
   margin-right: 5%;
 }
-.top-margin{
+.top-margin {
   margin-top: 2.5%;
 }
-
 </style>

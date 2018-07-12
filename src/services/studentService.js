@@ -4,16 +4,13 @@ const db = firebase.database;
 const students = db.collection('students');
 
 export default {
-
-  addStudent(){
-    students.add({name:'testStudent',school:'testSchool'})
-    .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-      console.error("Error adding document: ", error);
-    });
+  addStudent() {
+    students.add({ name: 'testStudent', school: 'testSchool' })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
   }
-
-
 }

@@ -129,94 +129,95 @@
 </template>
 
 <script>
-import StudentService from '../../services/studentService.js';
-import UserService from '../../services/userService.js';
+import StudentService from "../../services/studentService.js";
+import UserService from "../../services/userService.js";
 export default {
-  name: 'StudentProfile',
-  data () {
+  name: "StudentProfile",
+  data() {
     return {
       student: {}
-    }
+    };
   },
-  mounted(){
+  mounted() {
     this.student = UserService.currentUser;
     console.log(this.student);
   },
-  methods:{
-    addStudent(){ // just wanted to test the firestore database
+  methods: {
+    addStudent() {
+      // just wanted to test the firestore database
       //StudentService.addStudent();
       console.log("this was just testing");
     },
-    emptyString(str){
-      return str.replace(/^\s+|\s+$/g, '').length == 0;
+    emptyString(str) {
+      return str.replace(/^\s+|\s+$/g, "").length == 0;
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.black-background{
+.black-background {
   background-color: black;
   color: white;
 }
-.date{
+.date {
   display: inline;
 }
-.flex-content{
+.flex-content {
   display: flex;
   justify-content: center;
 }
-.flex-row{
+.flex-row {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
 }
-hr{
-height: 1px;
-color: black;
-background-color: black;
-border: none;
+hr {
+  height: 1px;
+  color: black;
+  background-color: black;
+  border: none;
 }
-.img-restricted{
+.img-restricted {
   height: 200px;
   width: 200px;
 }
-.left-margin{
+.left-margin {
   margin-left: 5%;
 }
-.left-margin-small{
+.left-margin-small {
   margin-left: 2.5%;
 }
-.margin-top{
+.margin-top {
   margin-top: 5%;
 }
-.margin-top-small{
+.margin-top-small {
   margin-top: 2.5%;
 }
-.negative-left-margin{
+.negative-left-margin {
   margin-left: -3%;
 }
-.no-left-margin{
+.no-left-margin {
   margin-left: 0 !important;
 }
-.no-left-padding{
+.no-left-padding {
   padding-left: 0 !important;
 }
-.no-right-margin{
+.no-right-margin {
   margin-right: 0 !important;
 }
-.no-right-padding{
+.no-right-padding {
   padding-right: 0 !important;
 }
-.theme-bold{
+.theme-bold {
   font-weight: bold;
 }
-.theme-blue{
+.theme-blue {
   color: #50a1ff !important;
 }
-@media (max-width:400px){
-  .center-mobile{
+@media (max-width: 400px) {
+  .center-mobile {
     display: flex;
     align-items: center;
     justify-content: center;

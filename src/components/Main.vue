@@ -475,11 +475,11 @@
 
 <script>
 export default {
-  name: 'Main',
-  data () {
+  name: "Main",
+  data() {
     return {
-      msg: 'This is Main content'
-    }
+      msg: "This is Main content"
+    };
   }
-}
+};
 </script>
