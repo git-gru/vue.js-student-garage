@@ -5,17 +5,17 @@
       Messages
     </div>
     <ul class="list-group">
-        <li v-for="item in test" @click= "individualView()" class="list-group-item bordered">
+        <li v-for="item in users" @click= "individualView(item)" class="list-group-item bordered">
             <div class="pull-left hidden-xs">
                 <div>
-                    <img class="avatar avatar-lg" src="https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg" alt="avatar">
+                    <img class="avatar avatar-lg" v-bind:src="item && item.profile_img_add ? item.profile_img_add : 'https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg'" alt="avatar">
                 </div>
             </div>
-            <small class="pull-right text-muted">10.12.2014 in 12:56</small>
+            <small class="pull-right text-muted">10.12.2014 in 12:56(dummy)</small>
             <div class="left-margin">
-                <small class="list-group-item-heading text-muted text-primary left-margin">User1</small>
+                <small class="list-group-item-heading text-muted text-primary left-margin">{{item.email}}</small>
                 <p class="list-group-item-text left-margin">
-                    Hi! this message is FOR you.
+                    Hi! this message is FOR you.(dummy)
                 </p>
             </div>
         </li>
@@ -26,19 +26,39 @@
 
 </template>
 <script>
+
+import StudentService from '../../services/studentService.js';
+import common from '../../services/common.js';
+
 export default {
   name: 'Messages',
   data () {
     return {
       msg: 'This is navbar',
       example: 'Testing',
-      test: [1, 2, 3, 4, 5]
+      test: [1, 2, 3, 4, 5],
+      users: []
     }
   },
   methods: {
-    individualView () {
-      this.$router.push('/message')
+    individualView (rData) {
+      this.$router.push({ name: 'IndividualMessageView',  params: { rData }})
+    },
+    getAllStudents(){
+      StudentService.getStudents((status, snapshot)=>{
+        if(status === common.constants().SUCCESS){
+          if(snapshot.size)snapshot.forEach(doc => {
+            this.users.push(doc.data());
+            if(snapshot.size === this.users.length){
+              this.users = Array.from(this.users).filter((ele, index, arr)=> ele.email);
+            }
+          });
+        }
+      })
     }
+  },
+  created(){
+    this.getAllStudents();
   }
 }
 </script>

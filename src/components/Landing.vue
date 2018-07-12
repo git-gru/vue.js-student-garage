@@ -62,9 +62,10 @@ export default {
     }
   },
   methods: {
-    login () { // handled in the success callback of index.html
+    login (data) { // handled in the success callback of index.html
       this.$store.dispatch('testLogin');
-      console.log('logged in');
+      this.$store.commit("setUserData", data);
+      console.log('logged in', data);
     }
   }
 }

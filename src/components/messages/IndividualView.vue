@@ -12,9 +12,9 @@
                     <img class="avatar avatar-lg" src="https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg" alt="avatar">
                 </div>
             </div>
-            <small class="pull-right text-muted">10.12.2014 in 12:56</small>
+            <small class="pull-right text-muted">{{item.date}}</small>
             <div class="left-margin">
-                <small class="list-group-item-heading text-muted text-primary left-margin">{{item.name}}(Name is on the bases of userid)</small>
+                <small class="list-group-item-heading text-muted text-primary left-margin">{{item.name}}(unique key)</small>
                 <p class="list-group-item-text left-margin">
                     {{item.message}}
                 </p>
@@ -49,7 +49,7 @@ export default {
   data () {
     return {
       userId: "user1",
-      receiverId: "user2",
+      receiverId: "",
       messages: [],
       message: ""
     }
@@ -77,7 +77,7 @@ export default {
       var count = 0;
       MessageService.getMessages((status, snapshot)=>{
         if(snapshot.size)snapshot.forEach(doc => {
-            if(doc.data().userId === this.userId || doc.data().receiverId === this.userId) messages.push(doc.data()); 
+            if(doc.data().userId === this.userId && doc.data().receiverId === this.receiverId) messages.push(doc.data()); 
             if(snapshot.size-1 === count){
               messages.sort((a, b)=> a.updatedDate-b.updatedDate);
               this.messages = messages.map(ele => common.parseMessage(ele, this.userId));
@@ -86,7 +86,7 @@ export default {
           });
         });
     },
-    onSubmit(){
+    onSubmit(e){
       this.sendMessage(this.message, (status)=>{
         if(status === common.constants().SUCCESS) this.getMessages();
       });
@@ -96,11 +96,17 @@ export default {
   },
   created(){
 
+    //this.$store.getters.getUserData.values[0] has full info about user, for time being getting only userId
+    this.userId = this.$store.getters.getUserData.values[0].id;
+
     //Get all mesages from db
     this.getMessages();
 
     //Get real time data
     MessageService.getAllMessagesRealTime(()=> this.getMessages());
+
+    if(this.$route.params && this.$route.params.rData) this.receiverId = this.$route.params.rData.email;
+    else this.$router.replace('/messages');
   }
 }
 </script>

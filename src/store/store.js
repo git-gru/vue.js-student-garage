@@ -7,49 +7,56 @@ Vue.use(Vuex);
 Vue.use(firebase);
 
 export const store = new Vuex.Store({
-  state:{
+  state: {
     curUser: null,
     loggedIn: null,
+    uData: null,
     onboarded: null,
-    onboardingData : {}
+    onboardingData: {}
   },
   getters: {
-    loggedIn(state){
+    loggedIn(state) {
       return state.loggedIn;
     },
-    getOnboardingData(state){
+    getOnboardingData(state) {
       return state.onboardingData;
+    },
+    getUserData(state) {
+      return state.uData;
     }
   },
   mutations: {
-    setUser(state,payload){
+    setUser(state, payload) {
       state.user = payload;
     },
-    setLoggedIn(state){
+    setLoggedIn(state) {
       state.loggedIn = true;
     },
-    updateOnboardingData(state, payload){
-      state.onboardingData = helperFunctions.updateOnboardingData(state.onboardingData,payload);
+    updateOnboardingData(state, payload) {
+      state.onboardingData = helperFunctions.updateOnboardingData(state.onboardingData, payload);
+    },
+    setUserData(state, payload) {
+      state.uData = payload;
     }
   },
-  actions:{
-    signUserUp({commit}, payload){
-      firebase.auth().createUserWithEmailAndPassword(payload.email,payload.password)
-      .then(
+  actions: {
+    signUserUp({ commit }, payload) {
+      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(
         user => {
-          commit('setUser',user);
+          commit('setUser', user);
         }
-      ).catch(
+        ).catch(
         error => {
           console.log(error)
         }
-      )
+        )
     },
-    testLogin({commit}){
+    testLogin({ commit }) {
       commit('setLoggedIn');
     },
-    onboarding({commit},payload){
-      commit('updateOnboardingData',payload);
+    onboarding({ commit }, payload) {
+      commit('updateOnboardingData', payload);
     }
   }
 });
