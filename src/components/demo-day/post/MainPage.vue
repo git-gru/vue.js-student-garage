@@ -21,7 +21,7 @@
             <div class="form-group">
               <label class="">Upload Photos</label>
               <div class="">
-                <DemoDayDrop ref='uploader' @uploadFinish='addPhotosToPost' />
+                <DemoDayDrop ref='demoDayDrop' @uploadFinish='addPhotosToPost' />
               </div>
             </div>
             <div class="form-group ">
@@ -42,6 +42,7 @@
 
 <script>
 import DemoDayDrop from './demo-day-drop.vue'
+import DemoDayService from '../../../services/demoDayService.js'
 export default {
   name: 'PostProductMain',
   components:{
@@ -49,6 +50,7 @@ export default {
   },
   data () {
     return {
+      projectId: '',
       projectName:'',
       projectDescription:'',
       youtubeLink:''
@@ -59,7 +61,16 @@ export default {
       let project = {};
       project.name = this.projectName;
       project.description = this.projectDescription;
+      project.youtubeLink = this.youtubeLink;
       console.log(project);
+      let id = DemoDayService.postProject(project);
+      this.projectId = id;
+      this.$refs.demoDayDrop.uploadFiles();
+    },
+    addPhotosToPost(images) {
+      images.forEach((imgUrl) => {
+        DemoDayService.addPhoto(this.projectId, 'img', imgUrl)
+      })
     }
   }
 }
