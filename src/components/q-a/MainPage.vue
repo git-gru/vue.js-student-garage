@@ -65,6 +65,17 @@
       </div>
     </div>
 
+    <div v-if="showSpinner" class="top-margin-5">
+      <div class="flex-content">
+        <semipolar-spinner
+          :animation-duration="2000"
+          :size="65"
+          color="black"
+  />
+      </div>
+      <h4 class="text-center"> Loading... </h4>
+    </div>
+
     <div class = "row left-margin right-margin">
       <div v-for="question in questions"  class = "col-md-6 top-margin">
         <div class="card border">
@@ -80,14 +91,19 @@
 </template>
 <script>
 import QuestionService from '../../services/questionService.js'
+import { SemipolarSpinner  } from 'epic-spinners'
 export default {
   name: 'QAMain',
+  components: {
+      SemipolarSpinner
+  },
   data () {
     return {
       questionAsked: '',
       userHasQuestion: false,
       questionQuery:'',
-      questions: []
+      questions: [],
+      showSpinner: true
     }
   },
   methods:{
@@ -113,6 +129,7 @@ export default {
         question.id = doc.id;
         return question;
       })
+      self.showSpinner = false;
     });
   }
 }

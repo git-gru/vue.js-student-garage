@@ -30,9 +30,13 @@
 
     <div v-if="showSpinner" class="top-margin-5">
       <div class="flex-content">
-        <rotate-square2 class="display-block"></rotate-square2>
+        <semipolar-spinner
+          :animation-duration="2000"
+          :size="65"
+          color="black"
+  />
       </div>
-      <h4 class="text-center"> Loading </h4>
+      <h4 class="text-center"> Loading... </h4>
     </div>
     <div class = "row left-margin right-margin">
       <div v-for="resource in resources" class = "col-md-6 top-margin">
@@ -52,11 +56,11 @@
 </template>
 <script>
 import EducationResourceService from '../../../services/educationResourceService.js'
-import {RotateSquare2} from 'vue-loading-spinner'
+import { SemipolarSpinner  } from 'epic-spinners'
 export default {
   name: 'EducationResources',
   components: {
-      RotateSquare2
+      SemipolarSpinner
   },
   data () {
     return {
