@@ -71,14 +71,15 @@ export default {
     },
   methods:{
     toFirstScreen(){
-      this.$router.push('/student-onboarding/1')
+      //this.$router.push('/student-onboarding/1')
+      console.log(this.onboardingSoFar);
     },
     toThirdScreen(){
       console.log(this.experiences);
-      let userData = {};/*
+      let userData = {};
       userData.experiences = this.experiences;
       this.$store.dispatch('onboarding',userData);
-      this.$router.push('/student-onboarding/3')*/
+      this.$router.push('/student-onboarding/3')
     },
     addExperience(){
       this.experiences.push({title:'',company:'', description:'', start:'', end:''});

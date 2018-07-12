@@ -37,7 +37,7 @@
     </fieldset>
         <div class="row">
           <div class="form-group col-md-6">
-              <label>Major</label>
+              <label>Major/Program</label>
               <input  class="form-control" type="text" placeholder="Major" v-model="educationData[key].major">
           </div>
           <div class="form-group col-md-6">
@@ -96,6 +96,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import OnboardingFunctions from '../scripts/onboarding.js'
 export default {
   name: 'StudentMainOnboarding',
   data () {
@@ -120,20 +121,25 @@ export default {
     },
   methods:{
     toSecondScreen(){
-      this.$router.push('/student-onboarding/2')
+      //this.$router.push('/student-onboarding/2')
+      console.log(this.onboardingSoFar);
     },
     toFourthScreen(){
+      let result = {};
       let stanfordEducation = {};
       stanfordEducation.school = this.stanfordEducation;
-      stanfordEducation.description = stanfordDescription;
+      stanfordEducation.description = this.stanfordDescription;
       stanfordEducation.gradYear = this.stanfordGraduation;
+      result.stanford_education = stanfordEducation;
       let otherEducation = {};
       otherEducation.education = this.educationData;
+      result = OnboardingFunctions.joinObjects(result,otherEducation);
       let testInformation = {};
       testInformation.tests = this.testData;
-      /*
-      //this.$store.dispatch('onboarding',userData);
-      this.$router.push('/student-onboarding/4')*/
+      result = OnboardingFunctions.joinObjects(result,testInformation);
+      console.log(result);
+      this.$store.dispatch('onboarding',result);
+      this.$router.push('/student-onboarding/4');
     },
     addExperience(){
       console.log("Add Experience!");

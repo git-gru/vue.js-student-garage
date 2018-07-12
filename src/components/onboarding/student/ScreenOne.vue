@@ -59,8 +59,8 @@ export default {
   methods:{
       toSecondScreen(){
       let userData = {};
-      userData.firstName = this.userFirstName;
-      userData.lastName = this.userLastName;
+      userData.first_name = this.userFirstName;
+      userData.last_name = this.userLastName;
       userData.headline = this.userHeadline;
       this.$store.dispatch('onboarding',userData);
       this.$router.push('/student-onboarding/2');

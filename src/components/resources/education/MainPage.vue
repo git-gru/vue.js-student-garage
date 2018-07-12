@@ -48,17 +48,18 @@
 <script>
 import EducationResourceService from '../../../services/educationResourceService.js'
 export default {
-  name: 'Navbar',
+  name: 'EducationResources',
   data () {
     return {
-      msg: 'This is navbar',
       resources: []
+      // spinner = true
     }
   },
   mounted() {
     var self = this;
     EducationResourceService.getResources().then(function(querySnapshot){
       self.resources = querySnapshot.docs.map(doc => doc.data());
+      // spinner = false
     });
   }
 }

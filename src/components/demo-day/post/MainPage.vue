@@ -11,15 +11,24 @@
           </div>
           <form class="input-line">
             <div class="form-group ">
-                  <label>Project Name</label>
-                  <input class="form-control" type="text" placeholder="Project Name" v-model="projectName">
-                  </div>
-
-                  <div class="form-group">
-                  <label>Description</label>
-                  <textarea class="form-control" rows="4" placeholder="Project Description" v-model="projectDescription"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" @click="postProject()">Post Project</button>
+              <label>Project Name</label>
+              <input class="form-control" type="text" placeholder="Project Name" v-model="projectName">
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea class="form-control" rows="4" placeholder="Project Description" v-model="projectDescription"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="">Upload Photos</label>
+              <div class="">
+                <DemoDayDrop ref='uploader' @uploadFinish='addPhotosToPost' />
+              </div>
+            </div>
+            <div class="form-group ">
+              <label>Youtube Link (if you want to show a video demo of project)</label>
+              <input class="form-control" type="text" placeholder="Youtube Link" v-model="youtubeLink">
+            </div>
+            <button type="submit" class="btn btn-primary" @click="postProject()">Post Project</button>
             </form>
           </div>
       </div>
@@ -32,12 +41,17 @@
 
 
 <script>
+import DemoDayDrop from './demo-day-drop.vue'
 export default {
   name: 'PostProductMain',
+  components:{
+    'DemoDayDrop': DemoDayDrop
+  },
   data () {
     return {
       projectName:'',
-      projectDescription:''
+      projectDescription:'',
+      youtubeLink:''
     }
   },
   methods: {

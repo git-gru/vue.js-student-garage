@@ -19,7 +19,10 @@
         </div>
         <div class="form-group ">
             <label>Link</label>
-            <input class="form-control" type="text" placeholder="Item Link" v-model="lockerItems[key].link">
+            <div v-if="invalidLink(lockerItems[key].link)">
+              <p class="text-danger"> Link must begin with http:// or https://</p>
+            </div>
+            <input class="form-control inline" type="text" placeholder="Item Link" v-model="lockerItems[key].link">
         </div>
           <div class="form-group">
             <label>Description</label>
@@ -56,11 +59,10 @@
     </div>
 
     <div>
-    <button type="submit" class="btn btn-primary" @click="onboardingFinished()">Finish</button>
+      <button type="submit" class="btn btn-primary float-l" @click="toThirdScreen()">Previous</button>
+    <button type="submit" class="btn btn-primary float-r" @click="onboardingFinished()">Finish</button>
   </div>
         </form>
-
-
 
     </div>
 
@@ -72,6 +74,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import OnboardingFunctions from '../scripts/onboarding.js'
 export default {
   name: 'StudentMainOnboarding',
   data () {
@@ -88,22 +91,30 @@ export default {
     },
   methods:{
     onboardingFinished(){
+      let result = {};
       let lockerData = {};
       lockerData.lockerItems = this.lockerItems;
-      let freeTime = {};
-      freeTime.free_time = this.userFreeTime;
-    },
-    addExperience(){
-      console.log("Add Experience!");
-    },
-    addEducation(){
-      console.log("Add Education!");
+      result = OnboardingFunctions.joinObjects(result,lockerData);
+      result.free_time = this.userFreeTime;
+      console.log(result);
     },
     addItem(){
       this.lockerItems.push({title:'',link:'',description:'',start:'', end:''});
     },
     deleteItem(index){
       this.lockerItems.splice(index,1);
+    },
+    invalidLink(link){
+      if(link == '') return false;
+      let checkHttp = link.substring(0,8);
+      if(checkHttp == 'http://') return false;
+      let checkHttps = link.substring(0,9);
+      if(checkHttps == 'https://') return false;
+      return true;
+    },
+    toThirdScreen(){
+      //this.$router.push('/student-onboarding/3');
+      console.log(this.onboardingSoFar);
     }
   }
 }
@@ -127,6 +138,14 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: row;
+}
+.float-l{
+  float: left;
+  margin-left: 0px;
+}
+.float-r{
+  float: right;
+  margin-right: 0px;
 }
 .float-right{
   float:right;
