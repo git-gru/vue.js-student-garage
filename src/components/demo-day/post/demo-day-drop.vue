@@ -18,7 +18,7 @@ export default {
   data: function () {
     return {
       dropzoneOptions: {
-          url: 'https://httpbin.org/post',
+          url: 'https://student-garage.appspot.com',
           thumbnailWidth: 150,
           maxFileSizeInMB: 10,
           addRemoveLinks: true,
@@ -38,8 +38,7 @@ export default {
       },
     linkImageToPost(file, { result }) {
         result.files.file.forEach((file) => {
-          const imageUrl = this.baseURL + `/api/containers/${file.container}/download/${file.name}`
-          this.images.push(imageUrl)
+          this.images.push(file.name)
         })
         console.log('A file was successfully uploaded')
       }

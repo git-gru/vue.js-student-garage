@@ -2,9 +2,13 @@
 import {store} from '../store/store.js'
 import firebase from '../store/firebase.js'
 const db = firebase.database;
-const projects = db.collection('demo-day');
+const projects = db.collection('garage-projects');
+const storage = firebase.storage;
+const storageRef = storage.ref();
+
 export default {
   postProject(project){
+    let id;
     return projects.add(project)
     .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);
@@ -14,14 +18,30 @@ export default {
       console.error("Error adding document: ", error);
     });
   },
-  addPhoto(postId, name, src) {
-    return axios.post(`api/posts/${postId}/images`, {
-      name,
-      src
-    }).then((response) => {
-      return Promise.resolve(response.data)
-    })
+  getGarageImageURL(postId, fileName,image) {
+    let path = '/images/demo-day/' + postId +'/' + fileName;
+    let imageRef = storageRef.child(path)
+    return imageRef.put(image).then(snapshot =>{
+      return snapshot.ref.getDownloadURL().then(function(downloadURL){
+        return downloadURL;
+        })
+      })
+    },
+  addDownloadURL(id,url){
+    let projectRef = projects.doc(id);
+    projects.doc(id).get().then(function(querySnapshot){
+      let project = querySnapshot.data();
+      let urls = project.imageUrls;
+      urls.push(url);
+      return projectRef.update({
+        imageUrls: urls
+      }).then(function() {
+        console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+        });
+    });
   }
-
-
 }

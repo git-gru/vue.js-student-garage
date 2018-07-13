@@ -21,7 +21,17 @@
             <div class="form-group">
               <label class="">Upload Photos</label>
               <div class="">
-                <DemoDayDrop ref='demoDayDrop' @uploadFinish='addPhotosToPost' />
+                <button type="button" class="btn btn-xl black-button" @click="onUploadPhotos()">BROWSE PHOTOS</button>
+                <input type ="file" class="display-none"
+                  ref="uploader"
+                  accept="image/*"
+                  multiple
+                  @change="onFilesChosen">
+              </div>
+            </div>
+            <div v-if="imageUrls.length > 0" class="row">
+              <div v-for="url in imageUrls" class="col-md-4">
+                <img :src="url" class="img-restricted"/>
               </div>
             </div>
             <div class="form-group ">
@@ -53,24 +63,64 @@ export default {
       projectId: '',
       projectName:'',
       projectDescription:'',
-      youtubeLink:''
+      youtubeLink:'',
+      imageUrls:[],
+      images:[]
     }
   },
   methods: {
+    onUploadPhotos(){
+      this.$refs.uploader.click();
+    },
+    onFilesChosen(event){
+      const files = event.target.files;
+      let self = this;
+      console.log(files);
+      let filesLength = files.length;
+      let fileArray = this.getFileArray(files,filesLength);
+      fileArray.forEach(function(file){
+        let fileName = file.name;
+        if(fileName.lastIndexOf('.')<=0) return alert('Please valid files only');
+        const fileReader = new FileReader();
+        let imageUrl;
+        fileReader.addEventListener('load',() =>{
+          imageUrl = fileReader.result;
+          self.imageUrls.push(imageUrl);
+        })
+          fileReader.readAsDataURL(file)
+          self.images.push(file);
+      });
+      console.log(this.imageUrls);
+      console.log("images", this.images);
+    },
+    getFileArray(files,length){
+      let fileArray = [];
+      for(let i = 0; i < length; i++){
+        let file = files[i];
+        fileArray.push(file);
+      }
+      return fileArray;
+    },
     postProject(){
       let project = {};
+      let self = this;
       project.name = this.projectName;
       project.description = this.projectDescription;
       project.youtubeLink = this.youtubeLink;
-      console.log(project);
-      let id = DemoDayService.postProject(project);
-      this.projectId = id;
-      this.$refs.demoDayDrop.uploadFiles();
+      project.imageUrls = [];
+      DemoDayService.postProject(project).then(function(id){
+        self.projectId = id;
+        self.addPhotosToPost();
+      });
     },
-    addPhotosToPost(images) {
-      images.forEach((imgUrl) => {
-        DemoDayService.addPhoto(this.projectId, 'img', imgUrl)
-      })
+    addPhotosToPost() {
+      let downloadUrls = [];
+      let self = this;
+      this.images.forEach((image) => {
+        DemoDayService.getGarageImageURL(self.projectId,image.name, image).then(function(url){
+            DemoDayService.addDownloadURL(self.projectId,url);
+        });
+      });
     }
   }
 }
@@ -82,6 +132,15 @@ export default {
 .ask-color{
   background-color: #FF420E;
   color: white;
+}
+
+.black-button{
+  background-color: black;
+  color:white;
+}
+
+.display-none{
+  display: none;
 }
 .flex-content{
   display: flex;
@@ -98,8 +157,8 @@ export default {
   float:right;
 }
 .img-restricted{
-  height: 200px;
-  width: 200px;
+  max-height: 150px;
+  max-width: 150px;
 }
 
 .left-margin{
