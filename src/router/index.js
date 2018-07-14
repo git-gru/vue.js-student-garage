@@ -22,6 +22,8 @@ import StudentOnboardThree from '@/components/onboarding/student/ScreenThree.vue
 import StudentOnboardFour from '@/components/onboarding/student/ScreenFour.vue'
 import InvestorOnboardOne from '@/components/onboarding/investor/ScreenOne.vue'
 import InvestorOnboardTwo from '@/components/onboarding/investor/ScreenTwo.vue'
+import StudentSignUp from '@/components/login-register/students/SignUp.vue'
+import StudentLogin from '@/components/login-register/students/Login.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -145,6 +147,16 @@ export default new Router({
       path:'/investor',
       name:'InvestorProfile',
       component:InvestorProfile
+    },
+    {
+      path:'/sign-up/student',
+      name:'StudentSignUp',
+      component:StudentSignUp
+    },
+    {
+      path:'/login/student',
+      name:'StudentLogin',
+      component:StudentLogin
     }
   ]
 })
