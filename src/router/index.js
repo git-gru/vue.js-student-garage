@@ -24,139 +24,141 @@ import InvestorOnboardOne from '@/components/onboarding/investor/ScreenOne.vue'
 import InvestorOnboardTwo from '@/components/onboarding/investor/ScreenTwo.vue'
 import StudentSignUp from '@/components/login-register/students/SignUp.vue'
 import StudentLogin from '@/components/login-register/students/Login.vue'
+
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'ProfilePage',
-      component: ProfilePage
-    },
-    {
-      path: '/profile',
-      name: 'ProfilePage',
-      component: ProfilePage
-    },
-    {
-      path: '/questions',
-      name: 'QAMain',
-      component: QAMain
-    },
-    {
-      path: '/events',
-      name: 'EventsMain',
-      component: EventsMain
-    },
-    {
-      path: '/education',
-      name: 'EducationMain',
-      component: EducationMain
-    }
-    ,
-    {
-      path: '/discover',
-      name: 'DiscoverMain',
-      component: DiscoverMain
-    },
-    {
-      path: '/messages',
-      name: 'MessagesMain',
-      component: MessagesMain
-    },
-    {
-      path: '/post-product',
-      name: 'PostProductMain',
-      component: PostProductMain
-    },
-    {
-      path:'/settings',
-      name:'AccountSettingsMain',
-      component:AccountSettingsMain
-    },
-    {
-      path:'/jobs',
-      name:'JobsMain',
-      component:JobsMain
-    },
-    {
-      path:'/message',
-      name:'IndividualMessageView',
-      component:IndividualMessageView
-    },
-    {
-      path:'/product',
-      name:'IndividualProductView',
-      component:IndividualProductView
-    },
-    {
-      path:'/my-products',
-      name:'MyProducts',
-      component:MyProducts
-    },
-    {
-      path:'/create-event',
-      name:'CreateEvent',
-      component:CreateEvent
-    },
-    {
-      path:'/question/:id',
-      name:'IndividualQuestionView',
-      component:IndividualQuestionView,
-      props:true
-    },
-    {
-      path:'/landing',
-      name:'LandingPage',
-      component:LandingPage
-    },
-    {
-      path:'/student-onboarding/1',
-      name:'StudentOnboardOne',
-      component:StudentOnboardOne
-    },
-    {
-      path:'/student-onboarding/2',
-      name:'StudentOnboardTwo',
-      component:StudentOnboardTwo,
-      props: true
-    },
-    {
-      path:'/student-onboarding/3',
-      name:'StudentOnboardThree',
-      component:StudentOnboardThree,
-      props: true
-    },
-    {
-      path:'/student-onboarding/4',
-      name:'StudentOnboardFour',
-      component:StudentOnboardFour,
-      props: true
-    },
-    {
-      path:'/investor-onboarding/1',
-      name:'InvestorOnboardOne',
-      component:InvestorOnboardOne
-    },
-    {
-      path:'/investor-onboarding/2',
-      name:'InvestorOnboardTwo',
-      component:InvestorOnboardTwo
-    },
-    {
-      path:'/investor',
-      name:'InvestorProfile',
-      component:InvestorProfile
-    },
-    {
-      path:'/sign-up/student',
-      name:'StudentSignUp',
-      component:StudentSignUp
-    },
-    {
-      path:'/login/student',
-      name:'StudentLogin',
-      component:StudentLogin
-    }
-  ]
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'ProfilePage',
+            component: ProfilePage
+        },
+        {
+            path: '/profile',
+            name: 'ProfilePage',
+            component: ProfilePage
+        },
+        {
+            path: '/questions',
+            name: 'QAMain',
+            component: QAMain
+        },
+        {
+            path: '/events',
+            name: 'EventsMain',
+            component: EventsMain
+        },
+        {
+            path: '/education',
+            name: 'EducationMain',
+            component: EducationMain
+        }
+        ,
+        {
+            path: '/discover',
+            name: 'DiscoverMain',
+            component: DiscoverMain
+        },
+        {
+            path: '/messages',
+            name: 'MessagesMain',
+            component: MessagesMain
+        },
+        {
+            path: '/post-product',
+            name: 'PostProductMain',
+            component: PostProductMain
+        },
+        {
+            path: '/settings',
+            name: 'AccountSettingsMain',
+            component: AccountSettingsMain
+        },
+        {
+            path: '/jobs',
+            name: 'JobsMain',
+            component: JobsMain
+        },
+        {
+            path: '/message',
+            name: 'IndividualMessageView',
+            component: IndividualMessageView
+        },
+        {
+            path: '/product',
+            name: 'IndividualProductView',
+            component: IndividualProductView
+        },
+        {
+            path: '/my-products',
+            name: 'MyProducts',
+            component: MyProducts
+        },
+        {
+            path: '/create-event',
+            name: 'CreateEvent',
+            component: CreateEvent
+        },
+        {
+            path: '/question/:id',
+            name: 'IndividualQuestionView',
+            component: IndividualQuestionView,
+            props: true
+        },
+        {
+            path: '/landing',
+            name: 'LandingPage',
+            component: LandingPage
+        },
+        {
+            path: '/student-onboarding/1',
+            name: 'StudentOnboardOne',
+            component: StudentOnboardOne
+        },
+        {
+            path: '/student-onboarding/2',
+            name: 'StudentOnboardTwo',
+            component: StudentOnboardTwo,
+            props: true
+        },
+        {
+            path: '/student-onboarding/3',
+            name: 'StudentOnboardThree',
+            component: StudentOnboardThree,
+            props: true
+        },
+        {
+            path: '/student-onboarding/4',
+            name: 'StudentOnboardFour',
+            component: StudentOnboardFour,
+            props: true
+        },
+        {
+            path: '/investor-onboarding/1',
+            name: 'InvestorOnboardOne',
+            component: InvestorOnboardOne
+        },
+        {
+            path: '/investor-onboarding/2',
+            name: 'InvestorOnboardTwo',
+            component: InvestorOnboardTwo
+        },
+        {
+            path: '/investor',
+            name: 'InvestorProfile',
+            component: InvestorProfile
+        },
+        {
+            path: '/sign-up/student',
+            name: 'StudentSignUp',
+            component: StudentSignUp
+        },
+        {
+            path: '/login/student',
+            name: 'StudentLogin',
+            component: StudentLogin
+        }
+    ]
 })
