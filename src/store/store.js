@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import firebase from './firebase.js'
+import firebaseInfo from './firebase.js'
+import firebase from 'firebase'
 import helperFunctions from './helperFunctions.js'
 import currentUser from './user.js'
+import router from '../router'
 
 Vue.use(Vuex);
 Vue.use(firebase);
@@ -18,6 +20,9 @@ export const store = new Vuex.Store({
     loggedIn(state){
       return state.loggedIn;
     },
+    isOnboarded(state){
+      return state.onboarded;
+    },
     getOnboardingData(state){
       return state.onboardingData;
     },
@@ -29,23 +34,82 @@ export const store = new Vuex.Store({
     setUser(state,payload){
       state.user = payload;
     },
-    studentSignUp(state,payload){
+    studentSignUpMutation(state,payload){
+      console.log(payload);
       if(payload.emailSignUp == true){
-        firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(function(error) {
+        firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password).then(function(user){
+          state.loggedIn = true;
+          if(!state.onboarded){
+            router.push({ name: 'StudentOnboardIntro' });
+          }else{
+            router.push({ name: 'ProfilePage' });
+          }
+        }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
           // ...
         });
       }
-        else if(payload.google == true){
-          this.googleSignIn(payload,state);
-        }
-        else if(payload.facebook = true){
-          facebookSignIn(payload,state);
+      else if(payload.google == true){
+        let provider = new firebase.auth.GoogleAuthProvider();
+        //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+        //provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
+        //provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            // find user in database -> set to current user
+            state.loggedIn = true;
+            if(!state.onboarded){
+              router.push({ name: 'StudentOnboardIntro' });
+            }else{
+              router.push({ name: 'ProfilePage' });
+            }
+            // ...
+          }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+          });
+      }
+      else if(payload.facebook = true){
+        let provider = new firebase.auth.FacebookAuthProvider();
+        provider.addScope('email');
+        console.log("login to facebook");
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          state.loggedIn = true;
+          if(!state.onboarded){
+            router.push({ name: 'StudentOnboardIntro' });
+          }else{
+            router.push({ name: 'ProfilePage' });
+          }
+          // ...
+        }).catch(function(error) {
+          console.log(error.message);
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
         }
       },
-    studentLogin(state,payload){
+    studentLoginMutation(state,payload){
       if(payload.emailLogin == true){
         firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(function(error) {
           // Handle Errors here.
@@ -55,10 +119,60 @@ export const store = new Vuex.Store({
         });
       }
         else if(payload.google == true){
-          this.googleSignIn(payload,state);
+          let provider = new firebase.auth.GoogleAuthProvider();
+          provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+          provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
+          provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+          firebase.auth().signInWithPopup(provider).then(function(result) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+              var token = result.credential.accessToken;
+              // The signed-in user info.
+              var user = result.user;
+              // find user in database -> set to current user
+              state.loggedIn = true;
+              if(!state.onboarded){
+                router.push({ name: 'StudentOnboardIntro' });
+              }else{
+                router.push({ name: 'ProfilePage' });
+              }
+              // ...
+            }).catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // The email of the user's account used.
+              var email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              var credential = error.credential;
+              // ...
+            });
         }
         else if(payload.facebook = true){
-          facebookSignIn(payload,state);
+          let provider = new firebase.auth.FacebookAuthProvider();
+          provider.addScope('email');
+          firebase.auth().signInWithPopup(provider).then(function(result) {
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            state.loggedIn = true;
+            if(!state.onboarded){
+              router.push({ name: 'StudentOnboardIntro' });
+            }else{
+              router.push({ name: 'ProfilePage' });
+            }
+            // ...
+          }).catch(function(error) {
+            // Handle Errors here.
+            console.log(error.message);
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+          });
         }
       },
     setLoggedIn(state){
@@ -69,56 +183,11 @@ export const store = new Vuex.Store({
     }
   },
   actions:{
-    testLogin({commit}){
-      commit('setLoggedIn');
+    studentSignUp({commit},payload){
+      commit('studentSignUpMutation',payload);
     },
     onboarding({commit},payload){
       commit('updateOnboardingData',payload);
     }
-  },
-  methods:{
-    googleSignIn(payload,state){
-      let provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
-      provider.addScope('https://www.googleapis.com/auth/userinfo.email');
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // find user in database -> set to current user 
-          // ...
-        }).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
-      },
-      facebookSignIn(payload,state){
-        let provider = new firebase.auth.FacebookAuthProvider();
-        provider.addScope('email');
-        firebase.auth().signInWithPopup(provider).then(function(result) {
-          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          // ...
-        }).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
-          // ...
-        });
-      }
   }
 });

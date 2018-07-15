@@ -23,12 +23,6 @@
     <meta property="og:url" content="http://thetheme.io/thesaas/">
     <meta name="twitter:card" content="summary_large_image">
 
-    <script type="text/javascript" src="//platform.linkedin.com/in.js">
-        api_key:   86wtjssgyprmd1
-        onLoad:    onLinkedinLoad
-        authorize: true
-        lang:      en_US
-    </script>
     <script  type="text/javascript">
         function onLinkedinLoad() {
             console.log("trying to login");
@@ -41,8 +35,8 @@
 
         // Handle the successful return from the API call
         function displayProfileData(data){
-            window.landingComponent.login();
-            console.log(data);
+            window.linkedInAuth.login(data);
+            //console.log(data);
         }
         function onError () {
 

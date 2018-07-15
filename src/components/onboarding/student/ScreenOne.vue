@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="margin-20">
-
-
       <form class="input-line">
         <div class="flex-content">
           <h2>Before You Get Started </h2>
