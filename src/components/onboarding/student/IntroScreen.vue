@@ -4,14 +4,14 @@
       Before We Get Started .... Need Some Information About You. Do you want us to fetch some ...
       from LinkedIn?
     </div>
-   
+
     <div ref="Linkedin"/>
-    <script type="in/Login"></script> 
+    <script type="in/Login"></script>
   </div>
 
 </template>
 
- 
+
 <script>
 export default {
   name: 'StudentIntroOnboarding',
@@ -20,6 +20,7 @@ export default {
     }
   },
   mounted(){
+    window.linkedInAuth = this;
     let linkedinScriptPartOne = document.createElement('script');
     linkedinScriptPartOne.setAttribute('src', '//platform.linkedin.com/in.js');
     let text = `api_key: 86wtjssgyprmd1
@@ -31,8 +32,9 @@ export default {
       this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartOne);
   },
   methods: {
-    login () { // handled in the success callback of index.html
+    login (data) { // handled in the success callback of index.html
       //this.$store.dispatch('testLogin');
+      console.log("user",data);
       console.log('logged in');
     }
   }

@@ -36,7 +36,7 @@ computed:{
     })
   },
   mounted () {
-    window.landingComponent = this.$refs.landing
+    //window.landingComponent = this.$refs.landing
   }
 }
 </script>
