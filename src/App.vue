@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="spread">
+    <div id="app" class="spread" style="margin-bottom: 200px;">
         <div v-if="loggedIn">
             <Navbar/>
             <router-view class="margin-nav"></router-view>
