@@ -27,7 +27,7 @@
         <div class="form-group input-group">
                   <input type="text" class="form-control" placeholder="Send a message">
                   <div class="input-group-append ml-4">
-                    <button class="btn btn-primary" type="button">Send</button>
+                    <button class="btn btn-primary" type="button" @click="onSubmit">Send</button>
                   </div>
         </div>
       </fieldset>
@@ -40,19 +40,66 @@
 
 
 <script>
+import MessageService from "../../services/messageService.js";
+import common from '../../services/common.js';
 export default {
   name: 'Messages',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing',
-      test: [1,2,2,3,4]
+      userId: "user1",
+      receiverId: "",
+      messages: [],
+      message: ""
     }
   },
   methods: {
     isMe(message){
       return message % 2 === 0;
+    },
+    sendMessage(message, cb){
+      if(this.message && this.message.length !== 0){
+        MessageService.addMessage(this.userId, this.receiverId, message, (status, snapshot)=>{
+          switch(status){
+            case common.constants().SUCCESS:
+              cb(common.constants().SUCCESS);
+              break;
+            case common.constants().ERROR:
+              cb(common.constants().ERROR);
+              break;
+          }
+        });
+      }
+    },
+    getMessages(){
+      var messages = []
+      var count = 0;
+      MessageService.getMessages((status, snapshot)=>{
+        if(snapshot.size)snapshot.forEach(doc => {
+            if(doc.data().userId === this.userId && doc.data().receiverId === this.receiverId) messages.push(doc.data());
+            if(snapshot.size-1 === count){
+              messages.sort((a, b)=> a.updatedDate-b.updatedDate);
+              this.messages = messages.map(ele => common.parseMessage(ele, this.userId));
+            }
+            count += 1;
+          });
+        });
+    },
+    onSubmit(e){
+      this.sendMessage(this.message, (status)=>{
+        if(status === common.constants().SUCCESS) this.getMessages();
+      });
+      this.message = ""
     }
+  },
+  created(){
+    //this.$store.getters.getUserData.values[0] has full info about user, for time being getting only userId
+    this.userId = this.$store.getters.getUserData.values[0].id;
+    //Get all mesages from db
+    this.getMessages();
+    //Get real time data
+    MessageService.getAllMessagesRealTime(()=> this.getMessages());
+    if(this.$route.params && this.$route.params.rData) this.receiverId = this.$route.params.rData.email;
+    else this.$router.replace('/messages');
   }
 }
 </script>
