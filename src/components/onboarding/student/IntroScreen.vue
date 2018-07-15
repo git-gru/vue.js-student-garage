@@ -1,77 +1,67 @@
 <template>
-  <div class="entire-page">
-    <!-- Header -->
-    <div class="white-background">
-      <div class="first-screen">
-        <div class="view">
-          <div class="centered-block">
-            <div class="big-margin-below login-wrapper clearfix">
-              <button type="submit" class="btn btn-primary" @click ="goToStudentLogin()">Student Login/SignUp</button>
-            </div>
-            <div class= "flex-content logo-wrapper">
-              <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="left-margin">
-        <div class="row">
-          <p class="col-5 col-sm-3">
-            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
-          </p>
-          <div class="col-7 col-sm-9">
-            <h4> For Students </h4>
-            <p> This is fake data that is simulating something real. Continue
-              to work right now on this page until we have put real data in it
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="left-margin">
-        <div class="row">
-          <div class="col-7 col-sm-9">
-            <h4> For Investors </h4>
-            <p> This is fake data that is simulating something real. Continue
-              to work right now on this page until we have put real data in it
-            </p>
-          </div>
-          <p class="col-5 col-sm-3">
-            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
-          </p>
-        </div>
-      </div>
-
-      <div>
-
-      </div>
-
+  <div>
+    <div>
+      Before We Get Started .... Need Some Information About You. Do you want us to fetch some ...
+      from LinkedIn?
     </div>
+    <div ref="Linkedin"/>
   </div>
-
 
 </template>
 
 
 <script>
 export default {
-  name: 'Landing',
+  name: 'StudentIntroOnboarding',
   data () {
     return {
     }
   },
+  mounted(){
+    /*
+    let linkedinScriptPartOne = document.createElement('script');
+    linkedinScriptPartOne.setAttribute('src', '//platform.linkedin.com/in.js');
+    let text = 'api_key: 86wtjssgyprmd1
+      onLoad:    onLinkedinLoad
+      authorize: true
+      lang: en_US'
+    let appInfo = document.createTextNode(text);
+      linkedinScriptPartOne.appendChild(appInfo);
+      this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartOne);
+      let linkedInScriptPartTwo = document.createElement('script');
+      let functionCode = document.createTextNode('function onLinkedinLoad() {
+        console.log("trying to login");
+            IN.Event.on(IN, "auth", getProfileData);
+
+        }
+        function getProfileData() {
+            IN.API.Profile("me").fields("id", "first-name", "last-name", "headline", "location", "picture-url", "public-profile-url", "email-address","positions").result(displayProfileData).error(onError);
+        }
+
+        // Handle the successful return from the API call
+        function displayProfileData(data){
+            //window.landingComponent.login();
+            console.log(data);
+        }
+        function onError () {
+
+        }');
+        linkedinScriptPartTwo.appendChild(functionCode);
+        this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartTwo);
+        */
+        let linkedInScriptPartThree = document.createElement('script');
+        linkedInScriptPartThree.setAttribute('type','in/Login');
+        //console.log(this.$refs.Linkedin);
+         this.$refs.Linkedin.insertAdjacentElement('afterend', linkedInScriptPartThree);
+
+  },
   methods: {
     login () { // handled in the success callback of index.html
-      this.$store.dispatch('testLogin');
+      //this.$store.dispatch('testLogin');
       console.log('logged in');
-    },
-    goToStudentLogin(){
-      this.$router.push('/sign-up/student');
     }
   }
 }
-
 </script>
 
 
@@ -211,4 +201,5 @@ border: none;
 .top-margin{
   margin-top: 2.5%;
 }
+
 </style>

@@ -1,14 +1,8 @@
 <template>
   <div id="app" class="spread">
-    <div v-if="loggedIn">
-      <Navbar/>
+      <Navbar v-if="loggedIn"/>
       <router-view class="margin-nav"> </router-view>
-    </div>
-    <div v-if="!loggedIn" class="not-logged-in">
-      <Landing ref="landing" />
-    </div>
-
-    <Foot/>
+      <Foot/>
   </div>
 </template>
 
@@ -18,6 +12,7 @@ import Head from '@/components/Head.vue'
 import Main from '@/components/Main.vue'
 import Foot from '@/components/Foot.vue'
 import Landing from '@/components/Landing.vue'
+import StudentSignUp from '@/components/login-register/students/SignUp.vue'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -27,7 +22,8 @@ export default {
     Head,
     Main,
     Foot,
-    Landing
+    Landing,
+    StudentSignUp
   },
   data () {
     return {
