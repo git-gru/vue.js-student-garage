@@ -9,7 +9,7 @@
 
 </template>
 
-
+ 
 <script>
 export default {
   name: 'StudentIntroOnboarding',
@@ -18,42 +18,45 @@ export default {
     }
   },
   mounted(){
-    /*
-    let linkedinScriptPartOne = document.createElement('script');
-    linkedinScriptPartOne.setAttribute('src', '//platform.linkedin.com/in.js');
-    let text = 'api_key: 86wtjssgyprmd1
-      onLoad:    onLinkedinLoad
-      authorize: true
-      lang: en_US'
-    let appInfo = document.createTextNode(text);
-      linkedinScriptPartOne.appendChild(appInfo);
-      this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartOne);
-      let linkedInScriptPartTwo = document.createElement('script');
-      let functionCode = document.createTextNode('function onLinkedinLoad() {
-        console.log("trying to login");
-            IN.Event.on(IN, "auth", getProfileData);
 
-        }
-        function getProfileData() {
-            IN.API.Profile("me").fields("id", "first-name", "last-name", "headline", "location", "picture-url", "public-profile-url", "email-address","positions").result(displayProfileData).error(onError);
-        }
 
-        // Handle the successful return from the API call
-        function displayProfileData(data){
-            //window.landingComponent.login();
-            console.log(data);
-        }
-        function onError () {
+    
+    // let linkedinScriptPartOne = document.createElement('script');
+    // linkedinScriptPartOne.setAttribute('src', '//platform.linkedin.com/in.js');
+    // let text = 'api_key: 86wtjssgyprmd1'
+    //   onLoad:    'onLinkedinLoad'
+    //   authorize: 'true'
+    //   lang: 'en_US'
+    // let appInfo = document.createTextNode(text);
+    //   linkedinScriptPartOne.appendChild(appInfo);
+    //   this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartOne);
+    //   let linkedInScriptPartTwo = document.createElement('script');
+    //   let functionCode = document.createTextNode(`function onLinkedinLoad() {
+    //     console.log("trying to login");
+    //         IN.Event.on(IN, "auth", getProfileData);
 
-        }');
-        linkedinScriptPartTwo.appendChild(functionCode);
-        this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartTwo);
-        */
-        let linkedInScriptPartThree = document.createElement('script');
-        linkedInScriptPartThree.setAttribute('type','in/Login');
-        //console.log(this.$refs.Linkedin);
-         this.$refs.Linkedin.insertAdjacentElement('afterend', linkedInScriptPartThree);
+    //     }
+    //     function getProfileData() {
+    //         IN.API.Profile("me").fields("id", "first-name", "last-name", "headline", "location", "picture-url", "public-profile-url", "email-address","positions").result(displayProfileData).error(onError);
+    //     }
 
+    //     // Handle the successful return from the API call
+    //     function displayProfileData(data){
+    //         //window.landingComponent.login();
+    //         console.log(data);
+    //     }
+    //     function onError () {
+
+    //     }`);
+    //     linkedinScriptPartTwo.appendChild(functionCode);
+    //     this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartTwo);
+        
+    //     let linkedInScriptPartThree = document.createElement('script');
+    //     linkedInScriptPartThree.setAttribute('type','in/Login');
+    //     //console.log(this.$refs.Linkedin);
+    //      this.$refs.Linkedin.insertAdjacentElement('afterend', linkedInScriptPartThree);
+    IN.Event.on(IN, "auth", getProfileData);
+    displayProfileData();
   },
   methods: {
     login () { // handled in the success callback of index.html
