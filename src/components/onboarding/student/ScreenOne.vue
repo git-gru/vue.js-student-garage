@@ -8,7 +8,7 @@
 
         <div class = "flex-content">
           <div class= "">
-            <img src="https://pbs.twimg.com/profile_images/833767319973212161/Ft904pMk_400x400.jpg" alt="..." class="rounded-circle img-restricted">
+            <img :src="userProfileImgSrc" alt="..." class="rounded-circle img-restricted">
           </div>
         </div>
 
@@ -45,6 +45,8 @@
 
 
 <script>
+import { mapGetters } from 'vuex'
+import OnboardingService from '../../../services/onboardingService.js'
 export default {
   name: 'StudentMainOnboarding',
   data () {
@@ -52,16 +54,32 @@ export default {
       userFirstName: '',
       userLastName: '',
       userHeadline: '',
+      userProfileImgSrc:''
     }
+  },
+  mounted(){
+    let linkedinData = OnboardingService.getLinkedinOnboardingData();
+    this.userFirstName = linkedinData.firstName;
+    this.userLastName = linkedinData.lastName;
+    this.userHeadline = linkedinData.headline;
+    this.userProfileImgSrc = linkedinData.pictureUrls.values[0];
+  },
+  computed:{
+    ...mapGetters({
+      linkedinInfo: 'getLinkedinInfo'
+    })
   },
   methods:{
       toSecondScreen(){
+        console.log(this.linkedinInfo);
+        console.log(this.userName);
+        /*
       let userData = {};
       userData.first_name = this.userFirstName;
       userData.last_name = this.userLastName;
       userData.headline = this.userHeadline;
       this.$store.dispatch('onboarding',userData);
-      this.$router.push('/student-onboarding/2');
+      this.$router.push('/student-onboarding/2');*/
     },
     addExperience(){
       console.log("Add Experience!");

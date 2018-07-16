@@ -78,7 +78,6 @@ export default {
   },
   methods:{
       emailSignUp(){
-        this.passwordIssue();
         let login = {};
         login.emailSignUp = true;
         login.email = this.userEmail;

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="spread">
-      <Navbar v-if="loggedIn"/>
+      <Navbar v-if="onboarded"/>
       <router-view class="margin-nav"> </router-view>
       <Foot/>
   </div>
@@ -32,11 +32,10 @@ export default {
   // ...
 computed:{
   ...mapGetters({
-    loggedIn: 'loggedIn'
+    onboarded: 'isOnboarded'
     })
   },
   mounted () {
-    //window.landingComponent = this.$refs.landing
   }
 }
 </script>

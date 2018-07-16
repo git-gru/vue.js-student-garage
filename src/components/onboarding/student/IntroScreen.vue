@@ -6,13 +6,16 @@
     </div>
 
     <div ref="Linkedin"/>
-    <script type="in/Login"></script>
+    <div>
+      <button class="btn btn-primary" @click="clickScript()"> Fetch My LinkedIn Information </button>
+    </div>
   </div>
 
 </template>
 
 
 <script>
+
 export default {
   name: 'StudentIntroOnboarding',
   data () {
@@ -32,11 +35,15 @@ export default {
       this.$refs.Linkedin.insertAdjacentElement('afterend', linkedinScriptPartOne);
   },
   methods: {
-    login (data) { // handled in the success callback of index.html
-      //this.$store.dispatch('testLogin');
+    linkedinInfo(data) {
       console.log("user",data);
-      console.log('logged in');
-    }
+      this.$store.dispatch('linkedinInfo',data.values[0]); // the user
+      this.$router.push('/student-onboarding/1');
+    },
+    clickScript(){
+      IN.User.authorize(function(){
+     });
+   }
   }
 }
 </script>
@@ -134,12 +141,14 @@ border: none;
 .inline{
   display: inline;
 }
+
 .left-margin{
   margin-left: 5%;
 }
 .left-margin-small{
   margin-left: 2.5%;
 }
+
 .margin-top{
   margin-top: 5%;
 }
@@ -175,8 +184,17 @@ border: none;
   height: 40%;
   width:25%;
 }
+span.IN-widget{
+  height:200px !important;
+  width: 50px !important;
+}
 .top-margin{
   margin-top: 2.5%;
+}
+
+#li_ui_li_gen_1531690151598_0-link{
+  width: 200px !important;
+  height: 50px !important;
 }
 
 </style>
