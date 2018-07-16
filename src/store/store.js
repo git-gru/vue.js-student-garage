@@ -211,6 +211,35 @@ export const store = new Vuex.Store({
     insertLinkedinInfo(state,payload){
       state.onboardingData.linkedinInfo = helperFunctions.updateOnboardingData(state.onboardingData.linkedinInfo,payload);
       OnboardingService.updateLinkedinOnboarding(state.onboardingData.linkedinInfo);
+    },
+    studentOnboardingFinished(state,payload){
+      state.onboardingData.garageInfo = helperFunctions.updateOnboardingData(state.onboardingData.garageInfo,payload);
+      let studentRef = students.where("userId", "==", state.curUser.userId).limit(1);
+      studentRef.get().then(function(snapshot){
+        snapshot.docs.forEach(function(doc){ // should only be one user
+          students.doc(doc.id).update(state.onboardingData.garageInfo).then(function(){
+            studentRef.get().then(function(snapshot){
+              snapshot.docs.forEach(function(doc){
+                console.log("Document successfully updated!");
+                state.curUser = doc.data();
+                console.log(state.curUser);
+              })
+            })
+          })
+          .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+          });
+        });
+      });
+      let userRef = users.where("userId", "==", state.curUser.userId).limit(1);
+      userRef.get().then(function(snapshot){
+        snapshot.docs.forEach(function(doc){ // should only be one user
+          let user = doc.data(); // user doc
+          let onboardedObj = {onboarded:true};
+          users.doc(doc.id).update(onboardedObj);
+        });
+      });
     }
   },
   actions:{
@@ -222,6 +251,9 @@ export const store = new Vuex.Store({
     },
     linkedinInfo({commit},payload){
       commit('insertLinkedinInfo',payload);
+    },
+    finishStudentOnboarding({commit},payload){
+      commit('studentOnboardingFinished',payload);
     }
   }
 });

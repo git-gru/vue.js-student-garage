@@ -71,15 +71,13 @@ export default {
   },
   methods:{
       toSecondScreen(){
-        console.log(this.linkedinInfo);
-        console.log(this.userName);
-        /*
       let userData = {};
       userData.first_name = this.userFirstName;
       userData.last_name = this.userLastName;
       userData.headline = this.userHeadline;
+      userData.profile_img_add = this.userProfileImgSrc;
       this.$store.dispatch('onboarding',userData);
-      this.$router.push('/student-onboarding/2');*/
+      this.$router.push('/student-onboarding/2');
     },
     addExperience(){
       console.log("Add Experience!");

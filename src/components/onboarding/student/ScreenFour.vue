@@ -75,6 +75,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import OnboardingFunctions from '../scripts/onboarding.js'
+import OnboardingService from '../../../services/onboardingService.js'
 export default {
   name: 'StudentMainOnboarding',
   data () {
@@ -96,7 +97,8 @@ export default {
       lockerData.lockerItems = this.lockerItems;
       result = OnboardingFunctions.joinObjects(result,lockerData);
       result.free_time = this.userFreeTime;
-      console.log(result);
+      result.onboarded = true;
+      this.$store.dispatch('finishStudentOnboarding',result);
     },
     addItem(){
       this.lockerItems.push({title:'',link:'',description:'',start:'', end:''});

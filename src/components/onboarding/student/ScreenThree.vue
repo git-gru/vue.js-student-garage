@@ -97,6 +97,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import OnboardingFunctions from '../scripts/onboarding.js'
+import OnboardingService from '../../../services/onboardingService.js'
 export default {
   name: 'StudentMainOnboarding',
   data () {
