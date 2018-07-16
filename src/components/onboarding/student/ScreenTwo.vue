@@ -99,7 +99,7 @@ export default {
           obj.company = this.checkForNull(experience.company.name);
           obj.start = this.checkForNull(experience.startDate.year);
           obj.end = 'Present';
-          obj.description = this.checkForNull(experience.description);
+          obj.description = this.checkForNull(experience.summary);
           this.experiences.push(obj);
         }
       },
