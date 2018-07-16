@@ -1,8 +1,10 @@
 <template>
-  <div id="app" class="spread">
+  <div>
+    <div id="app" class="spread">
       <Navbar v-if="onboarded"/>
-      <router-view class="margin-nav"> </router-view>
-      <Foot/>
+      <router-view class="margin-nav"></router-view>
+    </div>
+    <Foot/>
   </div>
 </template>
 
@@ -13,7 +15,7 @@ import Main from '@/components/Main.vue'
 import Foot from '@/components/Foot.vue'
 import Landing from '@/components/Landing.vue'
 import StudentSignUp from '@/components/login-register/students/SignUp.vue'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'App',
@@ -26,13 +28,12 @@ export default {
     StudentSignUp
   },
   data () {
-    return {
-    }
+    return {}
   },
   // ...
-computed:{
-  ...mapGetters({
-    onboarded: 'isOnboarded'
+  computed: {
+    ...mapGetters({
+      onboarded: 'isOnboarded'
     })
   },
   mounted () {
@@ -41,15 +42,17 @@ computed:{
 </script>
 
 <style scoped>
+  .margin-nav {
+    margin-top: 75px;
+  }
 
-.margin-nav{
-  margin-top: 75px;
+  .spread {
+    min-height: 100vh;
+  }
 
   @media screen and (max-width: 768px) {
-    body { padding-top: 0px; }
+    body {
+      padding-top: 0px;
+    }
   }
-}
-.spread{
-  height: 100%;
-}
 </style>
