@@ -6,9 +6,10 @@ import router from './router'
 import { store } from './store/store.js'
 import firebase from './store/firebase.js'
 import Carousel3d from 'vue-carousel-3d';
+import globalMixins from './mixins/globalMixins'
 
 Vue.use(Carousel3d);
-
+Vue.mixin(globalMixins)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

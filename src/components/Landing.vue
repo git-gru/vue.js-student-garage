@@ -6,6 +6,9 @@
         <div class="view">
           <div class="centered-block">
             <div class="big-margin-below login-wrapper clearfix">
+              <!-- TODO: remove this buttons -->
+              <button @click="someMethod('with some val')">Test mixin method</button>
+              <button @click="someGlobalMethod('with some val')">Test global mixin method</button>
               <button type="submit" class="btn btn-primary" @click ="goToStudentLogin()">Student Login/SignUp</button>
             </div>
             <div class= "flex-content logo-wrapper">
@@ -55,8 +58,10 @@
 
 
 <script>
+import exampleMixin from './../mixins/exampleMixin'
 export default {
   name: 'Landing',
+  mixins: [exampleMixin],
   data () {
     return {
     }
