@@ -35,7 +35,7 @@
 
 
           <div class="flex-content margin-bottom">
-          <button type="submit" class="btn btn-primary" @click="emailSignUp()">Sign Up</button>
+          <button class="btn btn-primary" @click.prevent="emailSignUp()">Sign Up</button>
 
         </div>
 
