@@ -7,7 +7,7 @@ let currentUser = null;
 export default {
   setCurrentUser(user){
     currentUser = user;
-  }
+  },
   getCurrentUserId(){
     return currentUser.userId;
   }
