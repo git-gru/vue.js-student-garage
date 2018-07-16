@@ -48,8 +48,8 @@ export default class MessageService {
         })
       })
     })
+  }
 
-    static getLastMessageOfEachChat(cb)
 
   static getAllMessagesRealTime(cb) {
     messages.onSnapshot(() => cb());
