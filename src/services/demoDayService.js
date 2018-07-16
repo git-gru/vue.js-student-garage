@@ -8,7 +8,6 @@ const storageRef = storage.ref();
 
 export default {
   postProject(project){
-    let id;
     return projects.add(project)
     .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);

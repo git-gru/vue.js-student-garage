@@ -7,9 +7,9 @@ const messages = db.collection("messages");
 const chatrooms = db.collection("chatrooms");
 
 
-export default class MessageService {
+export default{
 
-  static createMessage(uid, rid, textMessage) {
+  createMessage(uid, rid, textMessage) {
     return Object.assign({}, {
       userId: uid,
       receiverId: rid,
@@ -19,20 +19,39 @@ export default class MessageService {
     });
   }
 
-  static createChatRoom(userId, otherUser){
+  createChatRoom(userId, otherUser){
     let room = {};
     let users = {};
     users[userId] = true;
     usrs[otherUser] = true;
+    room.users = users;
+    room.messages = [];
+    chatrooms.add(room).then(function(docRef) {
+      console.log("Document written with ID: ", docRef.id);
+    }).catch(function(error) {
+    console.error("Error adding document: ", error);
+    });
+}
+
+  addMessage(chatId,) {
+    let chatRef = chatrooms.doc(chatId);
+    projects.doc(id).get().then(function(querySnapshot){
+      let project = querySnapshot.data();
+      let urls = project.imageUrls;
+      urls.push(url);
+      return projectRef.update({
+        imageUrls: urls
+      }).then(function() {
+        console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+        });
+    });
   }
 
-  static addMessage(uid, rid, textMessage, cb) {
-    messages.add(this.createMessage(uid, rid, textMessage))
-      .then((ref) => cb(Common.constants().SUCCESS, ref))
-      .catch((err) => cb(Common.constants().ERROR, err));
-  }
-
-  static getMessagesWithUser(cb,otherUserId) {
+  getMessagesWithUser(cb,otherUserId) {
     let userId = UserService.getCurrentUserId();
     let messages = [];
     return messages.where("userId", "==",userId).where("receiverId", "==",otherUserId).get().then(function(snapshot){
@@ -51,7 +70,7 @@ export default class MessageService {
   }
 
 
-  static getAllMessagesRealTime(cb) {
+  getAllMessagesRealTime(cb) {
     messages.onSnapshot(() => cb());
   }
 
