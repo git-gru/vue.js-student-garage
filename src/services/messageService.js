@@ -10,13 +10,7 @@ export default class MessageService {
     return Object.assign({}, {
       userId: uid,
       receiverId: rid,
-      userScene: 0,
-      receiverScene: 0,
       message: textMessage,
-      docUrl: null,
-      imgUrl: null,
-      status: 0,
-      deletedStatus: 0,
       createdDate: new Date().getTime(),
       updatedDate: new Date().getTime()
     });
@@ -29,7 +23,7 @@ export default class MessageService {
   }
 
   static getMessages(cb) {
-    messages.get() // where message.userid = user id || message.senderId = user id  
+    messages.get() // where message.userid = user id || message.senderId = user id
       .then((ref) => cb(Common.constants().SUCCESS, ref))
       .catch((err) => cb(Common.constants().ERROR, err));
   }

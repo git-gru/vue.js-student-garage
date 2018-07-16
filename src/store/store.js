@@ -4,6 +4,7 @@ import firebaseInfo from './firebase.js'
 import firebase from 'firebase'
 import helperFunctions from './helperFunctions.js'
 import OnboardingService from '../services/onboardingService.js'
+import UserService from '../services/userService.js'
 import router from '../router'
 const db = firebaseInfo.database;
 const students = db.collection('students');
@@ -55,6 +56,7 @@ export const store = new Vuex.Store({
             students.add(profile).then(function(docRef) { // add this user to students
               docRef.get().then(function(doc) {
                 state.curUser = doc.data(); // set the current user to this student
+                UserService.setCurrentUser(state.curUser);
                 console.log("state", state.curUser);
               });
             })

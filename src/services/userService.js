@@ -5,8 +5,11 @@ const db = firebase.database;
 const users = db.collection('users');
 let currentUser = null;
 export default {
-  addUser(user){
-
+  setCurrentUser(user){
+    currentUser = user;
+  }
+  getCurrentUserId(){
+    return currentUser.userId;
   }
 
 }
