@@ -5,7 +5,7 @@
       Your Chat With Curtis
     </div>
     <ul class="list-group top-margin">
-        <li v-for="item in test" v-bind:class="{'to-the-right': isMe(item), 'light-blue': isMe(item)}" class="list-group-item bordered w-75 rounded top-margin-1">
+        <li v-for="item in messages" v-bind:class="{'to-the-right': isMe(item), 'light-blue': isMe(item)}" class="list-group-item bordered w-75 rounded top-margin-1">
           <div>
             <div class="pull-left hidden-xs">
                 <div>
@@ -25,7 +25,7 @@
       <form class="form-horizontal top-margin" autocomplete="off">
       <fieldset>
         <div class="form-group input-group">
-                  <input type="text" class="form-control" placeholder="Send a message">
+                  <input type="text" class="form-control" placeholder="Send a message" v-model="message">
                   <div class="input-group-append ml-4">
                     <button class="btn btn-primary" type="button" @click="onSubmit">Send</button>
                   </div>
@@ -41,65 +41,64 @@
 
 <script>
 import MessageService from "../../services/messageService.js";
+import UserService from "../../services/userService.js";
 import common from '../../services/common.js';
 export default {
   name: 'Messages',
   data () {
     return {
-      userId: "user1",
+      userId:"",
       receiverId: "",
       messages: [],
-      message: ""
+      message: "",
+      chatId: ""
     }
+  },
+  mounted(){
+    this.userId = UserService.getCurrentUserId();
+    this.receiverId = this.$route.params.id;
+    this.getMessages();
   },
   methods: {
     isMe(message){
       return message % 2 === 0;
     },
-    sendMessage(message, cb){
-      if(this.message && this.message.length !== 0){
-        MessageService.addMessage(this.userId, this.receiverId, message, (status, snapshot)=>{
-          switch(status){
-            case common.constants().SUCCESS:
-              cb(common.constants().SUCCESS);
-              break;
-            case common.constants().ERROR:
-              cb(common.constants().ERROR);
-              break;
-          }
-        });
+    finalizeSend(chatId,userId,receiverId,message){
+      let self = this;
+      MessageService.sendMessage(chatId,userId,receiverId,message).then(function(result){
+        self.getMessages();
+      });
+    },
+    sendMessage(message){
+      let self = this;
+      if(this.message && this.message.length != 0){
+        if(self.chatId == "" || !self.chatId){
+          MessageService.createChatRoom(this.userId,this.receiverId).then(function(id){
+            self.chatId = id;
+            self.whatIsId("sendMessage() no currentChatId:, chatID is:")
+            self.finalizeSend(id,self.userId,self.receiverId,self.message);
+          });
+        } else{
+          self.whatIsId("sendMessage() currentId is set, id is: ");
+          self.finalizeSend(self.chatId,self.userId,self.receiverId,self.message)
+        }
+        this.message ="";
       }
     },
     getMessages(){
-      var messages = []
-      var count = 0;
-      MessageService.getMessages((status, snapshot)=>{
-        if(snapshot.size)snapshot.forEach(doc => {
-            if(doc.data().userId === this.userId && doc.data().receiverId === this.receiverId) messages.push(doc.data());
-            if(snapshot.size-1 === count){
-              messages.sort((a, b)=> a.updatedDate-b.updatedDate);
-              this.messages = messages.map(ele => common.parseMessage(ele, this.userId));
-            }
-            count += 1;
-          });
-        });
+      let self = this;
+      MessageService.getMessgesWithUser(this.userId,this.receiverId).then(function(result){
+        self.messages = result.messages;
+        self.chatId = result.chatId;
+        self.whatIsId("getMessages() chatID is: ");
+      });
     },
     onSubmit(e){
-      this.sendMessage(this.message, (status)=>{
-        if(status === common.constants().SUCCESS) this.getMessages();
-      });
-      this.message = ""
+      this.sendMessage();
+    },
+    whatIsId(f){
+      console.log(f, this.chatId);
     }
-  },
-  created(){
-    //this.$store.getters.getUserData.values[0] has full info about user, for time being getting only userId
-    this.userId = this.$store.getters.getUserData.values[0].id;
-    //Get all mesages from db
-    this.getMessages();
-    //Get real time data
-    MessageService.getAllMessagesRealTime(()=> this.getMessages());
-    if(this.$route.params && this.$route.params.rData) this.receiverId = this.$route.params.rData.email;
-    else this.$router.replace('/messages');
   }
 }
 </script>

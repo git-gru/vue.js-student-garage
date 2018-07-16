@@ -92,9 +92,10 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path:'/message',
+      path:'/message/:id',
       name:'IndividualMessageView',
       component:IndividualMessageView,
+      props:true,
       meta: { requiresAuth: true }
     },
     {

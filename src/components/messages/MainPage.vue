@@ -5,7 +5,7 @@
       Messages
     </div>
     <ul class="list-group">
-        <li v-for="item in users" @click= "individualView(item)" class="list-group-item bordered">
+        <li v-for="room in chatrooms" @click= "individualView(room)" class="list-group-item bordered">
             <div class="pull-left hidden-xs">
                 <div>
                     <img class="avatar avatar-lg" v-bind:src="item && item.profile_img_add ? item.profile_img_add : 'https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg'" alt="avatar">
@@ -26,37 +26,32 @@
 
 </template>
 <script>
-import StudentService from '../../services/studentService.js';
+import UserService from '../../services/userService.js';
+import MessageService from '../../services/messageService.js';
 import common from '../../services/common.js';
 export default {
   name: 'Messages',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing',
-      test: [1, 2, 3, 4, 5],
-      users: []
+      userId: "",
+      chatrooms: []
     }
   },
   methods: {
     individualView (rData) {
       this.$router.push({ name: 'IndividualMessageView',  params: { rData }})
     },
-    getAllStudents(){
-      StudentService.getStudents((status, snapshot)=>{
-        if(status === common.constants().SUCCESS){
-          if(snapshot.size)snapshot.forEach(doc => {
-            this.users.push(doc.data());
-            if(snapshot.size === this.users.length){
-              this.users = Array.from(this.users).filter((ele, index, arr)=> ele.email);
-            }
-          });
-        }
-      })
+    getUserChatRooms(){
+      let self = this;
+      MessageService.getUserChatRooms(this.userId).then(function(rooms){
+        console.log(rooms);
+        self.chatrooms = rooms;
+      });
     }
   },
   created(){
-    this.getAllStudents();
+    this.userId = UserService.getCurrentUserId;
+    this.getUserChatRooms();
   }
 }
 
