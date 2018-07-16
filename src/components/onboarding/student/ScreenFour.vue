@@ -59,8 +59,8 @@
     </div>
 
     <div>
-      <button type="submit" class="btn btn-primary float-l" @click="toThirdScreen()">Previous</button>
-    <button type="submit" class="btn btn-primary float-r" @click="onboardingFinished()">Finish</button>
+      <button class="btn btn-primary float-l" @click.prevent="toThirdScreen()">Previous</button>
+    <button  class="btn btn-primary float-r" @click.prevent="onboardingFinished()">Finish</button>
   </div>
         </form>
 
