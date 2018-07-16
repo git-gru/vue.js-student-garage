@@ -42,8 +42,8 @@
 
 
       <div>
-      <button type="submit" class="btn btn-primary float-l" @click="toFirstScreen()">Previous</button>
-      <button type="submit" class="btn btn-primary float-r" @click="toThirdScreen()">Next</button>
+      <button  class="btn btn-primary float-l" @click.prevent="toFirstScreen()">Previous</button>
+      <button  class="btn btn-primary float-r" @click.prevent="toThirdScreen()">Next</button>
     </div>
   </form>
     </div>

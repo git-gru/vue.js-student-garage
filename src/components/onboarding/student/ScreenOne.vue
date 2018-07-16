@@ -29,7 +29,7 @@
           </div>
 
           <div class="flex-content">
-          <button type="submit" class="btn btn-primary" @click="toSecondScreen()">Next</button>
+          <button class="btn btn-primary" @click.prevent="toSecondScreen()">Next</button>
 
         </div>
 

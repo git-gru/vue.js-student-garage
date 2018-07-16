@@ -80,8 +80,8 @@
 
       </div>
       <div>
-      <button type="submit" class="btn btn-primary float-l" @click="toSecondScreen()">Previous</button>
-      <button type="submit" class="btn btn-primary float-r" @click="toFourthScreen()">Next</button>
+      <button class="btn btn-primary float-l" @click.prevent="toSecondScreen()">Previous</button>
+      <button class="btn btn-primary float-r" @click.prevent="toFourthScreen()">Next</button>
     </div>
 </form>
 
