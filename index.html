@@ -30,12 +30,12 @@
 
         }
         function getProfileData() {
-            IN.API.Profile("me").fields("id", "first-name", "last-name", "headline", "location", "picture-url", "public-profile-url", "email-address","positions").result(displayProfileData).error(onError);
+            IN.API.Profile("me").fields("id", "first-name", "last-name", "headline", "location", "picture-url","picture-urls::(original)", "public-profile-url", "email-address","positions").result(displayProfileData).error(onError);
         }
 
         // Handle the successful return from the API call
         function displayProfileData(data){
-            window.linkedInAuth.login(data);
+            window.linkedInAuth.linkedinInfo(data);
             //console.log(data);
         }
         function onError () {

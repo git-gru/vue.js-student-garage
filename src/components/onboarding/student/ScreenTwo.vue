@@ -56,12 +56,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import OnboardingService from '../../../services/onboardingService.js'
 export default {
   name: 'StudentMainOnboarding',
   props: ['userData'],
   data () {
     return {
-      experiences: [{title:'',company:'', description:'', start:'', end:''}],
+      experiences: [],
     }
   },
   computed:{
@@ -69,13 +70,16 @@ export default {
       onboardingSoFar: 'getOnboardingData'
       })
     },
+    mounted(){
+      let linkedinData = OnboardingService.getLinkedinOnboardingData();
+      this.inputExperiences(linkedinData.positions.values);
+    },
   methods:{
     toFirstScreen(){
       //this.$router.push('/student-onboarding/1')
       console.log(this.onboardingSoFar);
     },
     toThirdScreen(){
-      console.log(this.experiences);
       let userData = {};
       userData.experiences = this.experiences;
       this.$store.dispatch('onboarding',userData);
@@ -85,17 +89,25 @@ export default {
       this.experiences.push({title:'',company:'', description:'', start:'', end:''});
     },
     deleteExperience(index){
-        //this.experiences.push({title:'', description:'', start:'', end:''});
-        console.log("experience deleted", index);
         this.experiences.splice(index,1);
       },
-    addEducation(){
-      console.log("Add Education!");
-    },
-    addSomethingCool(){
-      console.log("Add Something Cool!");
+    inputExperiences(experiences){
+        for(let i = 0; i < experiences.length; i++){
+          let experience = experiences[i];
+          let obj = {};
+          obj.title = this.checkForNull(experience.title);
+          obj.company = this.checkForNull(experience.company.name);
+          obj.start = this.checkForNull(experience.startDate.year);
+          obj.end = 'Present';
+          obj.description = this.checkForNull(experience.description);
+          this.experiences.push(obj);
+        }
+      },
+      checkForNull(field){
+        if(field == null) return '';
+        else return field;
+      }
     }
-  }
 }
 
 </script>
