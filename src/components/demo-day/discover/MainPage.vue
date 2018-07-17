@@ -27,8 +27,19 @@
       <span class="badge badge-pill badge-dark">Dark</span>
     </div>
 
+    <div v-if="showSpinner" class="top-margin-5">
+      <div class="flex-content">
+        <semipolar-spinner
+          :animation-duration="2000"
+          :size="65"
+          color="black"
+  />
+      </div>
+      <h4 class="text-center"> Loading... </h4>
+    </div>
+
     <div class = "row left-margin right-margin">
-      <div class = "col-md-6 top-margin">
+      <div class = "col-md-6 top-margin" v-for="(project, key) in projects">
         <div class="card">
                 <div class="card-img-top">
                   <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
@@ -41,64 +52,42 @@
                 <div class="card-body">
                   <h5 class="card-title">Image at top with labels</h5>
                   <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-                  <a class="fs-12 fw-600" @click="goToProduct()" href="#">Read more <i class="fa fa-angle-right pl-1"></i></a>
+                  <a class="fs-12 fw-600" @click="goToProduct(project.id)" href="#">Read more <i class="fa fa-angle-right pl-1"></i></a>
                 </div>
               </div>
       </div>
-
-      <div class = "col-md-6 top-margin">
-        <div class="card">
-                  <div class="card-img-top">
-                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
-                    <div class="badges">
-                      <a class="badge badge-warning" href="#">Product</a>
-                      <a class="badge badge-info" href="#">Design</a>
-                    </div>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Image at top with labels</h5>
-                    <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-                    <a class="fs-12 fw-600" @click="goToProduct()" href="#">Read more <i class="fa fa-angle-right pl-1"></i></a>
-                  </div>
-                </div>
-
-      </div>
-
-      <div class = "col-md-6 top-margin">
-        <div class="card">
-                  <div class="card-img-top">
-                    <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
-                    <div class="badges">
-                      <a class="badge badge-warning" href="#">Product</a>
-                      <a class="badge badge-info" href="#">Design</a>
-                    </div>
-                  </div>
-
-                  <div class="card-body">
-                    <h5 class="card-title">Image at top with labels</h5>
-                    <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-                    <a class="fs-12 fw-600" @click="goToProduct()" href="#">Read more <i class="fa fa-angle-right pl-1"></i></a>
-                  </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
 </template>
 <script>
+import DemoDayService from '../../../services/demoDayService.js';
 export default {
-  name: 'Navbar',
+  name: 'DiscoverMain',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing'
+      projects:[],
+      showSpinner: true,
+      projectQuery: ""
     }
   },
+  mounted(){
+    var self = this;
+    DemoDayService.getAllProjects().then(function(querySnapshot){
+      self.projects = querySnapshot.docs.map(doc => {
+        let project = doc.data();
+        project.id = doc.id;
+        return project;
+      })
+      self.showSpinner = false;
+    });
+  },
   methods: {
-    goToProduct(){
-      this.$router.push('/product');
+    goToProduct(id){
+      this.$router.push({ name: 'IndividualProductView', params: { id }});
+    },
+    queryProjects(){
+      console.log(this.projectQuery);
     }
   }
 }

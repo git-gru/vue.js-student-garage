@@ -91,6 +91,7 @@
 </template>
 <script>
 import QuestionService from '../../services/questionService.js'
+import UserService from '../../services/userService.js'
 import { SemipolarSpinner  } from 'epic-spinners'
 export default {
   name: 'QAMain',
@@ -109,7 +110,10 @@ export default {
   methods:{
     ask(){
       let question = {};
-      question.content = this.questionAsked;
+      let curUserId = UserService.getCurrentUserId();
+      QuestionService.askQuestion(curUserId,this.questionAsked);
+      question.title = this.questionAsked;
+
       console.log(question);
       this.userHasQuestion = true;
     },

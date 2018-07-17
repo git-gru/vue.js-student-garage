@@ -42,5 +42,13 @@ export default {
         console.error("Error updating document: ", error);
         });
     });
+  },
+  getAllProjects(){
+    return projects.get().then(function(querySnapshot){
+      return querySnapshot;
+    })
+  },
+  getProject(id){
+    return projects.doc(id).get()
   }
 }

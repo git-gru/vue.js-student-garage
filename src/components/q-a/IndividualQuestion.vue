@@ -45,6 +45,7 @@
 
 <script>
 import QuestionService from '../../services/questionService.js';
+import UserService from '../../services/userService.js';
 export default {
   name: 'IndividualQuestionView',
   data () {
@@ -69,21 +70,25 @@ export default {
       });
     },
     downvote(answer) {
-      const reaction = this.getReaction(answer)
-      answerService.reactToAnswer(answer.id, reaction.value === -1 ? 'neutral' : 'downvote')
-        .then(() => {
-          this.update()
-        })
+      let curUserId = UserService.getCurrentUserId();
+      let self = this;
+      QuestionService.downvoteAnswer(answer,this.question.id,curUserId).then(function(message){
+        console.log(message);
+        self.update();
+      });
     },
     upvote(answer) {
-      const reaction = this.getReaction(answer)
-      answerService.reactToAnswer(answer.id, reaction.value === 1 ? 'neutral' : 'upvote')
-        .then(() => {
-          this.update()
-        })
+      let curUserId = UserService.getCurrentUserId();
+      let self = this;
+      QuestionService.upvoteAnswer(answer,this.question.id,curUserId).then(function(message){
+        console.log(message);
+        self.update();
+      });
     },
     getReaction(answer) {
-      return answer.reactions.find(answer => answer.userId === userService.currentUser.id) || {}
+      let curUserId = UserService.getCurrentUserId();
+      let reaction = answer.reactions().get(curUserId);
+      return reaction;
     },
     countUpvotes(answer) {
       let score = 0;
