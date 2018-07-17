@@ -53,6 +53,7 @@
 <script>
 import DemoDayDrop from './demo-day-drop.vue'
 import DemoDayService from '../../../services/demoDayService.js'
+import UserService from '../../../services/userService.js'
 export default {
   name: 'PostProductMain',
   components:{
@@ -75,7 +76,6 @@ export default {
     onFilesChosen(event){
       const files = event.target.files;
       let self = this;
-      console.log(files);
       let filesLength = files.length;
       let fileArray = this.getFileArray(files,filesLength);
       fileArray.forEach(function(file){
@@ -90,8 +90,6 @@ export default {
           fileReader.readAsDataURL(file)
           self.images.push(file);
       });
-      console.log(this.imageUrls);
-      console.log("images", this.images);
     },
     getFileArray(files,length){
       let fileArray = [];
@@ -108,8 +106,9 @@ export default {
       project.description = this.projectDescription;
       project.youtubeLink = this.youtubeLink;
       project.imageUrls = [];
-      DemoDayService.postProject(project).then(function(id){
+      DemoDayService.postProject(project,curUserId).then(function(id){
         self.projectId = id;
+        UserService.addGarageProjectToUser(id);
         self.addPhotosToPost();
       });
     },

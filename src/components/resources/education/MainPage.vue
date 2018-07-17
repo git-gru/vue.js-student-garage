@@ -65,17 +65,22 @@ export default {
   data () {
     return {
       resources: [],
-      showSpinner: true
+      showSpinner: true,
+      resourceQuery: ""
     }
   },
   mounted() {
     console.log(this.showSpinner);
-    console.log("hello");
     var self = this;
     EducationResourceService.getResources().then(function(querySnapshot){
       self.resources = querySnapshot.docs.map(doc => doc.data());
       self.showSpinner = false;
     });
+  },
+  methods:{
+    queryEducationResources(){
+      console.log(this.resourceQuery);
+    }
   }
 }
 </script>
