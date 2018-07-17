@@ -11,9 +11,9 @@
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for...">
+                <input type="text" class="form-control" placeholder="Search for..." v-model="resourceQuery">
                 <div class="input-group-append ml-4">
-                  <button class="btn btn-primary" type="button">Go!</button>
+                  <button class="btn btn-primary" type="button" @click.prevent="queryEducationResources()" >Search</button>
                 </div>
       </div>
     </div>
@@ -79,7 +79,11 @@ export default {
   },
   methods:{
     queryEducationResources(){
-      console.log(this.resourceQuery);
+      let self = this;
+      EducationResourceService.queryResources(this.resourceQuery).then(function(hits){
+        self.resources = hits;
+        self.resourceQuery = "";
+      });
     }
   }
 }

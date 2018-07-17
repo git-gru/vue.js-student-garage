@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "algoliasearch": "^3.29.0",
     "bootstrap": "^4.1.1",
     "epic-spinners": "^1.0.3",
     "firebase": "^5.1.0",
