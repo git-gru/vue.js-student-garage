@@ -29,6 +29,10 @@ new Vue({
       // These actions will mean automatic signin  after a refresh or a new visit
       //
       console.log('user',user);
+      if(user){
+        this.$store.commit('setUser', user);
+        this.$router.push('/');
+      }
       //if user !null
       // try to find user Id in students in students collections (collection where student.userId = user.id)
       // if found there, set this user to the current user with 'setUser'
