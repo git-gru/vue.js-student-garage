@@ -6,10 +6,7 @@
         <div class="view">
           <div class="centered-block">
             <div class="big-margin-below login-wrapper clearfix">
-              <!-- TODO: remove this buttons -->
-              <button @click="someMethod('with some val')">Test mixin method</button>
-              <button @click="someGlobalMethod('with some val')">Test global mixin method</button>
-              <button type="submit" class="btn btn-primary" @click ="goToStudentLogin()">Student Login/SignUp</button>
+              <button class="btn btn-primary" @click.prevent ="goToStudentLogin()">Student Login/SignUp</button>
             </div>
             <div class= "flex-content logo-wrapper">
               <img src="../assets/img/logo/full-logo.png" class="mid-sized-img">

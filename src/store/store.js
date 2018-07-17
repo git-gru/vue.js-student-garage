@@ -41,7 +41,7 @@ export const store = new Vuex.Store({
   },
   mutations: {
     setUser(state,payload){
-      state.user = payload;
+      state.curUser = payload;
     },
     studentSignUpMutation(state,payload){
       console.log(payload);

@@ -23,16 +23,20 @@ new Vue({
   created () {
     // This method is triggered automatically after the initial boot or manual entry/exit to the system
     firebase.auth.onAuthStateChanged(user => {
-      console.log(user)
       // Do anything what You want with this user.
       // You can fetch user additional data from firestore, setup user data with vuex
       // and push any route state
       // These actions will mean automatic signin  after a refresh or a new visit
       //
-      // this.$router.push('/anyRoute')
-      // this.$store.commit('setUser', user)
+      console.log('user',user);
+      //if user !null
+      // try to find user Id in students in students collections (collection where student.userId = user.id)
+      // if found there, set this user to the current user with 'setUser'
+      // if not found in students, look for in the investor collection where investor.userid  = user.id
+      //this.$store.commit('setUser', user);
+      //this.$router.push('/');
       // ...
-      // console.log('User is loged in')
+      console.log('User is logged in')
     })
   }
 })
