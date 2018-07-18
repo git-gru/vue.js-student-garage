@@ -2,21 +2,21 @@
   <div>
     <div class="chat_list left-margin right-margin">
       <div class = "text-center">
-      Your Chat With Curtis
+      Your Chat With {{otherUser.first_name}}
     </div>
     <ul class="list-group top-margin">
-        <li v-for="item in messages" v-bind:class="{'to-the-right': isMe(item), 'light-blue': isMe(item)}" class="list-group-item bordered w-75 rounded top-margin-1">
+        <li v-for="message in messages" v-bind:class="{'to-the-right': isMe(message), 'light-blue': isMe(message)}" class="list-group-item bordered w-75 rounded top-margin-1">
           <div>
             <div class="pull-left hidden-xs">
                 <div>
-                    <img class="avatar avatar-lg" src="https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg" alt="avatar">
+                    <img class="avatar avatar-lg" :src="messageUserSrc(message)" alt="avatar">
                 </div>
             </div>
-            <small class="pull-right text-muted">10.12.2014 in 12:56</small>
+            <small class="pull-right right-margin-time text-muted" v-bind:class="{'white-text': isMe(message)}">{{getDate(message.createdDate)}}</small>
             <div class="left-margin">
-                <small class="list-group-item-heading text-muted text-primary left-margin">User1</small>
-                <p class="list-group-item-text left-margin">
-                    Hi! I'm on the left ya sucka ! :>>>>
+                <small class="list-group-item-heading text-muted text-primary left-margin-shrunk" v-bind:class="{'white-text': isMe(message), 'bold': isMe(message)}">{{messageUserName(message)}}</small>
+                <p class="list-group-item-text left-margin" v-bind:class="{'white-text': isMe(message)}">
+                    {{message.message}}
                 </p>
             </div>
           </div>
@@ -27,7 +27,7 @@
         <div class="form-group input-group">
                   <input type="text" class="form-control" placeholder="Send a message" v-model="message">
                   <div class="input-group-append ml-4">
-                    <button class="btn btn-primary" type="button" @click="onSubmit">Send</button>
+                    <button class="btn btn-success" type="button" @click="onSubmit">Send</button>
                   </div>
         </div>
       </fieldset>
@@ -51,17 +51,21 @@ export default {
       receiverId: "",
       messages: [],
       message: "",
-      chatId: ""
+      chatId: "",
+      otherUser:{},
+      curUser:{}
     }
   },
   mounted(){
     this.userId = UserService.getCurrentUserId();
     this.receiverId = this.$route.params.id;
+    this.getOtherUser(this.receiverId);
     this.getMessages();
   },
   methods: {
     isMe(message){
-      return message % 2 === 0;
+      let curUserId = UserService.getCurrentUserId();
+      return curUserId == message.userId;
     },
     finalizeSend(chatId,userId,receiverId,message){
       let self = this;
@@ -75,11 +79,9 @@ export default {
         if(self.chatId == "" || !self.chatId){
           MessageService.createChatRoom(this.userId,this.receiverId).then(function(id){
             self.chatId = id;
-            self.whatIsId("sendMessage() no currentChatId:, chatID is:")
             self.finalizeSend(id,self.userId,self.receiverId,self.message);
           });
         } else{
-          self.whatIsId("sendMessage() currentId is set, id is: ");
           self.finalizeSend(self.chatId,self.userId,self.receiverId,self.message)
         }
         this.message ="";
@@ -88,16 +90,64 @@ export default {
     getMessages(){
       let self = this;
       MessageService.getMessgesWithUser(this.userId,this.receiverId).then(function(result){
-        self.messages = result.messages;
+        self.messages = result.messages.sort(function(a,b){
+          return a.createdDate - b.createdDate;
+        });
         self.chatId = result.chatId;
-        self.whatIsId("getMessages() chatID is: ");
       });
     },
     onSubmit(e){
       this.sendMessage();
+      this.sendTwilioMessage();
     },
-    whatIsId(f){
-      console.log(f, this.chatId);
+    getCurUser(){
+      let curUserId = UserService.getCurrentUserId();
+      let self = this;
+      UserService.getUserProfileStatus(curUserId).then(function(user){
+        if(user.isStudent){
+          UserService.getUserIsStudent(curUserId).then(function(student){
+            self.curUser= student;
+          });
+        } else if(user.isInvestor){
+          UserService.getUserIsStudent(curUserId).then(function(investor){
+            self.curUser = investor;
+            });
+          }
+      })
+    },
+    getOtherUser(otherUserId){
+      let self = this;
+      UserService.getUserProfileStatus(otherUserId).then(function(user){
+        if(user.isStudent){
+          UserService.getUserIsStudent(otherUserId).then(function(student){
+            self.otherUser= student;
+          });
+        } else if(user.isInvestor){
+          UserService.getUserIsStudent(otherUserId).then(function(investor){
+            self.otherUser = investor;
+            });
+          }
+      })
+    },
+    messageUserName(message){
+      let curUserId = UserService.getCurrentUserId();
+      if(curUserId == this.curUser.userId) return this.curUser.first_name;
+      return this.otherUser.first_name;
+    },
+    messageUserSrc(message){
+      let curUserId = UserService.getCurrentUserId();
+      if(curUserId == this.curUser.userId) return this.curUser.profile_img_add;
+      return this.otherUser.profile_img_add;
+    },
+    getDate(milliseconds){
+      let result = "";
+      let date = new Date(milliseconds);
+      let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      result = result + months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+      return result;
+    },
+    sendTwilioMessage(){
+      MessageService.notifyUser(this.otherUser.phone_number,this.otherUser);
     }
   }
 }
@@ -105,6 +155,9 @@ export default {
 
 
 <style scoped>
+.bold{
+  font-weight: bold;
+}
 .bordered{
   border-style: solid;
   border-color: black;
@@ -131,10 +184,6 @@ export default {
   width: 80%;
 }
 
-/*
-.card{
-  width: auto;
-}*/
 .flex-content{
   display: flex;
   justify-content: center;
@@ -152,11 +201,14 @@ export default {
   width: 200px;
 }
 .light-blue {
-  background-color: #25ddec !important;
+  background-color: #50a1ff !important;
   color: white !important;
 }
 .left-margin{
   margin-left: 5%;
+}
+.left-margin-shrunk{
+  margin-left: 2.5%;
 }
 .margin-top{
   margin-top: 5%;
@@ -187,9 +239,13 @@ export default {
 .right-margin{
   margin-right: 5%;
 }
+
+.right-margin-time{
+  margin-right: 5%;
+}
 .rounded{
-  border-radius: 30px !important;
-  border-color: #25ddec !important;
+  border-radius: 40px !important;
+  border-color: #50a1ff !important;
 }
 .to-the-right{
   float: right;
@@ -207,7 +263,7 @@ export default {
 }
 
 .white-text{
-  color: white;
+  color: white !important;
 }
 
 </style>

@@ -5,17 +5,18 @@
       Messages
     </div>
     <ul class="list-group">
-        <li v-for="room in chatrooms" @click= "individualView(room)" class="list-group-item bordered">
+        <li v-for="room in chatrooms" @click= "individualView(room.otherUser.userId)" class="list-group-item bordered">
             <div class="pull-left hidden-xs">
                 <div>
-                    <img class="avatar avatar-lg" v-bind:src="item && item.profile_img_add ? item.profile_img_add : 'https://symsys.stanford.edu/static/filedocument/2017/11/13/CurtisStaples-public.jpg'" alt="avatar">
+                    <img class="avatar avatar-lg" :src="room.otherUser.profile_img_add"  alt="avatar">
                 </div>
             </div>
-            <small class="pull-right text-muted">10.12.2014 in 12:56(dummy)</small>
+
+            <small class="pull-right text-muted">{{getDate(room.messages[room.messages.length -1].createdDate)}}</small>
             <div class="left-margin">
-                <small class="list-group-item-heading text-muted text-primary left-margin">{{item.email}}</small>
+                <small class="list-group-item-heading text-muted text-primary left-margin"> {{room.otherUser.first_name}} {{room.otherUser.last_name}}</small>
                 <p class="list-group-item-text left-margin">
-                    Hi! this message is FOR you.(dummy)
+                    {{lastMessage(room)}}
                 </p>
             </div>
         </li>
@@ -34,25 +35,75 @@ export default {
   data () {
     return {
       userId: "",
-      chatrooms: []
+      chatrooms: [],
     }
   },
   methods: {
-    individualView (rData) {
-      this.$router.push({ name: 'IndividualMessageView',  params: { rData }})
+    individualView (id) {
+      this.$router.push({ name: 'IndividualMessageView',  params: { id }})
     },
-    getUserChatRooms(){
+    lastMessage(room){
+      let message = room.messages[room.messages.length -1]
+      let content = message.message;
+      let sender = message.userId;
+      if(sender == this.userId){
+        return "You: " + content;
+      } else{
+        return room.otherUser.first_name + ": " + content;
+      }
+    },
+    getUserChatrooms(){
       let self = this;
-      MessageService.getUserChatRooms(this.userId).then(function(rooms){
-        console.log(rooms);
-        self.chatrooms = rooms;
+      MessageService.getUserChatrooms(this.userId).then(function(rooms){
+        console.log("rooms", rooms)
+        rooms.forEach(function(room){ // attaches the other user to chatroom
+          for(let id in room.users){
+            if(id !== self.userId){
+              UserService.getUserProfileStatus(id).then(function(user){
+                let index;
+                if(user.isStudent){
+                  UserService.getUserIsStudent(id).then(function(student){
+                    index = rooms.findIndex(function(room){
+                      return room.users[id] == true;
+                    });
+                    rooms[index].otherUser = student;
+                    room.messages.sort(function(a,b){
+                      console.log("creating date check")
+                      return a.createdDate - b.createdDate;
+                    });
+                    self.chatrooms = rooms;
+                  });
+                } else if(user.isInvestor){
+                  UserService.getUserIsStudent(id).then(function(investor){
+                    index = rooms.findIndex(function(room){
+                      return room.users[id] == true;
+                    });
+                    rooms[index].otherUser = investor;
+                    room.messages.sort(function(a,b){
+                      console.log("creating date check")
+                      return a.createdDate - b.createdDate;
+                    });
+                    self.chatrooms = rooms;
+                  });
+                }
+              })
+            }
+          }
+        });
       });
+    },
+    getDate(milliseconds){
+      let result = "";
+      let date = new Date(milliseconds);
+      let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      result = result + months[date.getMonth()] + " " + date.getDate() + " " + date.getFullYear();
+      return result;
     }
   },
   created(){
-    this.userId = UserService.getCurrentUserId;
-    this.getUserChatRooms();
-  }
+    this.userId = UserService.getCurrentUserId();
+    this.getUserChatrooms();
+  },
 }
 
 </script>

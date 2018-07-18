@@ -34,7 +34,7 @@ export default {
           console.error("Error adding document: ", error);
         });
         state.loggedIn = true;
-        if(!state.onboarded){
+        if(!state.curUser.onboarded){
           self.routerPushStudentNotOnboarded(); // student hasn't been onboarded yet
         }else{
           self.routerPushStudentOnboarded();
@@ -47,32 +47,93 @@ export default {
       });
     },
     studentLoginPassword: function(state,payload){
-      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).catch(function(error) {
-        // Handle Errors here.
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        // ...
+      let self = this;
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password).then(function(user){
+        let curUserId = firebase.auth().currentUser.uid;
+         students.where("userId", "==", curUserId).limit(1).get().then(function(snapshot){
+          snapshot.docs.forEach(function(doc){ // should only be one user
+            state.curUser = doc.data(); // set the current state user to this student
+            UserService.setCurrentUser(state.curUser);
+            if(!state.curUser.onboarded){
+              self.routerPushStudentNotOnboarded(); // student hasn't been onboarded yet
+            }else{
+              self.routerPushStudentOnboarded();
+            }
+          });
+        });
       });
     },
     googleSignIn: function(state,payload){
+      let self = this;
       let provider = new firebase.auth.GoogleAuthProvider();
-      //provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      //provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
-      //provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+      firebase.auth().signInWithPopup(provider).then(function(user){
+        let curUserId = firebase.auth().currentUser.uid;
+         students.where("userId", "==", curUserId).limit(1).get().then(function(snapshot){
+          snapshot.docs.forEach(function(doc){ // should only be one user
+            state.curUser = doc.data(); // set the current state user to this student
+            UserService.setCurrentUser(state.curUser);
+            if(!state.curUser.onboarded){
+              self.routerPushStudentNotOnboarded(); // student hasn't been onboarded yet
+            }else{
+              self.routerPushStudentOnboarded();
+            }
+          });
+        });
+      });
+    },
+    facebookSignIn: function(state,payload){
+      let self = this;
+      let provider = new firebase.auth.FacebookAuthProvider();
+      provider.addScope('email');
+      console.log("login to facebook");
+      firebase.auth().signInWithPopup(provider).then(function(user){
+        let curUserId = firebase.auth().currentUser.uid;
+         students.where("userId", "==", curUserId).limit(1).get().then(function(snapshot){
+          snapshot.docs.forEach(function(doc){ // should only be one user
+            state.curUser = doc.data(); // set the current state user to this student
+            UserService.setCurrentUser(state.curUser);
+            if(!state.curUser.onboarded){
+              self.routerPushStudentNotOnboarded(); // student hasn't been onboarded yet
+            }else{
+              self.routerPushStudentOnboarded();
+            }
+          });
+        });
+      });
+    },
+    googleSignUp: function(state,payload){
+      let self = this;
+      let provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          // find user in database -> set to current user
-          state.loggedIn = true;
-          if(!state.onboarded){
-            router.push({ name: 'StudentOnboardIntro' });
-          }else{
-            router.push({ name: 'ProfilePage' });
-          }
-          // ...
-        }).catch(function(error) {
+          let profile = {};
+          profile.userId = firebase.auth().currentUser.uid;
+          profile.isStudent = true;
+          profile.isInvestor = false;
+          profile.onboarded = false;
+          users.add(profile).then(function(docRef){ // add to users collection
+            students.add(profile).then(function(docRef) { // add this user to students
+              docRef.get().then(function(doc) {
+                state.curUser = doc.data(); // set the current state user to this student
+                UserService.setCurrentUser(state.curUser);
+                state.loggedIn = true;
+                if(!state.curUser.onboarded){
+                  router.push({ name: 'StudentOnboardIntro' });
+                }else{
+                  router.push({ name: 'ProfilePage' });
+                }
+              });
+            }).catch(function(error) {
+              console.error("Error adding document: ", error);
+            });
+            console.log("User written with ID: ", docRef.id, "user", docRef); // referring to the user collection
+            }).catch(function(error) {
+              console.error("Error adding document: ", error);
+
+            }).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
@@ -82,35 +143,52 @@ export default {
           var credential = error.credential;
           // ...
         });
-    },
-    facebookSignIn: function(state,payload){
-      let provider = new firebase.auth.FacebookAuthProvider();
-      provider.addScope('email');
-      console.log("login to facebook");
-      firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        state.loggedIn = true;
-        if(!state.onboarded){
-          router.push({ name: 'StudentOnboardIntro' });
-        }else{
-          router.push({ name: 'ProfilePage' });
-        }
-        // ...
-      }).catch(function(error) {
-        console.log(error.message);
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
       });
-    },
+  },
+    facebookSignUp: function(state,payload){
+      let self = this;
+      let provider = new firebase.auth.FacebookAuthProvider();
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          let profile = {};
+          profile.userId = firebase.auth().currentUser.uid;
+          profile.isStudent = true;
+          profile.isInvestor = false;
+          profile.onboarded = false;
+          users.add(profile).then(function(docRef){ // add to users collection
+            students.add(profile).then(function(docRef) { // add this user to students
+              docRef.get().then(function(doc) {
+                state.curUser = doc.data(); // set the current state user to this student
+                UserService.setCurrentUser(state.curUser);
+                state.loggedIn = true;
+                if(!state.curUser.onboarded){
+                  router.push({ name: 'StudentOnboardIntro' });
+                }else{
+                  router.push({ name: 'ProfilePage' });
+                }
+              });
+            }).catch(function(error) {
+              console.error("Error adding document: ", error);
+            });
+            console.log("User written with ID: ", docRef.id, "user", docRef); // referring to the user collection
+            }).catch(function(error) {
+              console.error("Error adding document: ", error);
+
+            }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
+      });
+  },
     routerPushStudentNotOnboarded: function(){
       router.push({ name: 'StudentOnboardIntro' });
     },

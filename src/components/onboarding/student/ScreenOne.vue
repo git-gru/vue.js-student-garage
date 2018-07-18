@@ -3,7 +3,7 @@
     <div class="margin-20">
       <form class="input-line">
         <div class="flex-content">
-          <h2>Before You Get Started </h2>
+          <h2>Basic Information </h2>
         </div>
 
         <div class = "flex-content">
@@ -59,10 +59,10 @@ export default {
   },
   mounted(){
     let linkedinData = OnboardingService.getLinkedinOnboardingData();
-    this.userFirstName = linkedinData.firstName;
-    this.userLastName = linkedinData.lastName;
-    this.userHeadline = linkedinData.headline;
-    this.userProfileImgSrc = linkedinData.pictureUrls.values[0];
+    this.userFirstName = this.checkForNull(linkedinData.firstName);
+    this.userLastName = this.checkForNull(linkedinData.lastName);
+    this.userHeadline = this.checkForNull(linkedinData.headline);
+    this.userProfileImgSrc = this.checkImageForNull(linkedinData.pictureUrls);
   },
   computed:{
     ...mapGetters({
@@ -79,14 +79,16 @@ export default {
       this.$store.dispatch('onboarding',userData);
       this.$router.push('/student-onboarding/2');
     },
-    addExperience(){
-      console.log("Add Experience!");
+    checkForNull(field){
+      if(!field) return '';
+      else return field;
     },
-    addEducation(){
-      console.log("Add Education!");
-    },
-    addSomethingCool(){
-      console.log("Add Something Cool!");
+    checkImageForNull(src){
+      console.log(src);
+      if(src) return src.values[0]
+      else{
+        return "http://walyou.com/wp-content/uploads//2010/12/facebook-profile-picture-no-pic-avatar.jpg"
+      }
     }
   }
 }

@@ -104,7 +104,7 @@ export default {
         }
       },
       checkForNull(field){
-        if(field == null) return '';
+        if(!field) return '';
         else return field;
       }
     }

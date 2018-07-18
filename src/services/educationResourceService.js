@@ -15,7 +15,6 @@ export default {
   return algoliaResourceIndex.search({
       query:query
     }).then(function(data){
-      console.log(data.hits);
       return data.hits;
     })
   }

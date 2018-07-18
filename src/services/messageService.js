@@ -2,6 +2,7 @@
 import firebase from '../store/firebase.js';
 import Common from './common';
 import UserService from './userService.js'
+import axios from 'axios'
 const db = firebase.database;
 const messages = db.collection("messages");
 const chatrooms = db.collection("chatrooms");
@@ -61,7 +62,7 @@ export default{
       let result = {};
       console.log(snapshot.docs.length);
       if(snapshot.docs.length > 0){
-    
+
         result.chatId = snapshot.docs[0].id;
         result.messages = snapshot.docs[0].data().messages.sort(function(a,b){
           return new Date(b.createdDate) - new Date(a.createdDate);
@@ -77,14 +78,38 @@ export default{
     })
   },
 
-  getUserChatRooms(userId){
+  getUserChatrooms(userId){
+    console.log(userId);
     return chatrooms.where('users.'+userId,"==",true).get().then(function(snapshot){
-      return snapshot.docs;
+      let rooms = [];
+      snapshot.docs.forEach(function(doc){
+        rooms.push(doc.data());
+      });
+      return rooms;
     })
   },
 
   getAllMessagesRealTime(cb) {
     messages.onSnapshot(() => cb());
+  },
+  notifyUser(phoneNumber,user){
+    axios
+    .post(
+        'https://us-central1-student-garage.cloudfunctions.net/messageSent',
+        {
+            user: user,
+            phoneNumber: user.phone_number,
+        },
+        {
+        headers: { 'Access-Control-Allow-Origin': '*' }
+      }
+    )
+    .then(function(response) {
+        console.log(response);
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
   }
 
 }
