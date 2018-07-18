@@ -10,9 +10,14 @@
       <div class = "col-md-6 bordered-right">
       <form class="input-line">
           <div class="">
+            <div v-if="emailAlreadyAssociated">
+            <p class="text-danger text-center"> There's already an account associated with that email.
+              <a class=""> <router-link :to="{ name: 'StudentLogin' }">Need to Login?</router-link></a>
+            </p>
+          </div>
             <div class="form-group">
                 <label>Email</label>
-                <input  class="form-control" type="text" placeholder="Email" v-model="userEmail">
+                <input  class="form-control" type="text" placeholder="Email" v-model="userEmail" v-on:focus="toggleEmailIfTrue()">
             </div>
             <div v-if="passwordIsIssue">
               <p class="text-danger"> Passwords Don't Match </p>
@@ -68,7 +73,8 @@ export default {
       userEmail:'',
       userPassword:'',
       verifyPassword: '',
-      passwordIsIssue:false
+      passwordIsIssue:false,
+      emailAlreadyAssociated: false
     }
   },
   computed:{
@@ -81,6 +87,7 @@ export default {
         let login = {};
         login.emailSignUp = true;
         login.email = this.userEmail;
+        login.emailAssociated = this.setEmailAssociatedToTrue;
         login.password = sha256(this.userPassword);
         if(this.passwordIsIssue == true){
 
@@ -108,15 +115,6 @@ export default {
       login.google = true;
       this.$store.dispatch('studentSignUp',login);
     },
-    addExperience(){
-      console.log("Add Experience!");
-    },
-    addEducation(){
-      console.log("Add Education!");
-    },
-    addSomethingCool(){
-      console.log("Add Something Cool!");
-    },
     getFirmIndex(){
       this.firmIndex = this.firms.findIndex(firm => firm.name == this.firmName);
     },
@@ -134,6 +132,12 @@ export default {
     },
     togglePasswordIfTrue(){
       if(this.passwordIsIssue == true) this.passwordIsIssue = false;
+    },
+    setEmailAssociatedToTrue(){
+      this.emailAlreadyAssociated = true;
+    },
+    toggleEmailIfTrue(){
+      if(this.emailAlreadyAssociated == true) this.emailAlreadyAssociated = false;
     }
   }
 }

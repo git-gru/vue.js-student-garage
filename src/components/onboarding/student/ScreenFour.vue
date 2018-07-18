@@ -97,6 +97,7 @@ export default {
       lockerData.lockerItems = this.lockerItems;
       result = OnboardingFunctions.joinObjects(result,lockerData);
       result.free_time = this.userFreeTime;
+      result.garage_projects = [];
       result.onboarded = true;
       this.$store.dispatch('finishStudentOnboarding',result);
     },

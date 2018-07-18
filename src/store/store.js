@@ -44,7 +44,6 @@ export const store = new Vuex.Store({
       state.user = payload;
     },
     studentSignUpMutation(state,payload){
-      console.log(payload);
       if(payload.emailSignUp == true){
         helperFunctions.studentSignUpPassword(state,payload);
       }

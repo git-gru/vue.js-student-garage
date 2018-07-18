@@ -18,12 +18,16 @@
       <div class="left-margin">
         <div class="row">
           <p class="col-5 col-sm-3">
-            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/student-garage.appspot.com/o/images%2Flanding%2Fstudent-landing-image.svg?alt=media&token=4646d6ba-32b5-411c-8a59-4296ffcda2f7" />
           </p>
           <div class="col-7 col-sm-9">
             <h4> For Students </h4>
-            <p> This is fake data that is simulating something real. Continue
-              to work right now on this page until we have put real data in it
+            <p> Student Garage is a place to network with investors and other students
+              interested in tech and entrepreneurship. Our platform gives you the
+              ability to showcase your personal profile and portfolio, find answers
+              to questions that you might have, showcase current projects you’re working on,
+              find others to work on future projects with, connects you with 1000+ (and counting)
+              educational resources, and get job offers from tech startups.
             </p>
           </div>
         </div>
@@ -33,12 +37,14 @@
         <div class="row">
           <div class="col-7 col-sm-9">
             <h4> For Investors </h4>
-            <p> This is fake data that is simulating something real. Continue
-              to work right now on this page until we have put real data in it
+            <p> Our platform gives you the ability to network with and market your firm
+              to students, discover new startups and projects coming out of Stanford,
+              and find a talent pool for your existing portfolio companies.
+
             </p>
           </div>
           <p class="col-5 col-sm-3">
-            <img src="https://s3.envato.com/files/138853034/_1/Rocket%20Launch%20in%20Desk%20590x590.jpg" />
+            <img src="https://firebasestorage.googleapis.com/v0/b/student-garage.appspot.com/o/images%2Flanding%2Finvestor-landing-image.svg?alt=media&token=a5105897-93d4-4425-a524-664755792e90" />
           </p>
         </div>
       </div>

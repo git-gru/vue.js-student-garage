@@ -45,7 +45,7 @@
               <div class="accordion w-100" id="accordion-1">
                 <div class="card no-padding">
                   <h5 class="card-title">
-                    <a data-toggle="collapse" href="#collapse-1-1">Experiences</a>
+                    <a class="collapsed" data-toggle="collapse" href="#collapse-1-1">Experiences</a>
                   </h5>
 
                   <div id="collapse-1-1" class="collapse" data-parent="#accordion-1">
@@ -77,7 +77,7 @@
                       <p> Graduation Year (or expected): {{education.gradYear}} </p>
                       <hr v-if="key < student.education.length -1">
                     </div>
-                    <div class="card-body" v-if="!emptyString(student.gpa)">
+                    <div class="card-body">
                       <h4 class="theme-bold"> GPA: {{student.gpa}} </h4>
                     </div>
                     <div class="card-body" v-if="student.tests.length > 0">
@@ -139,8 +139,12 @@ export default {
     }
   },
   mounted(){
-    this.student = UserService.currentUser;
-    console.log(this.student);
+    const curUserId = UserService.getCurrentUserId();
+    let self = this;
+    UserService.getUserIsStudent(curUserId).then(function(student){
+      self.student = student;
+      console.log("profile mounted",this.student);
+    });
   },
   methods:{
     addStudent(){ // just wanted to test the firestore database

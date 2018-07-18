@@ -13,7 +13,8 @@ export default {
   },
   queryResources(query){
   return algoliaResourceIndex.search({
-      query:query
+      query:query,
+      hitsPerPage: 1000
     }).then(function(data){
       return data.hits;
     })
