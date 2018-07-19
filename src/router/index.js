@@ -99,9 +99,10 @@ const router = new Router({
       meta: { requiresAuth: true }
     },
     {
-      path:'/product',
+      path:'/product/:id',
       name:'IndividualProductView',
       component:IndividualProductView,
+      props:true,
       meta: { requiresAuth: true }
     },
     {

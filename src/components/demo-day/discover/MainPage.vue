@@ -39,10 +39,10 @@
     </div>
 
     <div class = "row left-margin right-margin">
-      <div class = "col-md-6 top-margin" v-for="(project, key) in projects">
-        <div class="card">
+      <div class = "col-md-6 top-margin bottom-margin-card" v-for="(project, key) in projects">
+        <div class="card border border-secondary">
                 <div class="card-img-top">
-                  <img src="https://static.makeuseof.com/wp-content/uploads/2015/08/free-images-1.jpg" alt="Card image cap">
+                  <img :src="project.imageUrls[1]" alt="Card image cap">
                   <div class="badges">
                     <a class="badge badge-warning" href="#">Product</a>
                     <a class="badge badge-info" href="#">Design</a>
@@ -50,9 +50,9 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Image at top with labels</h5>
-                  <p>Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title.</p>
-                  <a class="fs-12 fw-600" @click="goToProduct(project.id)" href="#">Read more <i class="fa fa-angle-right pl-1"></i></a>
+                  <h5 class="card-title">{{project.name}}</h5>
+                  <p>{{project.description}}</p>
+                  <button  class="btn btn-primary" @click.prevent="goToProject(project.id)">See More</button>
                 </div>
               </div>
       </div>
@@ -62,8 +62,12 @@
 </template>
 <script>
 import DemoDayService from '../../../services/demoDayService.js';
+import { SemipolarSpinner  } from 'epic-spinners'
 export default {
   name: 'DiscoverMain',
+  components: {
+      SemipolarSpinner
+  },
   data () {
     return {
       projects:[],
@@ -83,7 +87,7 @@ export default {
     });
   },
   methods: {
-    goToProduct(id){
+    goToProject(id){
       this.$router.push({ name: 'IndividualProductView', params: { id }});
     },
     queryProjects(){
@@ -97,6 +101,21 @@ export default {
 .ask-color{
   background-color: #FF420E;
   color: white;
+}
+
+.background-blue{
+  background-color: #50a1ff;
+  color:white;
+}
+
+.border-bold{
+  border: solid !important;
+  border-width: 2px !important;
+  border-color: transparent !important;
+}
+
+.bottom-margin-card{
+  margin-bottom: 2.5%;
 }
 /*
 .card{
@@ -140,9 +159,13 @@ export default {
     justify-content: center;
   }
 }
+
+.project-img{
+  height: 400px;
+  width: 600px;
+}
 .read-more{
   background-color: white;
-  /* primary */
   color:#50a1ff;
 }
 .right-margin{

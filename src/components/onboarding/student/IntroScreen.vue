@@ -1,15 +1,31 @@
 <template>
   <div>
-    <div>
-      Before We Get Started .... Need Some Information About You. Do you want us to fetch some ...
-      from LinkedIn?
+    <div class="margin-20">
+    <div class="flex-content">
+      <h2>Before You Get Started </h2>
     </div>
 
-    <div ref="Linkedin"/>
-    <div>
-      <button class="btn btn-primary" @click="clickScript()"> Fetch My LinkedIn Information </button>
+    <div class="flex-content">
+      <h5>To create your profile, we need some more information
+        about you. We are able to import some of this information from your LinkedIn.
+        If you would like for us to do so, click the button below.
+      </h5>
+    </div>
+    <div class="flex-content">
+      <div ref="Linkedin"/>
+      <div>
+        <button class="btn btn-success" @click="clickScript()"> Import LinkedIn Information </button>
+      </div>
+    </div>
+    <hr>
+    <div class="flex-content">
+      <h5> Or </h5>
+    </div>
+    <div class="flex-content">
+      <button class="btn btn-danger" @click="noLinkedInImport()"> No, Do Not Import My LinkedIn Information </button>
     </div>
   </div>
+</div>
 
 </template>
 
@@ -43,6 +59,10 @@ export default {
     clickScript(){
       IN.User.authorize(function(){
      });
+   },
+   noLinkedInImport(){
+     this.$store.dispatch('linkedinInfo',{}); // nothing
+     this.$router.push('/student-onboarding/1');
    }
   }
 }

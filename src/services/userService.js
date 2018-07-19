@@ -42,23 +42,29 @@ export default {
       return snapshot.docs;
     });
   },
-  getCurrentUserProfile(){
-    if(currentUser.isStudent = true){
-      return getCurrentUserIsStudent();
-    } else if(currentUser.isInvestor = true){
-      return getCurrentUserIsInvestor();
-    }
-  },
-  getCurrentUserIsStudent(){
-    return students.where("userId", "==", currentUser.userId).limit(1).get().then(function(snapshot){
-      snapshot.docs.forEach(function(doc){ // should only be one user
-        let user = doc.data(); // user doc
-        return user;
-      });
+  getUserProfileStatus(id){
+    let self = this;
+     return users.where("userId", "==", id).limit(1).get().then(function(snapshot){
+      let user = snapshot.docs[0].data();
+      return user;
     });
   },
-  getCurrentUserIsInvestor(){
-    return investors.where("userId", "==", currentUser.userId).limit(1).get().then(function(snapshot){
+  getCurrentCurrentUserProfile(){
+    if(currentUser.isStudent = true){
+      return this.getUserIsStudent(currentUser.userId);
+    } else if(currentUser.isInvestor = true){
+      return this.getUserIsInvestor(currentUser.userId);
+    }
+  },
+  getUserIsStudent(userId){
+      return students.where("userId", "==", userId).limit(1).get().then(function(snapshot){
+      let user = snapshot.docs[0].data();
+      console.log("user service", user);
+        return user;
+    });
+  },
+  getUserIsInvestor(userId){
+    return investors.where("userId", "==", userId).limit(1).get().then(function(snapshot){
       snapshot.docs.forEach(function(doc){ // should only be one user
         let user = doc.data(); // user doc
         return user;

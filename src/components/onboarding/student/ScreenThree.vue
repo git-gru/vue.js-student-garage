@@ -102,15 +102,9 @@ export default {
   name: 'StudentMainOnboarding',
   data () {
     return {
-      userFirstName: '',
-      userLastName: '',
-      userHeadline: '',
       stanfordEducation: 'Stanford University',
       stanfordGraduation: '',
       stanfordDescription: '',
-      userExperienceStart: '',
-      userExperienceEnd: '',
-      userExperienceDescription:'',
       educationData: [],
       testData: []
     }
@@ -141,9 +135,6 @@ export default {
       console.log(result);
       this.$store.dispatch('onboarding',result);
       this.$router.push('/student-onboarding/4');
-    },
-    addExperience(){
-      console.log("Add Experience!");
     },
     addEducation(){
       this.educationData.push({school:'',major:'', gradYear:''})

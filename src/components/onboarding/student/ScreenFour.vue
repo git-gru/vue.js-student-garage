@@ -97,6 +97,7 @@ export default {
       lockerData.lockerItems = this.lockerItems;
       result = OnboardingFunctions.joinObjects(result,lockerData);
       result.free_time = this.userFreeTime;
+      result.garage_projects = [];
       result.onboarded = true;
       this.$store.dispatch('finishStudentOnboarding',result);
     },
@@ -108,9 +109,9 @@ export default {
     },
     invalidLink(link){
       if(link == '') return false;
-      let checkHttp = link.substring(0,8);
+      let checkHttp = link.substring(0,7);
       if(checkHttp == 'http://') return false;
-      let checkHttps = link.substring(0,9);
+      let checkHttps = link.substring(0,8);
       if(checkHttps == 'https://') return false;
       return true;
     },

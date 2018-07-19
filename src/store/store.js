@@ -44,15 +44,14 @@ export const store = new Vuex.Store({
       state.user = payload;
     },
     studentSignUpMutation(state,payload){
-      console.log(payload);
       if(payload.emailSignUp == true){
         helperFunctions.studentSignUpPassword(state,payload);
       }
       else if(payload.google == true){
-        helperFunctions.googleSignIn(state,payload);
+        helperFunctions.googleSignUp(state,payload);
       }
       else if(payload.facebook = true){
-        helperFunctions.facebookSignIn(state,payload);
+        helperFunctions.facebookSignUp(state,payload);
     }
   },
     studentLoginMutation(state,payload){
@@ -84,6 +83,9 @@ export const store = new Vuex.Store({
   actions:{
     studentSignUp({commit},payload){
       commit('studentSignUpMutation',payload);
+    },
+    studentLogin({commit},payload){
+      commit('studentLoginMutation',payload);
     },
     onboarding({commit},payload){
       commit('updateOnboardingData',payload);

@@ -11,7 +11,7 @@
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for..." v-model="resourceQuery">
+                <input type="text" class="form-control" placeholder="Search for..." v-model="resourceQuery" @keyup.enter="queryEducationResources()">
                 <div class="input-group-append ml-4">
                   <button class="btn btn-primary" type="button" @click.prevent="queryEducationResources()" >Search</button>
                 </div>
@@ -39,7 +39,7 @@
       <h4 class="text-center"> Loading... </h4>
     </div>
     <div class = "row left-margin right-margin">
-      <div v-for="resource in resources" class = "col-md-6 top-margin">
+      <div v-for="resource in paginatedData" class = "col-md-6 top-margin">
         <div class="card border bg-primary white-text h-100 w-100">
             <div class="card-body">
               <h4 class="white-text">{{resource.title}}</h4>
@@ -51,6 +51,10 @@
         </div>
       </div>
     </div>
+    <div>
+    <button :disabled="pageNumber === 0"  class="btn btn-primary float-l" @click.prevent="prevPage()"><i class="fa fa-arrow-left"></i>Previous </button>
+    <button :disabled="pageNumber >= pageCount -1"  class="btn btn-primary float-r" @click.prevent="nextPage()">Next <i class="fa fa-arrow-right"></i></button>
+  </div>
   </div>
 
 </template>
@@ -66,25 +70,46 @@ export default {
     return {
       resources: [],
       showSpinner: true,
-      resourceQuery: ""
+      resourceQuery: "",
+      pageNumber:0,
+      size: 20
     }
   },
   mounted() {
-    console.log(this.showSpinner);
     var self = this;
     EducationResourceService.getResources().then(function(querySnapshot){
       self.resources = querySnapshot.docs.map(doc => doc.data());
       self.showSpinner = false;
     });
   },
+  computed:{
+    pageCount(){
+      let l = this.resources.length,
+          s = this.size;
+      return Math.floor(l/s);
+    },
+    paginatedData(){
+      const start = this.pageNumber * this.size,
+            end = start + this.size;
+      return this.resources
+               .slice(start, end);
+    }
+  },
   methods:{
     queryEducationResources(){
       let self = this;
       EducationResourceService.queryResources(this.resourceQuery).then(function(hits){
         self.resources = hits;
+        console.log(hits.length, "hits");
         self.resourceQuery = "";
       });
-    }
+    },
+    nextPage(){
+        this.pageNumber++;
+      },
+    prevPage(){
+      this.pageNumber--;
+      }
   }
 }
 </script>
@@ -113,7 +138,17 @@ export default {
   justify-content: center;
   flex-direction: row;
 }
-
+.float-l{
+  float: left;
+  margin-left: 0px;
+}
+.float-r{
+  float: right;
+  margin-right: 0px;
+}
+.float-right{
+  float:right;
+}
 .img-restricted{
   height: 200px;
   width: 200px;

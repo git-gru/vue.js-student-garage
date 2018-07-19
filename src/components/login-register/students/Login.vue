@@ -4,7 +4,7 @@
       <h2>Login</h2>
     </div>
     <div class="flex-content">
-      <p> Need an account? <a class=""> <router-link :to="{ name: 'StudentSignUp' }">Sign Up Here</router-link></a> </p>
+      <p> Need an account? <a class=""> <router-link :to="{ name: 'StudentSignUp' }">Login Here</router-link></a> </p>
     </div>
     <div class="margin-20 row bordered-div">
       <div class = "col-md-6 bordered-right">
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input  class="form-control" type="password" placeholder="Password" v-model="userPassword" v-on:focus="toggleMessageIfTrue()">
+                <input  class="form-control" type="password" placeholder="Password" v-model="userPassword" v-on:focus="togglePasswordIfTrue()">
             </div>
             <div v-if="invalidPasswordTyping()">
               <p class="text-danger"> Password must be at least 8 characters long </p>
@@ -35,15 +35,18 @@
 
 
           <div class="flex-content margin-bottom">
-          <button type="submit" class="btn btn-primary" @click="toSecondScreen()">Sign Up</button>
+          <button class="btn btn-primary" @click.prevent="emailLogin()">Login</button>
 
         </div>
 
         </form>
       </div>
 
-        <div class="col-md-6">
-          <div> <img src="https://i.stack.imgur.com/xAiqi.png"> </div>
+        <div class="col-md-6 flex-content">
+          <div>
+            <div> <img class="login-button margin-bottom-login-button" src="../../../../static/assets/img/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png" @click="googleLogin()"> </div>
+            <div> <img class="login-button" src="../../../../static/assets/img/facebook/fbsignin.png" @click="facebookLogin()"> </div>
+          </div>
         </div>
 
 
@@ -57,6 +60,7 @@
 
 <script>
 import sha256 from 'sha256';
+import { mapGetters } from 'vuex'
 export default {
   name: 'StudentMainOnboarding',
   data () {
@@ -68,20 +72,34 @@ export default {
     }
   },
   computed:{
+    ...mapGetters({
+      loggedIn: 'loggedIn'
+      })
   },
   methods:{
-      toSecondScreen(){
-        console.log(sha256(this.userPassword));
-        console.log(this.firmName);
-        console.log(this.firmIndex);
-        this.passwordIssue();
-        /*
-      let userData = {};
-      userData.firstName = this.userFirstName;
-      userData.lastName = this.userLastName;
-      userData.headline = this.userHeadline;
-      this.$store.dispatch('onboarding',userData);
-      this.$router.push('/investor-onboarding/2');*/
+      emailLogin(){
+        let login = {};
+        login.emailLogin = true;
+        login.email = this.userEmail;
+        login.password = sha256(this.userPassword);
+        if(this.passwordIsIssue == true){
+
+        }else{
+          this.$store.dispatch('studentLogin',login);
+        }
+    },
+    facebookLogin(){
+      let login = {};
+      login.emailLogin = false;
+      login.google = false;
+      login.facebook = true;
+      this.$store.dispatch('studentLogin',login);
+    },
+    googleLogin(){
+      let login = {};
+      login.emailLogin = false;
+      login.google = true;
+      this.$store.dispatch('studentLogin',login);
     },
     addExperience(){
       console.log("Add Experience!");
@@ -107,7 +125,7 @@ export default {
     passwordIssue(){
       this.passwordIsIssue = (!(this.userPassword === this.verifyPassword));
     },
-    toggleMessageIfTrue(){
+    togglePasswordIfTrue(){
       if(this.passwordIsIssue == true) this.passwordIsIssue = false;
     }
   }
@@ -139,6 +157,7 @@ export default {
 .flex-content{
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .flex-row{
@@ -173,11 +192,18 @@ border: none;
 .left-margin-shrunk{
   margin-left: 1%;
 }
+.login-button{
+  width: 200px;
+  height:50px;
+}
 .margin-top{
   margin-top: 5%;
 }
 .margin-bottom{
   margin-bottom: 5%;
+}
+.margin-bottom-login-button{
+  margin-bottom: 2.5%;
 }
 .margin-20{
   margin-left:20%;
