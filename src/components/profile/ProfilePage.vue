@@ -2,7 +2,7 @@
   <div>
     <!-- Profile Image -->
     <div class="">
-    <div class = "row align-items-center justify-content-center">
+    <div class = "row align-items-center justify-content-center student-profile">
       <div class = "">
         <div>
           <img :src="student.profile_img_add" alt="..." class="rounded-circle img-restricted">
@@ -10,7 +10,7 @@
       </div>
 
       <!-- Bio-->
-      <div class= "left-margin">
+      <div class= "left-margin student-bio">
         <div class= "">
           <h2>{{student.first_name}} {{student.last_name}}</h2>
         </div>
@@ -226,4 +226,17 @@ border: none;
     justify-content: center;
   }
 }
+
+@media (max-width: 575px) {
+  .student-profile {
+    flex-direction: column;
+  }
+
+  .student-bio {
+    text-align: center;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
 </style>

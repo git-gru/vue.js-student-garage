@@ -240,6 +240,22 @@ border: none;
   }
 }
 
+@media (max-width: 767px) {
+  .bordered-div {
+    max-width: 300px;
+    margin: 0 auto 100px;
+  }
+
+  .bordered-right {
+    padding: 15px 15px 5px;
+    border-right: none;
+  }
+
+  .grey-background {
+    padding: 15px;
+  }
+}
+
 .right-margin{
   margin-right: 5%;
 }
