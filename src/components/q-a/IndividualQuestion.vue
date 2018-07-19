@@ -2,15 +2,15 @@
   <div>
       <h2 class="text-center"> <span class ="bolded">{{question.title}}</span> </h2>
       <div class="flex-row">
-        <h5 class="inline"> Asked by: {{question.asked_by.first_name}} {{question.asked_by.last_name}}</h5>
-        <img class="avatar avatar-lg left-margin-small" :src="question.asked_by.profile_img_add" alt="avatar">
+        <h5 class="inline"> Asked by: {{questionAsker.first_name}} {{questionAsker.last_name}}</h5>
+        <img class="avatar avatar-lg left-margin-small" :src="questionAsker.profile_img_add" alt="avatar">
     </div>
       <div class="side-margin-10">
-        <h4 v-if="question.answers.length == 1" class ="bolded"> {{ question.answers.length }} Answer </h4>
-        <h4 v-if="question.answers.length != 1" class ="bolded"> {{ question.answers.length }} Answers </h4>
+        <h4 v-if="answers.length == 1" class ="bolded"> {{ answers.length }} Answer </h4>
+        <h4 v-if="answers.length != 1" class ="bolded"> {{ answers.length }} Answers </h4>
 
         <ul class="list-group">
-          <li v-for="answer in question.answers"
+          <li v-for="answer in answers"
               class="list-group-item side-margin pseudo message">
             <div class="vertical-center">
               <img class="ms-avatar-hero" v-bind:src="answer.answered_by.profile_img_add" alt="">
@@ -20,13 +20,13 @@
               </div>
             </div>
             <div class='vote-panel'>
-              <button class="bordered btn btn-sm">
-                <i class="fa fa-thumbs-up"></i>
-                <p v-if="countUpvotes(answer) >= 0"class="inline">{{countUpvotes(answer)}}</p>
+              <button class="bordered btn btn-sm" @click="upvote(answer)" v-bind:class="{'user-upvoted': userUpvoted(answer)}">
+                <i class="fa fa-thumbs-up" v-bind:class="{'user-upvoted': userUpvoted(answer)}"></i>
+                <p v-if="countUpvotes(answer) >= 0"class="inline" v-bind:class="{'user-upvoted': userUpvoted(answer)}">{{countUpvotes(answer)}}</p>
               </button>
 
-              <button  class="btn btn-sm bordered-red">
-                <i class="fa fa-thumbs-down"></i>
+              <button  class="btn btn-sm bordered-red" @click="downvote(answer)" v-bind:class="{'user-downvoted': userDownvoted(answer)}">
+                <i class="fa fa-thumbs-down" v-bind:class="{'user-downvoted': userDownvoted(answer)}"></i>
               </button>
             </div>
           </li>
@@ -51,36 +51,62 @@ export default {
   data () {
     return {
       userAnswer:'',
-      question: {}
+      question: {},
+      questionAsker: {},
+      answers:[]
     }
   },
   mounted(){
     this.update()
   },
   computed: {
-    answersTitle() {
-      //return (this.question.answers.length === 1) ? 'Answer' : 'Answers'
-    }
+
   },
   methods: {
     update() {
       let self = this;
-      QuestionService.getQuestion(this.$route.params.id).then(function(querySnapshot){
-        self.question = querySnapshot.data();
-      });
+      QuestionService.getQuestion(this.$route.params.id) // re-render the question so user sees their answer
+        .then(function(snapshot){
+          let question = snapshot.data();
+          question.id = snapshot.id;
+          self.question = {
+            ...question,
+            content: question.text,
+            answers: question.answers.map(answer => ({ ...answer, content: answer.text }))
+          };
+          self.mapUsersToAnswers(question.answers);
+          console.log("asked by",question.asked_by);
+          UserService.getUserProfileStatus(question.asked_by).then(function(user){
+            if(user.isStudent){
+              UserService.getUserIsStudent(question.asked_by).then(function(student){
+                self.questionAsker= student;
+              });
+            } else if(user.isInvestor){
+              UserService.getUserIsStudent(question.asked_by).then(function(investor){
+                self.questionAsker= investor;
+                });
+              }
+          })
+        })
     },
     downvote(answer) {
       let curUserId = UserService.getCurrentUserId();
       let self = this;
-      QuestionService.downvoteAnswer(answer,this.question.id,curUserId).then(function(message){
-        console.log(message);
+      let index = this.question.answers.findIndex(function(element){
+        return element.createdDate == answer.createdDate && element.answererId == answer.answererId;
+      });
+      QuestionService.downvoteAnswer(index,this.question.id,curUserId).then(function(message){
+        console.log(message)
         self.update();
       });
     },
     upvote(answer) {
       let curUserId = UserService.getCurrentUserId();
       let self = this;
-      QuestionService.upvoteAnswer(answer,this.question.id,curUserId).then(function(message){
+      let index = this.question.answers.findIndex(function(element){
+        return element.createdDate == answer.createdDate && element.answererId == answer.answererId;
+      });
+      QuestionService.upvoteAnswer(index,this.question.id,curUserId).then(function(message){
         console.log(message);
         self.update();
       });
@@ -92,31 +118,58 @@ export default {
     },
     countUpvotes(answer) {
       let score = 0;
-      for(let reaction in answer.reactions){
-        score += parseInt(answer.reactions[reaction]);
+      for(let reaction in answer.upvotes){
+        score += parseInt(answer.upvotes[reaction]);
       }
       return score;
     },
-    postComment(questionId) {
-      questionService.answerQuestion(questionId, this.answer);
-      if(this.question.user.phoneNum !== ""){
-        this.sendSystemMessage(this.question.user.phoneNum);
-      }
-      this.answer = "";
-      questionService.getQuestion(this.$route.params.id) // re-render the question so user sees their answer
-        .then((question) => {
-          this.question = {
-            ...question,
-            content: question.text,
-            answers: question.answers.map(answer => ({ ...answer, content: answer.text }))
+    mapUsersToAnswers(answers){
+      this.answers = answers;
+      this.answers.forEach(function(answer){
+      UserService.getUserProfileStatus(answer.answererId).then(function(user){
+        if(user.isStudent){
+          console.log("user is student");
+          UserService.getUserIsStudent(answer.answererId).then(function(student){
+            answer.answered_by = student;
+            console.log("answered by", answer.answered_by);
+          });
+        } else if(user.isInvestor){
+          UserService.getUserIsStudent(answer.answererId).then(function(investor){
+            answer.answered_by = investor;
+          });
           }
         })
+      });
+      console.log("this.answers",this.answers)
     },
     sendSystemMessage: function(phoneNumber){
       TwilioService.questionAnswered(phoneNumber);
     },
     answerQuestion(){
-      console.log("Answer the Question");
+      let curUserId = UserService.getCurrentUserId();
+      let answer = {};
+      answer.answererId = curUserId;
+      answer.content = this.userAnswer;
+      answer.createdDate = new Date().getTime();
+      answer.upvotes = {};
+      QuestionService.postAnswer(answer,this.question.id, this.update);
+      this.userAnswer = "";
+    },
+    userUpvoted(answer){
+      let curUserId = UserService.getCurrentUserId();
+      let upvotes = answer.upvotes;
+      if(upvotes.hasOwnProperty(curUserId)){
+        if(upvotes[curUserId] == 1) return true
+      }
+      return false;
+    },
+    userDownvoted(answer){
+      let curUserId = UserService.getCurrentUserId();
+      let upvotes = answer.upvotes;
+      if(upvotes.hasOwnProperty(curUserId)){
+        if(upvotes[curUserId] == -1) return true
+      }
+      return false;
     }
   }
 }
@@ -248,5 +301,14 @@ button.btn {
 button.bordered-red {
   border: 1px solid;
   color: red;
+}
+.user-upvoted{
+  background-color: #50a1ff;
+  color: white;
+}
+
+.user-downvoted{
+  background-color: red;
+  color:white;
 }
 </style>

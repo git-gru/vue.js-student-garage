@@ -1,61 +1,51 @@
 <template>
   <div>
     <div class="col-lg-7 mx-auto">
-              <div> <h1 class = "text-center text-bold"> Product Name </h1> </div>
+              <div> <h1 class = "text-center text-bold"> {{project.name}} </h1> </div>
               <div class="flex-content">
                 <div class = "row w-100">
-                  <div class="flex-content-column"> Team </div>
-                  <img class="avatar avatar-md left-margin-reduced" src="https://cdn.stocksnap.io/img-thumbs/960w/2UPHCTMHNR.jpg" alt="avatar">
-                  <img class="avatar avatar-md left-margin-reduced" src="https://cdn.stocksnap.io/img-thumbs/960w/2UPHCTMHNR.jpg" alt="avatar">
-                  <img class="avatar avatar-md left-margin-reduced" src="https://cdn.stocksnap.io/img-thumbs/960w/2UPHCTMHNR.jpg" alt="avatar">
+                  <div class="flex-content-column"> Posted By: </div>
+                  <img class="avatar avatar-md left-margin-reduced" :src="projectPoster.profile_img_add" alt="avatar">
                 </div>
               </div>
 
               <div class = "">
                 <div class="card">
 
-
-
                 <section id="lity" class="section">
                 <div class="container">
 
-
                   <div class="row">
 
-
                       <div class="gallery gallery-4-type4">
-                        <a class="gallery-item" href="#">
-                          <img src="/static/assets/img/thumb/1.jpg" alt="..." data-provide="lightbox">
+                        <a v-if= "hasMainImage()"class="gallery-item" href="#">
+                          <img :src="mainPhoto" alt="..." data-provide="lightbox">
                         </a>
                         <div class="gallery-item-group">
-                          <a class="gallery-item" href="#">
-                            <img src="/static/assets/img/thumb/2.jpg" alt="..." data-provide="lightbox">
-                          </a>
-                          <a class="gallery-item" href="#">
-                            <img src="/static/assets/img/thumb/3.jpg" alt="..." data-provide="lightbox">
-                          </a>
-                          <a class="gallery-item" href="#">
-                            <img src="/static/assets/img/thumb/4.jpg" alt="..." data-provide="lightbox">
+                          <a v-for="photo in otherPhotos"class="gallery-item" href="#">
+                            <img :src="photo" alt="..." data-provide="lightbox">
                           </a>
                         </div>
                       </div>
-
-
                   </div>
-
-
                 </div>
               </section>
-
-
                 </div>
               </div>
 
-              <div>
-                <h4> Description: </h4>
-                <p> Product Description goes here. This is the best product in the world. </p>
+              <div v-if="isYoutube(project.youtubeLink)">
+                <div class="flex-content">
+                  <h4> Demo Video </h4>
+                </div>
+                <div class="flex-content">
+                  <iframe width="420" height="345" :src="show(project.youtubeLink)">
+                  </iframe>
+                </div>
+              </div>
 
-
+              <div class="top-margin bottom-margin">
+                <p class="inline bolded"> Description: </p>
+                <p class="inline"> {{project.description}} </p>
               </div>
             </div>
 
@@ -65,19 +55,71 @@
 
 
 <script>
+import DemoDayService from '../../../services/demoDayService.js';
+import UserService from '../../../services/userService.js';
 export default {
   name: 'IndividualProductView',
   data () {
     return {
-      msg: 'This is navbar',
-      example: 'Testing',
-      test: [1,2,3,4,5]
+      projectId:'',
+      projectPoster:{},
+      project:{},
+      mainPhoto:'',
+      otherPhotos:[]
     }
   },
   methods: {
-    isMe(message){
-      return message % 2 === 0;
+    getProject(){
+      let self = this;
+      DemoDayService.getProject(this.projectId).then(function(project){
+        console.log(project);
+        self.project = project;
+        self.breakdownPhotos(project.imageUrls);
+        UserService.getUserProfileStatus(project.posterId).then(function(user){
+          if(user.isStudent){
+            UserService.getUserIsStudent(project.posterId).then(function(student){
+              self.projectPoster= student;
+            });
+          } else if(user.isInvestor){
+            UserService.getUserIsStudent(project.posterId).then(function(investor){
+              self.projectPoster= investor;
+              });
+            }
+        })
+      })
+
+    },
+    breakdownPhotos(photos){
+      if(photos.length > 0){
+        this.mainPhoto = photos[0];
+        let count = 1;
+        while(count < 4 && count < photos.length){
+          this.otherPhotos.push(photos[count]);
+          console.log(this.otherPhotos);
+          count ++;
+        }
+      }
+    },
+    hasMainImage(){
+      return this.mainPhoto !== '';
+    },
+    isYoutube(link){
+      if(!link)return false;
+      console.log(link);
+      return true;
+    },
+    show(link){
+      return 'https://www.youtube.com/embed/' + this.getYouTubeId(link);
+    },
+    getYouTubeId(link){
+      var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+      var match = link.match(regExp);
+      return (match&&match[7].length==11)? match[7] : false;
     }
+  },
+  mounted(){
+     this.projectId = this.$route.params.id;
+     this.getProject();
   }
 }
 </script>
@@ -85,9 +127,15 @@ export default {
 
 
 <style scoped>
+.bolded{
+  font-weight: bold;
+}
 .bordered{
   border-style: solid;
   border-color: black;
+}
+.bottom-margin{
+  margin-bottom: 5%;
 }
 .chat_list .list-group-item {
     padding: 5px 4px;
@@ -138,6 +186,9 @@ export default {
   width: 200px;
 }
 
+.inline{
+  display: inline;
+}
 .left-margin{
   margin-left: 5%;
 }

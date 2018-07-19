@@ -38,7 +38,7 @@
               <label>Youtube Link (if you want to show a video demo of project)</label>
               <input class="form-control" type="text" placeholder="Youtube Link" v-model="youtubeLink">
             </div>
-            <button type="submit" class="btn btn-primary" @click="postProject()">Post Project</button>
+            <button  class="btn btn-primary" @click.prevent="postProject()">Post Project</button>
             </form>
           </div>
       </div>
@@ -106,6 +106,7 @@ export default {
       project.description = this.projectDescription;
       project.youtubeLink = this.youtubeLink;
       project.imageUrls = [];
+      project.posterId = UserService.getCurrentUserId();
       DemoDayService.postProject(project,curUserId).then(function(id){
         self.projectId = id;
         UserService.addGarageProjectToUser(id);

@@ -11,7 +11,7 @@
 
     <div class="flex-row top-margin">
       <div class="form-group input-group w-80">
-                <input type="text" class="form-control" placeholder="Search for..." v-model="resourceQuery">
+                <input type="text" class="form-control" placeholder="Search for..." v-model="resourceQuery" @keyup.enter="queryEducationResources()">
                 <div class="input-group-append ml-4">
                   <button class="btn btn-primary" type="button" @click.prevent="queryEducationResources()" >Search</button>
                 </div>
@@ -76,11 +76,9 @@ export default {
     }
   },
   mounted() {
-    console.log(this.showSpinner);
     var self = this;
     EducationResourceService.getResources().then(function(querySnapshot){
       self.resources = querySnapshot.docs.map(doc => doc.data());
-      console.log(self.resources.length);
       self.showSpinner = false;
     });
   },

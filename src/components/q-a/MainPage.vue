@@ -109,13 +109,10 @@ export default {
   },
   methods:{
     ask(){
-      let question = {};
       let curUserId = UserService.getCurrentUserId();
       QuestionService.askQuestion(curUserId,this.questionAsked);
-      question.title = this.questionAsked;
-
-      console.log(question);
       this.userHasQuestion = true;
+      this.getQuestions();
     },
     queryQuestions(){
       console.log(this.questionQuery);
@@ -123,18 +120,21 @@ export default {
     goToQuestion(id){
       console.log(id);
       this.$router.push({ name: 'IndividualQuestionView', params: { id }});
+    },
+    getQuestions(){
+      var self = this;
+      QuestionService.getQuestions().then(function(querySnapshot){
+        self.questions = querySnapshot.docs.map(doc => {
+          let question = doc.data();
+          question.id = doc.id;
+          return question;
+        })
+        self.showSpinner = false;
+      });
     }
   },
   mounted(){
-    var self = this;
-    QuestionService.getQuestions().then(function(querySnapshot){
-      self.questions = querySnapshot.docs.map(doc => {
-        let question = doc.data();
-        question.id = doc.id;
-        return question;
-      })
-      self.showSpinner = false;
-    });
+    this.getQuestions();
   }
 }
 </script>

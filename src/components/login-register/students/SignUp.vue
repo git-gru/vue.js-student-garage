@@ -47,8 +47,8 @@
         </form>
       </div>
 
-        <div class="col-md-6 flex-content">
-          <div>
+        <div class="col-md-6 flex-content grey-background">
+          <div class="">
             <div> <img class="login-button margin-bottom-login-button" src="../../../../static/assets/img/google_signin_buttons/web/1x/btn_google_signin_dark_normal_web.png" @click="googleSignUp()"> </div>
             <div> <img class="login-button" src="../../../../static/assets/img/facebook/fbsignin.png" @click="facebookSignUp()"> </div>
           </div>
@@ -179,6 +179,10 @@ export default {
 }
 .float-right{
   float:right;
+}
+
+.grey-background{
+  background-color: #C8C8C8 !important;
 }
 .hand-hover:hover{
   cursor: pointer;

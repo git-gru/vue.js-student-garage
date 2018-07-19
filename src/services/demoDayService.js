@@ -49,6 +49,8 @@ export default {
     })
   },
   getProject(id){
-    return projects.doc(id).get()
+    return projects.doc(id).get().then(function(snapshot){
+      return snapshot.data();
+    })
   }
 }

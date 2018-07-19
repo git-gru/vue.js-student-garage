@@ -13,9 +13,8 @@ export default {
     });
   },
   createQuestion(askerId,title){
-    let user = UserService.getCurrentUserProfile();
     return Object.assign({}, {
-      asked_by: user,
+      asked_by: askerId,
       title: title,
       answers: [],
       createdDate: new Date().getTime(),
@@ -26,15 +25,17 @@ export default {
   },
   getQuestion(id){
     console.log("in question service", id);
-    return questions.doc(id).get()
+    return questions.doc(id).get();
   },
-  postAnswer(answer,id){
+  postAnswer(answer,id,updateCallback){
     let answers;
     this.getQuestion(id).then(function(querySnapshot){
+      console.log(querySnapshot);
       answers = querySnapshot.data().answers;
       answers.push(answer); // add the answer to the answers
       questions.doc(id).update({answers:answers}) // update answrs
       .then(function() {
+        updateCallback();
       console.log("Document successfully updated!");
     })
     .catch(function(error) {
@@ -55,16 +56,17 @@ export default {
   queryQuestions(query){
 
   },
-  upvoteAnswer(answer,questionId,curUserId){
-    this.getQuestion(questionId).then(function(querySnapshot){
+  upvoteAnswer(index,questionId,curUserId){
+    return this.getQuestion(questionId).then(function(querySnapshot){
       let answers = querySnapshot.data().answers;
-      let indexOfUpvotedAnswer = answers.findIndex(answer);
-      let answer = answers[indexOfUpvotedAnswer];
-      answer.reactions[curUserId] = 1;
-      answers.splice(indexOfUpvotedAnswer,1,answer);
-      questions.doc(id).update({answers:answers}) // update answrs
+      let answer = answers[index];
+      console.log(answer);
+      answer.upvotes[curUserId] = 1;
+      answers.splice(index,1,answer);
+      questions.doc(questionId).update({answers:answers}) // update answrs
       .then(function() {
       console.log("Document successfully updated!");
+      return 1;
     })
     .catch(function(error) {
         // The document probably doesn't exist.
@@ -72,16 +74,16 @@ export default {
       });
     });
   },
-  downvoteAnswer(answer,questionId,curUserId){
-    this.getQuestion(questionId).then(function(querySnapshot){
+  downvoteAnswer(index,questionId,curUserId){
+    return this.getQuestion(questionId).then(function(querySnapshot){
       let answers = querySnapshot.data().answers;
-      let indexOfUpvotedAnswer = answers.findIndex(answer);
-      let answer = answers[indexOfUpvotedAnswer];
-      answer.reactions[curUserId] = -1;
-      answers.splice(indexOfUpvotedAnswer,1,answer);
-      questions.doc(id).update({answers:answers}) // update answrs
+      let answer = answers[index];
+      answer.upvotes[curUserId] = -1;
+      answers.splice(index,1,answer);
+      questions.doc(questionId).update({answers:answers}) // update answrs
       .then(function() {
       console.log("Document successfully updated!");
+      return 1;
     })
     .catch(function(error) {
         // The document probably doesn't exist.
